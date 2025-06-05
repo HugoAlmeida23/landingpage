@@ -3,35 +3,70 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>TarefAI - Gestão Inteligente de Escritório de Contabilidade</title>
+    <title>TarefAI - Descubra Clientes Não Rentáveis em 60 Segundos</title>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet">
     <style>
+        :root {
+            --primary: #6366f1;
+            --primary-dark: #4f46e5;
+            --secondary: #ec4899;
+            --success: #10b981;
+            --warning: #f59e0b;
+            --danger: #ef4444;
+            --dark: #0f172a;
+            --dark-lighter: #1e293b;
+            --gray-100: #f1f5f9;
+            --gray-200: #e2e8f0;
+            --gray-300: #cbd5e1;
+            --gray-400: #94a3b8;
+            --gray-500: #64748b;
+            --gray-600: #475569;
+            --gray-700: #334155;
+            --gray-800: #1e293b;
+            --gray-900: #0f172a;
+            --white: #ffffff;
+            --glass: rgba(255, 255, 255, 0.1);
+            --glass-border: rgba(255, 255, 255, 0.2);
+        }
+
         * {
             margin: 0;
             padding: 0;
             box-sizing: border-box;
         }
 
-        :root {
-            --primary-blue: #2563eb;
-            --primary-purple: #8b5cf6;
-            --dark-bg: #0f172a;
-            --card-bg: #1e293b;
-            --text-primary: #f8fafc;
-            --text-secondary: #94a3b8;
-            --accent-green: #10b981;
-            --accent-orange: #f59e0b;
-            --accent-red: #ef4444;
-            --gradient-bg: linear-gradient(135deg, #0f172a 0%, #1e293b 50%, #334155 100%);
-            --glass-bg: rgba(30, 41, 59, 0.8);
-            --border-glass: rgba(148, 163, 184, 0.2);
+        body {
+            font-family: 'Inter', sans-serif;
+            line-height: 1.6;
+            color: var(--white);
+            background: var(--dark);
+            overflow-x: hidden;
         }
 
-        body {
-            font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
-            background: var(--gradient-bg);
-            color: var(--text-primary);
-            overflow-x: hidden;
-            line-height: 1.6;
+        /* Background Effects */
+        .bg-gradient {
+            background: linear-gradient(135deg, #0f172a 0%, #1e293b 50%, #334155 100%);
+            position: relative;
+        }
+
+        .bg-gradient::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: 
+                radial-gradient(circle at 20% 80%, rgba(99, 102, 241, 0.15) 0%, transparent 50%),
+                radial-gradient(circle at 80% 20%, rgba(236, 72, 153, 0.15) 0%, transparent 50%),
+                radial-gradient(circle at 40% 40%, rgba(16, 185, 129, 0.1) 0%, transparent 50%);
+            animation: float 20s ease-in-out infinite;
+        }
+
+        @keyframes float {
+            0%, 100% { transform: translateY(0px) rotate(0deg); }
+            33% { transform: translateY(-20px) rotate(1deg); }
+            66% { transform: translateY(10px) rotate(-1deg); }
         }
 
         /* Navigation */
@@ -39,17 +74,23 @@
             position: fixed;
             top: 0;
             width: 100%;
-            padding: 1rem 2rem;
-            background: rgba(15, 23, 42, 0.95);
-            backdrop-filter: blur(20px);
-            border-bottom: 1px solid var(--border-glass);
             z-index: 1000;
-            transition: all 0.3s ease;
+            padding: 1rem 0;
+            background: rgba(15, 23, 42, 0.8);
+            backdrop-filter: blur(20px);
+            border-bottom: 1px solid var(--glass-border);
+            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+
+        .navbar.scrolled {
+            background: rgba(15, 23, 42, 0.95);
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
         }
 
         .nav-container {
             max-width: 1200px;
             margin: 0 auto;
+            padding: 0 2rem;
             display: flex;
             justify-content: space-between;
             align-items: center;
@@ -60,57 +101,111 @@
             align-items: center;
             gap: 12px;
             font-size: 1.5rem;
-            font-weight: 700;
-            background: linear-gradient(45deg, var(--primary-blue), var(--primary-purple));
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
-            background-clip: text;
+            font-weight: 800;
+            color: var(--white);
+            text-decoration: none;
         }
 
         .logo-icon {
             width: 40px;
             height: 40px;
-            background: linear-gradient(45deg, var(--primary-blue), var(--primary-purple));
+            background: linear-gradient(135deg, var(--primary), var(--secondary));
             border-radius: 12px;
             display: flex;
             align-items: center;
             justify-content: center;
-            font-size: 1.2rem;
+            font-weight: 700;
+            color: white;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .logo-icon::before {
+            content: '';
+            position: absolute;
+            top: -50%;
+            left: -50%;
+            width: 200%;
+            height: 200%;
+            background: linear-gradient(45deg, transparent, rgba(255,255,255,0.3), transparent);
+            transform: rotate(45deg);
+            transition: all 0.6s;
+            opacity: 0;
+        }
+
+        .logo:hover .logo-icon::before {
+            animation: shine 0.6s ease-in-out;
+            opacity: 1;
+        }
+
+        @keyframes shine {
+            0% { transform: translateX(-100%) translateY(-100%) rotate(45deg); }
+            100% { transform: translateX(100%) translateY(100%) rotate(45deg); }
         }
 
         .nav-links {
             display: flex;
-            gap: 2rem;
-            list-style: none;
             align-items: center;
+            gap: 2rem;
         }
 
-        .nav-links a {
-            color: #ffffff;
+        .nav-link {
+            color: var(--gray-300);
             text-decoration: none;
-            transition: color 0.3s ease;
-            font-weight: 5500;
-        }
-
-        .nav-links a:hover {
-            color: var(--text-primary);
-        }
-
-        .btn-login {
-            padding: 0.75rem 1.5rem;
-            background: linear-gradient(45deg, var(--primary-blue), var(--primary-purple));
-            border: none;
-            border-radius: 12px;
-            color: white;
-            font-weight: 600;
-            text-decoration: none;
+            font-weight: 500;
             transition: all 0.3s ease;
-            cursor: pointer;
+            position: relative;
         }
 
-        .btn-login:hover {
+        .nav-link::after {
+            content: '';
+            position: absolute;
+            bottom: -4px;
+            left: 0;
+            width: 0;
+            height: 2px;
+            background: linear-gradient(90deg, var(--primary), var(--secondary));
+            transition: width 0.3s ease;
+        }
+
+        .nav-link:hover {
+            color: var(--white);
+        }
+
+        .nav-link:hover::after {
+            width: 100%;
+        }
+
+        .nav-cta {
+            background: linear-gradient(135deg, var(--primary), var(--secondary));
+            color: white;
+            padding: 0.75rem 1.5rem;
+            border-radius: 12px;
+            text-decoration: none;
+            font-weight: 600;
+            transition: all 0.3s ease;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .nav-cta::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(255,255,255,0.2), transparent);
+            transition: left 0.5s;
+        }
+
+        .nav-cta:hover::before {
+            left: 100%;
+        }
+
+        .nav-cta:hover {
             transform: translateY(-2px);
-            box-shadow: 0 10px 30px rgba(37, 99, 235, 0.3);
+            box-shadow: 0 10px 30px rgba(99, 102, 241, 0.4);
         }
 
         /* Hero Section */
@@ -118,29 +213,8 @@
             min-height: 100vh;
             display: flex;
             align-items: center;
-            padding: 0 2rem;
-            background: 
-                radial-gradient(circle at 20% 80%, rgba(37, 99, 235, 0.1) 0%, transparent 50%),
-                radial-gradient(circle at 80% 20%, rgba(139, 92, 246, 0.1) 0%, transparent 50%),
-                var(--gradient-bg);
+            padding: 8rem 2rem 4rem;
             position: relative;
-            overflow: hidden;
-        }
-
-        .hero::before {
-            content: '';
-            position: absolute;
-            top: 0;
-            left: 0;
-            right: 0;
-            bottom: 0;
-            background: url("data:image/svg+xml,%3Csvg width='60' height='60' viewBox='0 0 60 60' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='none' fill-rule='evenodd'%3E%3Cg fill='%234f46e5' fill-opacity='0.05'%3E%3Ccircle cx='30' cy='30' r='2'/%3E%3C/g%3E%3C/g%3E%3C/svg%3E");
-            animation: float 20s ease-in-out infinite;
-        }
-
-        @keyframes float {
-            0%, 100% { transform: translateY(0px); }
-            50% { transform: translateY(-20px); }
         }
 
         .hero-container {
@@ -152,78 +226,138 @@
             align-items: center;
         }
 
-        .hero-content h1 {
+        .hero-content {
+            animation: slideInLeft 1s ease-out;
+        }
+
+        @keyframes slideInLeft {
+            from {
+                opacity: 0;
+                transform: translateX(-50px);
+            }
+            to {
+                opacity: 1;
+                transform: translateX(0);
+            }
+        }
+
+        .hero-badge {
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            background: var(--glass);
+            border: 1px solid var(--glass-border);
+            border-radius: 50px;
+            padding: 0.5rem 1rem;
+            margin-bottom: 2rem;
+            backdrop-filter: blur(10px);
+            font-size: 0.875rem;
+            font-weight: 500;
+            color: var(--gray-300);
+        }
+
+        .hero-badge .badge-icon {
+            width: 8px;
+            height: 8px;
+            background: var(--success);
+            border-radius: 50%;
+            animation: pulse 2s infinite;
+        }
+
+        @keyframes pulse {
+            0%, 100% { opacity: 1; }
+            50% { opacity: 0.5; }
+        }
+
+        .hero-title {
             font-size: 3.5rem;
-            font-weight: 800;
-            line-height: 1.2;
+            font-weight: 900;
+            line-height: 1.1;
             margin-bottom: 1.5rem;
-            background: linear-gradient(135deg, var(--text-primary) 0%, var(--primary-blue) 50%, var(--primary-purple) 100%);
+            background: linear-gradient(135deg, var(--white) 0%, var(--primary) 50%, var(--secondary) 100%);
             -webkit-background-clip: text;
             -webkit-text-fill-color: transparent;
             background-clip: text;
         }
 
-        .hero-content p {
+        .hero-subtitle {
             font-size: 1.25rem;
-            color: var(--text-secondary);
+            color: var(--gray-400);
             margin-bottom: 2rem;
-            line-height: 1.7;
+            line-height: 1.6;
         }
 
-        .hero-buttons {
+        .hero-cta {
             display: flex;
             gap: 1rem;
             flex-wrap: wrap;
+            margin-bottom: 3rem;
+        }
+
+        .btn {
+            padding: 1rem 2rem;
+            border-radius: 12px;
+            font-weight: 600;
+            font-size: 1rem;
+            text-decoration: none;
+            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+            position: relative;
+            overflow: hidden;
+            border: none;
+            cursor: pointer;
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
         }
 
         .btn-primary {
-            padding: 1rem 2rem;
-            background: linear-gradient(45deg, var(--primary-blue), var(--primary-purple));
-            border: none;
-            border-radius: 12px;
+            background: linear-gradient(135deg, var(--primary), var(--secondary));
             color: white;
-            font-weight: 600;
-            font-size: 1.1rem;
-            cursor: pointer;
-            transition: all 0.3s ease;
-            text-decoration: none;
-            display: inline-block;
         }
 
         .btn-primary:hover {
             transform: translateY(-3px);
-            box-shadow: 0 15px 35px rgba(37, 99, 235, 0.4);
+            box-shadow: 0 15px 35px rgba(99, 102, 241, 0.4);
         }
 
         .btn-secondary {
-            padding: 1rem 2rem;
-            background: var(--glass-bg);
-            border: 1px solid var(--border-glass);
-            border-radius: 12px;
-            color: var(--text-primary);
-            font-weight: 600;
-            font-size: 1.1rem;
-            cursor: pointer;
-            transition: all 0.3s ease;
-            text-decoration: none;
-            display: inline-block;
+            background: var(--glass);
+            border: 1px solid var(--glass-border);
+            color: var(--white);
             backdrop-filter: blur(10px);
         }
 
         .btn-secondary:hover {
             transform: translateY(-3px);
-            border-color: var(--primary-blue);
-            box-shadow: 0 10px 30px rgba(30, 41, 59, 0.5);
+            border-color: var(--primary);
+            box-shadow: 0 10px 30px rgba(255, 255, 255, 0.1);
         }
 
-        /* Dashboard Preview */
-        .dashboard-preview {
-            background: var(--glass-bg);
-            border: 1px solid var(--border-glass);
-            border-radius: 20px;
-            backdrop-filter: blur(20px);
-            padding: 2rem;
-            transition: all 0.5s ease;
+        .hero-stats {
+            display: flex;
+            gap: 2rem;
+            flex-wrap: wrap;
+        }
+
+        .stat {
+            text-align: center;
+        }
+
+        .stat-number {
+            font-size: 2rem;
+            font-weight: 800;
+            color: var(--success);
+            margin-bottom: 0.25rem;
+        }
+
+        .stat-label {
+            font-size: 0.875rem;
+            color: var(--gray-400);
+        }
+
+        /* Interactive Dashboard Preview */
+        .hero-dashboard {
+            position: relative;
             animation: slideInRight 1s ease-out;
         }
 
@@ -238,22 +372,57 @@
             }
         }
 
-        .dashboard-preview:hover {
-            transform: translateY(-10px);
-            box-shadow: 0 25px 50px rgba(30, 41, 59, 0.7);
+        .dashboard-container {
+            background: var(--glass);
+            border: 1px solid var(--glass-border);
+            border-radius: 20px;
+            backdrop-filter: blur(20px);
+            padding: 2rem;
+            transition: all 0.5s ease;
+            position: relative;
+            overflow: hidden;
         }
 
-        .preview-header {
+        .dashboard-container::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 4px;
+            background: linear-gradient(90deg, var(--primary), var(--secondary), var(--success));
+            animation: loading 3s ease-in-out infinite;
+        }
+
+        @keyframes loading {
+            0%, 100% { transform: translateX(-100%); }
+            50% { transform: translateX(100%); }
+        }
+
+        .dashboard-container:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 25px 50px rgba(0, 0, 0, 0.3);
+        }
+
+        .dashboard-header {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            margin-bottom: 2rem;
+        }
+
+        .dashboard-title {
             display: flex;
             align-items: center;
             gap: 12px;
-            margin-bottom: 1.5rem;
+            font-weight: 700;
+            color: var(--white);
         }
 
-        .preview-icon {
+        .dashboard-icon {
             width: 50px;
             height: 50px;
-            background: linear-gradient(45deg, var(--accent-green), var(--primary-blue));
+            background: linear-gradient(135deg, var(--success), var(--primary));
             border-radius: 12px;
             display: flex;
             align-items: center;
@@ -261,42 +430,196 @@
             font-size: 1.5rem;
         }
 
-        .preview-title {
-            font-size: 1.25rem;
-            font-weight: 700;
-            color: var(--text-primary);
+        .status-indicator {
+            padding: 0.25rem 0.75rem;
+            background: var(--success);
+            color: white;
+            border-radius: 20px;
+            font-size: 0.75rem;
+            font-weight: 600;
+            animation: pulse 2s infinite;
         }
 
-        .preview-metrics {
+        .metrics-grid {
             display: grid;
             grid-template-columns: repeat(2, 1fr);
             gap: 1rem;
-            margin-bottom: 1.5rem;
+            margin-bottom: 2rem;
         }
 
         .metric-card {
-            background: rgba(15, 23, 42, 0.5);
-            padding: 1rem;
+            background: rgba(15, 23, 42, 0.6);
+            border: 1px solid var(--glass-border);
             border-radius: 12px;
-            border: 1px solid var(--border-glass);
+            padding: 1.5rem;
+            transition: all 0.3s ease;
+            cursor: pointer;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .metric-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 3px;
+            background: var(--primary);
+            transform: scaleX(0);
+            transition: transform 0.3s ease;
+        }
+
+        .metric-card:hover::before {
+            transform: scaleX(1);
+        }
+
+        .metric-card:hover {
+            transform: translateY(-5px);
+            border-color: var(--primary);
         }
 
         .metric-value {
-            font-size: 1.5rem;
-            font-weight: 700;
-            color: var(--accent-green);
-            margin-bottom: 0.25rem;
+            font-size: 1.75rem;
+            font-weight: 800;
+            margin-bottom: 0.5rem;
+            background: linear-gradient(135deg, var(--success), var(--primary));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
         }
 
         .metric-label {
+            color: var(--gray-400);
             font-size: 0.875rem;
-            color: var(--text-secondary);
+            margin-bottom: 0.5rem;
         }
 
-        /* Features Section */
-        .features {
+        .metric-change {
+            display: flex;
+            align-items: center;
+            gap: 4px;
+            font-size: 0.75rem;
+            font-weight: 600;
+        }
+
+        .metric-change.positive {
+            color: var(--success);
+        }
+
+        .metric-change.negative {
+            color: var(--danger);
+        }
+
+        .chart-placeholder {
+            height: 100px;
+            background: linear-gradient(135deg, rgba(99, 102, 241, 0.1), rgba(236, 72, 153, 0.1));
+            border-radius: 8px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .chart-bar {
+            width: 8px;
+            background: linear-gradient(180deg, var(--primary), var(--secondary));
+            border-radius: 4px;
+            animation: chartAnimation 2s ease-in-out infinite;
+            margin: 0 2px;
+        }
+
+        .chart-bar:nth-child(1) { height: 60%; animation-delay: 0s; }
+        .chart-bar:nth-child(2) { height: 80%; animation-delay: 0.2s; }
+        .chart-bar:nth-child(3) { height: 40%; animation-delay: 0.4s; }
+        .chart-bar:nth-child(4) { height: 90%; animation-delay: 0.6s; }
+        .chart-bar:nth-child(5) { height: 70%; animation-delay: 0.8s; }
+
+        @keyframes chartAnimation {
+            0%, 100% { transform: scaleY(1); }
+            50% { transform: scaleY(1.2); }
+        }
+
+        /* Problem Highlight Section */
+        .problem-section {
             padding: 6rem 2rem;
-            background: rgba(15, 23, 42, 0.5);
+            background: rgba(239, 68, 68, 0.05);
+            border-top: 1px solid rgba(239, 68, 68, 0.2);
+            border-bottom: 1px solid rgba(239, 68, 68, 0.2);
+        }
+
+        .problem-container {
+            max-width: 1200px;
+            margin: 0 auto;
+            text-align: center;
+        }
+
+        .problem-title {
+            font-size: 2.5rem;
+            font-weight: 800;
+            margin-bottom: 1rem;
+            color: var(--danger);
+        }
+
+        .problem-subtitle {
+            font-size: 1.25rem;
+            color: var(--gray-400);
+            margin-bottom: 3rem;
+            max-width: 600px;
+            margin-left: auto;
+            margin-right: auto;
+        }
+
+        .problem-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 2rem;
+            margin-bottom: 3rem;
+        }
+
+        .problem-card {
+            background: var(--glass);
+            border: 1px solid rgba(239, 68, 68, 0.3);
+            border-radius: 20px;
+            padding: 2rem;
+            backdrop-filter: blur(20px);
+            transition: all 0.3s ease;
+            text-align: left;
+        }
+
+        .problem-card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 25px 50px rgba(239, 68, 68, 0.2);
+        }
+
+        .problem-icon {
+            width: 60px;
+            height: 60px;
+            background: linear-gradient(135deg, var(--danger), #dc2626);
+            border-radius: 16px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.5rem;
+            margin-bottom: 1.5rem;
+        }
+
+        .problem-card h3 {
+            font-size: 1.25rem;
+            font-weight: 700;
+            margin-bottom: 1rem;
+            color: var(--white);
+        }
+
+        .problem-card p {
+            color: var(--gray-400);
+            line-height: 1.6;
+        }
+
+        /* Solution Features */
+        .features-section {
+            padding: 6rem 2rem;
         }
 
         .features-container {
@@ -304,25 +627,26 @@
             margin: 0 auto;
         }
 
-        .section-title {
+        .section-header {
             text-align: center;
+            margin-bottom: 4rem;
+        }
+
+        .section-title {
             font-size: 2.5rem;
             font-weight: 800;
             margin-bottom: 1rem;
-            background: linear-gradient(45deg, var(--text-primary), var(--primary-blue));
+            background: linear-gradient(135deg, var(--white), var(--primary));
             -webkit-background-clip: text;
             -webkit-text-fill-color: transparent;
             background-clip: text;
         }
 
         .section-subtitle {
-            text-align: center;
             font-size: 1.25rem;
-            color: var(--text-secondary);
-            margin-bottom: 4rem;
+            color: var(--gray-400);
             max-width: 600px;
-            margin-left: auto;
-            margin-right: auto;
+            margin: 0 auto;
         }
 
         .features-grid {
@@ -332,15 +656,15 @@
         }
 
         .feature-card {
-            background: var(--glass-bg);
-            border: 1px solid var(--border-glass);
+            background: var(--glass);
+            border: 1px solid var(--glass-border);
             border-radius: 20px;
             padding: 2rem;
             backdrop-filter: blur(20px);
-            transition: all 0.3s ease;
-            cursor: pointer;
-            overflow: hidden;
+            transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
             position: relative;
+            overflow: hidden;
+            cursor: pointer;
         }
 
         .feature-card::before {
@@ -348,72 +672,82 @@
             position: absolute;
             top: 0;
             left: 0;
-            right: 0;
-            height: 4px;
-            background: linear-gradient(90deg, var(--primary-blue), var(--primary-purple));
-            transform: scaleX(0);
-            transition: transform 0.3s ease;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(135deg, rgba(99, 102, 241, 0.1), rgba(236, 72, 153, 0.1));
+            opacity: 0;
+            transition: opacity 0.3s ease;
         }
 
         .feature-card:hover::before {
-            transform: scaleX(1);
+            opacity: 1;
         }
 
         .feature-card:hover {
-            transform: translateY(-10px);
-            box-shadow: 0 25px 50px rgba(30, 41, 59, 0.7);
-            border-color: var(--primary-blue);
+            transform: translateY(-15px) scale(1.02);
+            box-shadow: 0 30px 60px rgba(0, 0, 0, 0.3);
+            border-color: var(--primary);
         }
 
         .feature-icon {
-            width: 60px;
-            height: 60px;
-            border-radius: 16px;
+            width: 70px;
+            height: 70px;
+            border-radius: 20px;
             display: flex;
             align-items: center;
             justify-content: center;
-            font-size: 1.5rem;
+            font-size: 1.75rem;
             margin-bottom: 1.5rem;
+            position: relative;
+            z-index: 1;
         }
 
-        .feature-title {
+        .feature-card h3 {
             font-size: 1.5rem;
             font-weight: 700;
             margin-bottom: 1rem;
-            color: var(--text-primary);
+            color: var(--white);
+            position: relative;
+            z-index: 1;
         }
 
-        .feature-description {
-            color: var(--text-secondary);
+        .feature-card p {
+            color: var(--gray-400);
             line-height: 1.7;
             margin-bottom: 1.5rem;
+            position: relative;
+            z-index: 1;
         }
 
         .feature-link {
-            color: var(--primary-blue);
+            color: var(--primary);
             font-weight: 600;
             text-decoration: none;
             display: inline-flex;
             align-items: center;
-            gap: 0.5rem;
-            transition: gap 0.3s ease;
+            gap: 8px;
+            transition: all 0.3s ease;
+            position: relative;
+            z-index: 1;
         }
 
         .feature-link:hover {
-            gap: 1rem;
+            gap: 12px;
+            color: var(--secondary);
         }
 
-        /* Screenshot Section */
-        .screenshots {
+        /* Interactive Demo Section */
+        .demo-section {
             padding: 6rem 2rem;
+            background: rgba(16, 185, 129, 0.05);
         }
 
-        .screenshots-container {
+        .demo-container {
             max-width: 1200px;
             margin: 0 auto;
         }
 
-        .screenshot-tabs {
+        .demo-tabs {
             display: flex;
             justify-content: center;
             gap: 1rem;
@@ -421,159 +755,419 @@
             flex-wrap: wrap;
         }
 
-        .tab-btn {
-            padding: 0.75rem 1.5rem;
-            background: var(--glass-bg);
-            border: 1px solid var(--border-glass);
+        .demo-tab {
+            padding: 1rem 2rem;
+            background: var(--glass);
+            border: 1px solid var(--glass-border);
             border-radius: 12px;
-            color: var(--text-secondary);
+            color: var(--gray-400);
             cursor: pointer;
             transition: all 0.3s ease;
             backdrop-filter: blur(10px);
+            font-weight: 500;
         }
 
-        .tab-btn.active {
-            background: linear-gradient(45deg, var(--primary-blue), var(--primary-purple));
+        .demo-tab.active {
+            background: linear-gradient(135deg, var(--primary), var(--secondary));
             color: white;
             border-color: transparent;
+            transform: translateY(-2px);
         }
 
-        .tab-btn:hover:not(.active) {
-            border-color: var(--primary-blue);
-            color: var(--text-primary);
+        .demo-tab:hover:not(.active) {
+            border-color: var(--primary);
+            color: var(--white);
+            transform: translateY(-2px);
         }
 
-        .screenshot-content {
+        .demo-content {
             display: none;
-            animation: fadeIn 0.5s ease;
+            animation: fadeInUp 0.6s ease;
         }
 
-        .screenshot-content.active {
+        .demo-content.active {
             display: block;
         }
 
-        @keyframes fadeIn {
-            from { opacity: 0; transform: translateY(20px); }
-            to { opacity: 1; transform: translateY(0); }
+        @keyframes fadeInUp {
+            from {
+                opacity: 0;
+                transform: translateY(30px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
         }
 
-        .screenshot-grid {
+        .demo-grid {
             display: grid;
             grid-template-columns: 1fr 1fr;
-            gap: 3rem;
+            gap: 4rem;
             align-items: center;
         }
 
-        .screenshot-image {
-            background: var(--glass-bg);
-            border: 1px solid var(--border-glass);
+        .demo-mockup {
+            background: var(--glass);
+            border: 1px solid var(--glass-border);
             border-radius: 20px;
-            padding: 1.5rem;
+            padding: 2rem;
             backdrop-filter: blur(20px);
             transition: all 0.3s ease;
+            position: relative;
             overflow: hidden;
         }
 
-        .screenshot-image:hover {
-            transform: scale(1.02);
-            box-shadow: 0 25px 50px rgba(30, 41, 59, 0.7);
+        .demo-mockup:hover {
+            transform: scale(1.05);
+            box-shadow: 0 25px 50px rgba(0, 0, 0, 0.3);
         }
 
-        .screenshot-image img {
-            width: 100%;
-            height: auto;
-            border-radius: 12px;
-            display: block;
+        .mockup-header {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            margin-bottom: 1rem;
+            padding-bottom: 1rem;
+            border-bottom: 1px solid var(--glass-border);
         }
 
-        .screenshot-info h3 {
+        .mockup-dot {
+            width: 12px;
+            height: 12px;
+            border-radius: 50%;
+        }
+
+        .dot-red { background: var(--danger); }
+        .dot-yellow { background: var(--warning); }
+        .dot-green { background: var(--success); }
+
+        .mockup-content {
+            space-y: 1rem;
+        }
+
+        .mockup-row {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 0.75rem;
+            background: rgba(15, 23, 42, 0.5);
+            border-radius: 8px;
+            margin-bottom: 0.5rem;
+            transition: all 0.3s ease;
+        }
+
+        .mockup-row:hover {
+            background: rgba(99, 102, 241, 0.1);
+            transform: translateX(5px);
+        }
+
+        .client-name {
+            font-weight: 600;
+            color: var(--white);
+        }
+
+        .profit-loss {
+            font-weight: 700;
+            padding: 0.25rem 0.75rem;
+            border-radius: 20px;
+            font-size: 0.875rem;
+        }
+
+        .profit {
+            background: rgba(16, 185, 129, 0.2);
+            color: var(--success);
+        }
+
+        .loss {
+            background: rgba(239, 68, 68, 0.2);
+            color: var(--danger);
+        }
+
+        .demo-info h3 {
             font-size: 2rem;
             font-weight: 700;
             margin-bottom: 1rem;
-            color: var(--text-primary);
+            color: var(--white);
         }
 
-        .screenshot-info p {
+        .demo-info p {
             font-size: 1.1rem;
-            color: var(--text-secondary);
+            color: var(--gray-400);
             line-height: 1.7;
-            margin-bottom: 1.5rem;
+            margin-bottom: 2rem;
         }
 
-        .feature-list {
+        .benefit-list {
             list-style: none;
+            space-y: 0.75rem;
         }
 
-        .feature-list li {
+        .benefit-item {
             display: flex;
             align-items: center;
-            gap: 0.75rem;
+            gap: 12px;
+            color: var(--gray-400);
             margin-bottom: 0.75rem;
-            color: var(--text-secondary);
         }
 
-        .feature-list li::before {
-            content: '✓';
-            color: var(--accent-green);
+        .benefit-icon {
+            width: 20px;
+            height: 20px;
+            background: var(--success);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            font-size: 0.75rem;
             font-weight: bold;
-            font-size: 1.1rem;
+        }
+
+        /* Testimonials */
+        .testimonials-section {
+            padding: 6rem 2rem;
+            background: rgba(15, 23, 42, 0.5);
+        }
+
+        .testimonials-container {
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        .testimonials-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+            gap: 2rem;
+            margin-top: 3rem;
+        }
+
+        .testimonial-card {
+            background: var(--glass);
+            border: 1px solid var(--glass-border);
+            border-radius: 20px;
+            padding: 2rem;
+            backdrop-filter: blur(20px);
+            transition: all 0.3s ease;
+            position: relative;
+        }
+
+        .testimonial-card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 25px 50px rgba(0, 0, 0, 0.3);
+        }
+
+        .testimonial-content {
+            margin-bottom: 1.5rem;
+            color: var(--gray-300);
+            line-height: 1.7;
+            font-style: italic;
+        }
+
+        .testimonial-author {
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+        }
+
+        .author-avatar {
+            width: 50px;
+            height: 50px;
+            background: linear-gradient(135deg, var(--primary), var(--secondary));
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            font-weight: 700;
+            font-size: 1.25rem;
+        }
+
+        .author-info h4 {
+            color: var(--white);
+            font-weight: 600;
+            margin-bottom: 0.25rem;
+        }
+
+        .author-info p {
+            color: var(--gray-400);
+            font-size: 0.875rem;
         }
 
         /* CTA Section */
-        .cta {
+        .cta-section {
             padding: 6rem 2rem;
             background: 
-                radial-gradient(circle at 50% 50%, rgba(37, 99, 235, 0.1) 0%, transparent 50%),
-                var(--gradient-bg);
+                radial-gradient(circle at 50% 50%, rgba(99, 102, 241, 0.2) 0%, transparent 50%),
+                var(--dark);
         }
 
         .cta-container {
             max-width: 800px;
             margin: 0 auto;
             text-align: center;
-            background: var(--glass-bg);
-            border: 1px solid var(--border-glass);
-            border-radius: 20px;
+            background: var(--glass);
+            border: 1px solid var(--glass-border);
+            border-radius: 30px;
             padding: 4rem 2rem;
             backdrop-filter: blur(20px);
+            position: relative;
+            overflow: hidden;
         }
 
-        .cta h2 {
+        .cta-container::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 4px;
+            background: linear-gradient(90deg, var(--primary), var(--secondary), var(--success));
+            animation: loading 2s ease-in-out infinite;
+        }
+
+        .cta-title {
             font-size: 2.5rem;
             font-weight: 800;
             margin-bottom: 1rem;
-            background: linear-gradient(45deg, var(--text-primary), var(--primary-blue));
+            background: linear-gradient(135deg, var(--white), var(--primary));
             -webkit-background-clip: text;
             -webkit-text-fill-color: transparent;
             background-clip: text;
         }
 
-        .cta p {
+        .cta-subtitle {
             font-size: 1.25rem;
-            color: var(--text-secondary);
-            margin-bottom: 2.5rem;
+            color: var(--gray-400);
+            margin-bottom: 2rem;
+            line-height: 1.6;
+        }
+
+        .cta-buttons {
+            display: flex;
+            gap: 1rem;
+            justify-content: center;
+            flex-wrap: wrap;
+            margin-bottom: 2rem;
+        }
+
+        .cta-guarantee {
+            display: flex;
+            justify-content: center;
+            gap: 2rem;
+            flex-wrap: wrap;
+            font-size: 0.875rem;
+            color: var(--gray-400);
+        }
+
+        .guarantee-item {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .guarantee-icon {
+            color: var(--success);
+            font-weight: bold;
         }
 
         /* Footer */
         .footer {
-            padding: 3rem 2rem 1rem;
+            padding: 4rem 2rem 2rem;
             background: rgba(15, 23, 42, 0.8);
-            border-top: 1px solid var(--border-glass);
+            border-top: 1px solid var(--glass-border);
         }
 
         .footer-container {
             max-width: 1200px;
             margin: 0 auto;
-            text-align: center;
-            color: var(--text-secondary);
         }
 
-        /* Responsive Design */
-        @media (max-width: 768px) {
-            .navbar {
-                padding: 1rem;
-            }
+        .footer-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 2rem;
+            margin-bottom: 2rem;
+        }
 
+        .footer-brand {
+            display: flex;
+            flex-direction: column;
+            gap: 1rem;
+        }
+
+        .footer-brand p {
+            color: var(--gray-400);
+            line-height: 1.6;
+        }
+
+        .footer-section h4 {
+            color: var(--white);
+            font-weight: 600;
+            margin-bottom: 1rem;
+        }
+
+        .footer-links {
+            list-style: none;
+            space-y: 0.5rem;
+        }
+
+        .footer-links li {
+            margin-bottom: 0.5rem;
+        }
+
+        .footer-links a {
+            color: var(--gray-400);
+            text-decoration: none;
+            transition: color 0.3s ease;
+        }
+
+        .footer-links a:hover {
+            color: var(--white);
+        }
+
+        .footer-bottom {
+            border-top: 1px solid var(--glass-border);
+            padding-top: 2rem;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            flex-wrap: wrap;
+            gap: 1rem;
+        }
+
+        .footer-bottom p {
+            color: var(--gray-400);
+        }
+
+        .footer-social {
+            display: flex;
+            gap: 1rem;
+        }
+
+        .social-link {
+            width: 40px;
+            height: 40px;
+            background: var(--glass);
+            border: 1px solid var(--glass-border);
+            border-radius: 10px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: var(--gray-400);
+            text-decoration: none;
+            transition: all 0.3s ease;
+            backdrop-filter: blur(10px);
+        }
+
+        .social-link:hover {
+            color: var(--white);
+            border-color: var(--primary);
+            transform: translateY(-2px);
+        }
+
+        /* Mobile Responsive */
+        @media (max-width: 768px) {
             .nav-links {
                 display: none;
             }
@@ -584,42 +1178,66 @@
                 text-align: center;
             }
 
-            .hero-content h1 {
+            .hero-title {
                 font-size: 2.5rem;
             }
 
-            .hero-buttons {
+            .hero-cta {
                 justify-content: center;
+            }
+
+            .hero-stats {
+                justify-content: center;
+            }
+
+            .demo-grid {
+                grid-template-columns: 1fr;
+                gap: 2rem;
+            }
+
+            .demo-tabs {
+                flex-direction: column;
+                align-items: center;
             }
 
             .features-grid {
                 grid-template-columns: 1fr;
             }
 
-            .screenshot-grid {
-                grid-template-columns: 1fr;
-                text-align: center;
-            }
-
-            .screenshot-tabs {
-                flex-direction: column;
-                align-items: center;
-            }
-
             .section-title {
                 font-size: 2rem;
             }
 
-            .cta h2 {
+            .cta-title {
                 font-size: 2rem;
+            }
+
+            .cta-buttons {
+                flex-direction: column;
+                align-items: center;
+            }
+
+            .cta-guarantee {
+                flex-direction: column;
+                gap: 1rem;
+            }
+
+            .footer-bottom {
+                flex-direction: column;
+                text-align: center;
             }
         }
 
-        /* Scroll animations */
+        /* Utility Classes */
+        .text-center { text-align: center; }
+        .hidden { display: none; }
+        .visible { opacity: 1; transform: translateY(0); }
+
+        /* Scroll Animations */
         .scroll-animate {
             opacity: 0;
             transform: translateY(30px);
-            transition: all 0.6s ease;
+            transition: all 0.6s cubic-bezier(0.4, 0, 0.2, 1);
         }
 
         .scroll-animate.visible {
@@ -627,55 +1245,51 @@
             transform: translateY(0);
         }
 
-        /* Loading overlay */
-        .loading-overlay {
-            position: fixed;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            background: var(--dark-bg);
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            z-index: 9999;
-            transition: opacity 0.5s ease;
+        /* Loading Animation */
+        .loading-dots {
+            display: inline-flex;
+            gap: 4px;
         }
 
-        .loading-spinner {
-            width: 50px;
-            height: 50px;
-            border: 3px solid var(--border-glass);
-            border-top: 3px solid var(--primary-blue);
+        .loading-dot {
+            width: 8px;
+            height: 8px;
+            background: var(--primary);
             border-radius: 50%;
-            animation: spin 1s linear infinite;
+            animation: loadingDots 1.4s ease-in-out infinite both;
         }
 
-        @keyframes spin {
-            0% { transform: rotate(0deg); }
-            100% { transform: rotate(360deg); }
+        .loading-dot:nth-child(1) { animation-delay: -0.32s; }
+        .loading-dot:nth-child(2) { animation-delay: -0.16s; }
+        .loading-dot:nth-child(3) { animation-delay: 0s; }
+
+        @keyframes loadingDots {
+            0%, 80%, 100% {
+                transform: scale(0);
+                opacity: 0.5;
+            }
+            40% {
+                transform: scale(1);
+                opacity: 1;
+            }
         }
     </style>
 </head>
-<body>
-    <!-- Loading Overlay -->
-    <div class="loading-overlay" id="loadingOverlay">
-        <div class="loading-spinner"></div>
-    </div>
-
+<body class="bg-gradient">
     <!-- Navigation -->
-    <nav class="navbar">
+    <nav class="navbar" id="navbar">
         <div class="nav-container">
-            <div class="logo">
+            <a href="#" class="logo">
                 <div class="logo-icon">T</div>
                 TarefAI
+            </a>
+            <div class="nav-links">
+                <a href="#problema" class="nav-link">Problema</a>
+                <a href="#solucao" class="nav-link">Solução</a>
+                <a href="#demo" class="nav-link">Demo</a>
+                <a href="#preco" class="nav-link">Preços</a>
+                <a href="#" class="nav-cta">Teste Grátis</a>
             </div>
-            <ul class="nav-links">
-                <li><a href="#features" class="btn-login">Funcionalidades</a></li>
-                <li><a href="#screenshots" class="btn-login">Screenshots</a></li>
-                <li><a href="#pricing" class="btn-login">Preços</a></li>
-                <li><a href="#contact" class="btn-login">Contacto</a></li>
-            </ul>
         </div>
     </nav>
 
@@ -683,201 +1297,435 @@
     <section class="hero">
         <div class="hero-container">
             <div class="hero-content">
-                <h1>Descubra clientes não rentáveis em 60 segundos</h1>
-                <p>Pare de perder dinheiro com clientes que custam mais do que geram. Identifique os problemas, recupere 30% de lucro e nunca mais perca um prazo.</p>
-                <div class="hero-buttons">
-                    <a href="#demo" class="btn-primary">Ver Meus Clientes Não Rentáveis</a>
-                    <a href="#features" class="btn-secondary">Como Funciona em 2 Min</a>
+                <div class="hero-badge">
+                    <div class="badge-icon"></div>
+                    <span>✨ Novo: Detete clientes não rentáveis em 60 segundos</span>
+                </div>
+                
+                <h1 class="hero-title">
+                    Descubra clientes não rentáveis em 60 segundos
+                </h1>
+                
+                <p class="hero-subtitle">
+                    Pare de perder dinheiro com clientes que custam mais do que geram. Identifique os problemas, recupere 30% de lucro e nunca mais perca um prazo.
+                </p>
+                
+                <div class="hero-cta">
+                    <a href="#demo" class="btn btn-primary">
+                        🚀 Ver Meus Clientes Não Rentáveis
+                    </a>
+                    <a href="#solucao" class="btn btn-secondary">
+                        ▶️ Como Funciona (2 min)
+                    </a>
+                </div>
+                
+                <div class="hero-stats">
+                    <div class="stat">
+                        <div class="stat-number">30%</div>
+                        <div class="stat-label">Aumento no Lucro</div>
+                    </div>
+                    <div class="stat">
+                        <div class="stat-number">60s</div>
+                        <div class="stat-label">Para Identificar Problemas</div>
+                    </div>
+                    <div class="stat">
+                        <div class="stat-number">15h</div>
+                        <div class="stat-label">Poupadas por Semana</div>
+                    </div>
                 </div>
             </div>
-            <div class="dashboard-preview">
-                <div class="preview-header">
-                    <div class="preview-icon">📊</div>
-                    <div class="preview-title">Dashboard Executivo</div>
+            
+            <div class="hero-dashboard">
+                <div class="dashboard-container">
+                    <div class="dashboard-header">
+                        <div class="dashboard-title">
+                            <div class="dashboard-icon">📊</div>
+                            <span>Dashboard Executivo</span>
+                        </div>
+                        <div class="status-indicator">AO VIVO</div>
+                    </div>
+                    
+                    <div class="metrics-grid">
+                        <div class="metric-card">
+                            <div class="metric-value">€1.847</div>
+                            <div class="metric-label">Receita Este Mês</div>
+                            <div class="metric-change positive">
+                                ↗️ +12% vs mês anterior
+                            </div>
+                        </div>
+                        
+                        <div class="metric-card">
+                            <div class="metric-value">€-347</div>
+                            <div class="metric-label">Prejuízo Identificado</div>
+                            <div class="metric-change negative">
+                                ⚠️ 2 clientes não rentáveis
+                            </div>
+                        </div>
+                        
+                        <div class="metric-card">
+                            <div class="metric-value">87%</div>
+                            <div class="metric-label">Eficiência da Equipa</div>
+                            <div class="metric-change positive">
+                                ↗️ +5% esta semana
+                            </div>
+                        </div>
+                        
+                        <div class="metric-card">
+                            <div class="metric-value">3</div>
+                            <div class="metric-label">Prazos Próximos</div>
+                            <div class="metric-change">
+                                🔔 Próximo em 2 dias
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="chart-placeholder">
+                        <div class="chart-bar"></div>
+                        <div class="chart-bar"></div>
+                        <div class="chart-bar"></div>
+                        <div class="chart-bar"></div>
+                        <div class="chart-bar"></div>
+                    </div>
                 </div>
-                <div class="preview-metrics">
-                    <div class="metric-card">
-                        <div class="metric-value">1.200€</div>
-                        <div class="metric-label">Receita Mensal</div>
-                    </div>
-                    <div class="metric-card">
-                        <div class="metric-value">85%</div>
-                        <div class="metric-label">Eficiência</div>
-                    </div>
-                    <div class="metric-card">
-                        <div class="metric-value">4</div>
-                        <div class="metric-label">Clientes Ativos</div>
-                    </div>
-                    <div class="metric-card">
-                        <div class="metric-value">2</div>
-                        <div class="metric-label">Insights Ativos</div>
-                    </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Problem Section -->
+    <section class="problem-section scroll-animate" id="problema">
+        <div class="problem-container">
+            <h2 class="problem-title">Está a Perder Dinheiro Todos os Meses?</h2>
+            <p class="problem-subtitle">
+                A maioria dos escritórios de contabilidade perde 20-40% do lucro potencial sem saber
+            </p>
+            
+            <div class="problem-grid">
+                <div class="problem-card">
+                    <div class="problem-icon">💸</div>
+                    <h3>Clientes que Custam Mais do que Pagam</h3>
+                    <p>Cliente paga €200/mês mas consome €350 em tempo da equipa. Está a perder €150 todos os meses com um cliente que pensa ser rentável.</p>
                 </div>
+                
+                <div class="problem-card">
+                    <div class="problem-icon">⏰</div>
+                    <h3>Prazos Perdidos = Clientes Perdidos</h3>
+                    <p>Cada prazo perdido custa em média €500 em multas + stress + risco de perder o cliente permanentemente.</p>
+                </div>
+                
+                <div class="problem-card">
+                    <div class="problem-icon">🤯</div>
+                    <h3>Equipa Sobrecarregada e Desmotivada</h3>
+                    <p>Trabalho a dobrar, pessoas em burnout, e você ainda tem que microgerir tudo porque não sabe quem está a fazer o quê.</p>
+                </div>
+            </div>
+            
+            <div style="background: rgba(239, 68, 68, 0.1); border: 1px solid rgba(239, 68, 68, 0.3); border-radius: 15px; padding: 2rem; max-width: 600px; margin: 0 auto;">
+                <h3 style="color: var(--danger); margin-bottom: 1rem; text-align: center;">⚠️ Situação Real:</h3>
+                <p style="text-align: center; color: var(--white); font-size: 1.1rem; line-height: 1.6;">
+                    "Trabalho 60 horas por semana, mas no final do mês mal sobra dinheiro. Tenho clientes que me dão muito trabalho mas não sei se estão a ser rentáveis."
+                </p>
+                <p style="text-align: center; color: var(--gray-400); font-style: italic; margin-top: 1rem;">
+                    — 89% dos contabilistas entrevistados
+                </p>
             </div>
         </div>
     </section>
 
     <!-- Features Section -->
-    <section class="features scroll-animate" id="features">
+    <section class="features-section scroll-animate" id="solucao">
         <div class="features-container">
-            <h2 class="section-title">Pare de Trabalhar de Graça Para Clientes Não Rentáveis</h2>
-            <p class="section-subtitle">Em 3 cliques, veja exatamente quais os clientes estão a prejudicar o seu lucro (e o que fazer para corrigir)</p>
+            <div class="section-header">
+                <h2 class="section-title">A Solução que Transforma o Seu Escritório</h2>
+                <p class="section-subtitle">
+                    Em 3 cliques, veja exatamente quais clientes estão a prejudicar o seu lucro e o que fazer para corrigir
+                </p>
+            </div>
             
             <div class="features-grid">
                 <div class="feature-card">
-                    <div class="feature-icon" style="background: linear-gradient(45deg, #ef4444, #dc2626);">💸</div>
-                    <h3 class="feature-title">Pare de Perder Dinheiro</h3>
-                    <p class="feature-description">Veja em 60 segundos quais clientes custam mais do que pagam. Um cliente que paga 200€/mês mas consome 300€ em tempo está a roubar 100€ todos os meses.</p>
-                    <a href="#" class="feature-link">Calcular meus prejuízos →</a>
+                    <div class="feature-icon" style="background: linear-gradient(135deg, var(--danger), #dc2626);">
+                        💸
+                    </div>
+                    <h3>Detete Prejuízos em 60 Segundos</h3>
+                    <p>Veja instantaneamente quais clientes custam mais do que pagam. Dashboard simples: vermelho = prejuízo, verde = lucro. Sem matemática complicada.</p>
+                    <a href="#demo" class="feature-link">
+                        Ver meus prejuízos agora →
+                    </a>
                 </div>
 
                 <div class="feature-card">
-                    <div class="feature-icon" style="background: linear-gradient(45deg, #f59e0b, #d97706);">⏱️</div>
-                    <h3 class="feature-title">Nunca Mais Perca um Prazo</h3>
-                    <p class="feature-description">Alertas automáticos 3 dias antes de cada deadline. Pare de correr atrás de prazos e de explicar atrasos aos clientes.</p>
-                    <a href="#" class="feature-link">Acabar com atrasos →</a>
+                    <div class="feature-icon" style="background: linear-gradient(135deg, var(--success), #059669);">
+                        📈
+                    </div>
+                    <h3>Aumente Lucros em 30% Automaticamente</h3>
+                    <p>Sistema calcula o preço ideal para cada cliente baseado no tempo real gasto. Clientes que demoram mais, pagam mais.</p>
+                    <a href="#demo" class="feature-link">
+                        Calcular novos preços →
+                    </a>
                 </div>
 
                 <div class="feature-card">
-                    <div class="feature-icon" style="background: linear-gradient(45deg, #10b981, #059669);">📈</div>
-                    <h3 class="feature-title">Aumente o Lucro em 30%</h3>
-                    <p class="feature-description">Ajuste preços automaticamente baseado no tempo real gasto. Clientes que demoram mais, pagam mais. Simples assim.</p>
-                    <a href="#" class="feature-link">Calcular novo preço →</a>
+                    <div class="feature-icon" style="background: linear-gradient(135deg, var(--warning), #d97706);">
+                        ⏱️
+                    </div>
+                    <h3>Zero Prazos Perdidos</h3>
+                    <p>Alertas automáticos 3 dias antes de cada deadline. Toda a equipa sabe exatamente o que fazer e quando.</p>
+                    <a href="#demo" class="feature-link">
+                        Acabar com atrasos →
+                    </a>
                 </div>
 
                 <div class="feature-card">
-                    <div class="feature-icon" style="background: linear-gradient(45deg, #8b5cf6, #7c3aed);">🎯</div>
-                    <h3 class="feature-title">Delegue sem Stress</h3>
-                    <p class="feature-description">Cada tarefa vai automaticamente para a pessoa certa no momento certo. Pare de microgerir e tenha uma equipa que funciona sozinha.</p>
-                    <a href="#" class="feature-link">Automatizar equipa →</a>
+                    <div class="feature-icon" style="background: linear-gradient(135deg, var(--primary), var(--secondary));">
+                        🎯
+                    </div>
+                    <h3>Equipa que Funciona Sozinha</h3>
+                    <p>Distribuição automática de tarefas. Cada pessoa sabe o que fazer sem você ter que estar sempre a explicar.</p>
+                    <a href="#demo" class="feature-link">
+                        Automatizar equipa →
+                    </a>
                 </div>
 
                 <div class="feature-card">
-                    <div class="feature-icon" style="background: linear-gradient(45deg, #06b6d4, #0891b2);">⚡</div>
-                    <h3 class="feature-title">Registe Tempo em 5 Segundos</h3>
-                    <p class="feature-description">"Trabalhei 2h na declaração da empresa XYZ" - o sistema entende e regista tudo automaticamente. Sem formulários chatos.</p>
-                    <a href="#" class="feature-link">Testar registo →</a>
+                    <div class="feature-icon" style="background: linear-gradient(135deg, #06b6d4, #0891b2);">
+                        ⚡
+                    </div>
+                    <h3>Registo de Tempo Ultra-Rápido</h3>
+                    <p>"Trabalhei 2h na declaração da empresa XYZ" - o sistema entende e regista tudo automaticamente. Sem formulários.</p>
+                    <a href="#demo" class="feature-link">
+                        Testar registo →
+                    </a>
                 </div>
 
                 <div class="feature-card">
-                    <div class="feature-icon" style="background: linear-gradient(45deg, #84cc16, #65a30d);">🧠</div>
-                    <h3 class="feature-title">Descubra Oportunidades Escondidas</h3>
-                    <p class="feature-description">O sistema alerta quando um cliente está pronto para um serviço mais caro ou quando pode perder um cliente antes que aconteça.</p>
-                    <a href="#" class="feature-link">Ver oportunidades →</a>
+                    <div class="feature-icon" style="background: linear-gradient(135deg, #84cc16, #65a30d);">
+                        🧠
+                    </div>
+                    <h3>IA que Descobre Oportunidades</h3>
+                    <p>Alertas quando um cliente está pronto para um serviço mais caro ou quando pode perder um cliente.</p>
+                    <a href="#demo" class="feature-link">
+                        Ver oportunidades →
+                    </a>
                 </div>
             </div>
         </div>
     </section>
 
-    <!-- Screenshots Section -->
-    <section class="screenshots scroll-animate" id="screenshots">
-        <div class="screenshots-container">
-            <h2 class="section-title">Veja o Sistema em Ação</h2>
-            <p class="section-subtitle">Explore as principais interfaces da plataforma</p>
-
-            <div class="screenshot-tabs">
-                <button class="tab-btn active" onclick="showTab('dashboard')">Dashboard</button>
-                <button class="tab-btn" onclick="showTab('rentabilidade')">Rentabilidade</button>
-                <button class="tab-btn" onclick="showTab('tarefas')">Tarefas</button>
-                <button class="tab-btn" onclick="showTab('organizacao')">Organização</button>
-                <button class="tab-btn" onclick="showTab('notificacoes')">Notificações</button>
+    <!-- Interactive Demo Section -->
+    <section class="demo-section scroll-animate" id="demo">
+        <div class="demo-container">
+            <div class="section-header">
+                <h2 class="section-title">Veja o Sistema em Ação</h2>
+                <p class="section-subtitle">Explore como funciona na prática</p>
             </div>
 
-            <div id="dashboard" class="screenshot-content active">
-                <div class="screenshot-grid">
-                    <div class="screenshot-info">
-                        <h3>Veja Clientes Não Rentáveis em 60 Segundos</h3>
-                        <p>Dashboard que mostra imediatamente quais clientes estão a custar-lhe dinheiro. Sem números confusos - apenas "vermelho = mau, verde = bom".</p>
-                        <ul class="feature-list">
-                            <li>Cliente que paga 200€ mas custa 300€</li>
-                            <li>Quanto está a perder por mês</li>
-                            <li>Que preço cobrar para ter lucro</li>
-                            <li>Alertas antes de aceitar trabalho extra</li>
-                        </ul>
-                    </div>
-                    <div class="screenshot-image">
-                        <div style="width: 100%; height: 300px; background: linear-gradient(135deg, #1e293b, #334155); border-radius: 12px; display: flex; align-items: center; justify-content: center; color: #94a3b8; font-size: 1.1rem;">
-                            Dashboard: "Cliente X está a custar 150€/mês"
+            <div class="demo-tabs">
+                <div class="demo-tab active" onclick="showDemo('rentabilidade')">
+                    💰 Análise de Rentabilidade
+                </div>
+                <div class="demo-tab" onclick="showDemo('prazos')">
+                    ⏰ Gestão de Prazos
+                </div>
+                <div class="demo-tab" onclick="showDemo('equipa')">
+                    👥 Organização da Equipa
+                </div>
+                <div class="demo-tab" onclick="showDemo('insights')">
+                    🧠 IA Insights
+                </div>
+            </div>
+
+            <!-- Rentabilidade Demo -->
+            <div id="rentabilidade" class="demo-content active">
+                <div class="demo-grid">
+                    <div class="demo-mockup">
+                        <div class="mockup-header">
+                            <div class="mockup-dot dot-red"></div>
+                            <div class="mockup-dot dot-yellow"></div>
+                            <div class="mockup-dot dot-green"></div>
                         </div>
+                        <div class="mockup-content">
+                            <div class="mockup-row">
+                                <div class="client-name">🏢 Empresa ABC Lda</div>
+                                <div class="profit-loss loss">-€150/mês</div>
+                            </div>
+                            <div class="mockup-row">
+                                <div class="client-name">🏪 Café Central</div>
+                                <div class="profit-loss profit">+€89/mês</div>
+                            </div>
+                            <div class="mockup-row">
+                                <div class="client-name">🚗 Oficina Motors</div>
+                                <div class="profit-loss loss">-€67/mês</div>
+                            </div>
+                            <div class="mockup-row">
+                                <div class="client-name">💊 Farmácia Silva</div>
+                                <div class="profit-loss profit">+€234/mês</div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="demo-info">
+                        <h3>Identifique Prejuízos Instantaneamente</h3>
+                        <p>Veja em segundos quais clientes estão a custar-lhe dinheiro. O sistema calcula automaticamente tempo gasto vs. valor cobrado.</p>
+                        <ul class="benefit-list">
+                            <li class="benefit-item">
+                                <div class="benefit-icon">✓</div>
+                                <span>Cliente que paga €200 mas custa €350</span>
+                            </li>
+                            <li class="benefit-item">
+                                <div class="benefit-icon">✓</div>
+                                <span>Quanto está a perder por mês</span>
+                            </li>
+                            <li class="benefit-item">
+                                <div class="benefit-icon">✓</div>
+                                <span>Que preço cobrar para ter lucro</span>
+                            </li>
+                            <li class="benefit-item">
+                                <div class="benefit-icon">✓</div>
+                                <span>Histórico de rentabilidade</span>
+                            </li>
+                        </ul>
                     </div>
                 </div>
             </div>
 
-            <div id="rentabilidade" class="screenshot-content">
-                <div class="screenshot-grid">
-                    <div class="screenshot-image">
-                        <div style="width: 100%; height: 300px; background: linear-gradient(135deg, #1e293b, #334155); border-radius: 12px; display: flex; align-items: center; justify-content: center; color: #94a3b8; font-size: 1.1rem;">
-                            "Aumente o preço do Cliente Y para 350€"
-                        </div>
-                    </div>
-                    <div class="screenshot-info">
-                        <h3>Saiba Exatamente Que Preço Cobrar</h3>
-                        <p>Para cada cliente, vê quanto tempo gastou e quanto deveria cobrar para ter a margem que quer. Sem matemática complicada.</p>
-                        <ul class="feature-list">
-                            <li>Tempo real gasto vs. preço cobrado</li>
-                            <li>Sugestão automática de novo preço</li>
-                            <li>Histórico de rentabilidade por mês</li>
-                            <li>Alerta antes de aceitar trabalho extra</li>
-                        </ul>
-                    </div>
-                </div>
-            </div>
-
-            <div id="tarefas" class="screenshot-content">
-                <div class="screenshot-grid">
-                    <div class="screenshot-info">
+            <!-- Prazos Demo -->
+            <div id="prazos" class="demo-content">
+                <div class="demo-grid">
+                    <div class="demo-info">
                         <h3>Nunca Mais Perca um Prazo</h3>
-                        <p>Todas as suas tarefas organizadas por prazo. Alertas automáticos 3 dias antes. A sua equipa sabe sempre o que fazer a seguir.</p>
-                        <ul class="feature-list">
-                            <li>Próximos prazos em destaque</li>
-                            <li>Atribuição automática de tarefas</li>
-                            <li>Progresso visual de cada projeto</li>
-                            <li>Notificações antes dos deadlines</li>
+                        <p>Alertas automáticos e organização inteligente garantem que nunca mais se esqueça de um deadline importante.</p>
+                        <ul class="benefit-list">
+                            <li class="benefit-item">
+                                <div class="benefit-icon">✓</div>
+                                <span>Alertas 3 dias antes do prazo</span>
+                            </li>
+                            <li class="benefit-item">
+                                <div class="benefit-icon">✓</div>
+                                <span>Priorização automática por urgência</span>
+                            </li>
+                            <li class="benefit-item">
+                                <div class="benefit-icon">✓</div>
+                                <span>Distribuição de trabalho inteligente</span>
+                            </li>
+                            <li class="benefit-item">
+                                <div class="benefit-icon">✓</div>
+                                <span>Progresso visual de cada tarefa</span>
+                            </li>
                         </ul>
                     </div>
-                    <div class="screenshot-image">
-                        <div style="width: 100%; height: 300px; background: linear-gradient(135deg, #1e293b, #334155); border-radius: 12px; display: flex; align-items: center; justify-content: center; color: #94a3b8; font-size: 1.1rem;">
-                            "IRS da Empresa X - Prazo: 3 dias"
+                    <div class="demo-mockup">
+                        <div class="mockup-header">
+                            <div class="mockup-dot dot-red"></div>
+                            <div class="mockup-dot dot-yellow"></div>
+                            <div class="mockup-dot dot-green"></div>
+                        </div>
+                        <div class="mockup-content">
+                            <div class="mockup-row" style="border-left: 4px solid var(--danger);">
+                                <div class="client-name">🚨 IRS Empresa ABC - 2 dias</div>
+                                <div style="color: var(--danger); font-weight: 600;">URGENTE</div>
+                            </div>
+                            <div class="mockup-row" style="border-left: 4px solid var(--warning);">
+                                <div class="client-name">⚠️ IVA Café Central - 5 dias</div>
+                                <div style="color: var(--warning); font-weight: 600;">PRÓXIMO</div>
+                            </div>
+                            <div class="mockup-row" style="border-left: 4px solid var(--success);">
+                                <div class="client-name">✅ Contrato Farmácia - 12 dias</div>
+                                <div style="color: var(--success); font-weight: 600;">OK</div>
+                            </div>
                         </div>
                     </div>
                 </div>
             </div>
 
-            <div id="organizacao" class="screenshot-content">
-                <div class="screenshot-grid">
-                    <div class="screenshot-image">
-                        <div style="width: 100%; height: 300px; background: linear-gradient(135deg, #1e293b, #334155); border-radius: 12px; display: flex; align-items: center; justify-content: center; color: #94a3b8; font-size: 1.1rem;">
-                            "João: 8h/semana | Maria: 12h/semana"
+            <!-- Equipa Demo -->
+            <div id="equipa" class="demo-content">
+                <div class="demo-grid">
+                    <div class="demo-mockup">
+                        <div class="mockup-header">
+                            <div class="mockup-dot dot-red"></div>
+                            <div class="mockup-dot dot-yellow"></div>
+                            <div class="mockup-dot dot-green"></div>
+                        </div>
+                        <div class="mockup-content">
+                            <div class="mockup-row">
+                                <div class="client-name">👨‍💼 João Silva</div>
+                                <div style="color: var(--success);">8h/semana • 4 clientes</div>
+                            </div>
+                            <div class="mockup-row">
+                                <div class="client-name">👩‍💼 Maria Santos</div>
+                                <div style="color: var(--warning);">15h/semana • 6 clientes</div>
+                            </div>
+                            <div class="mockup-row">
+                                <div class="client-name">👨‍💼 Carlos Ferreira</div>
+                                <div style="color: var(--success);">12h/semana • 5 clientes</div>
+                            </div>
                         </div>
                     </div>
-                    <div class="screenshot-info">
-                        <h3>Equipa que Funciona Sozinha</h3>
-                        <p>Cada pessoa sabe exatamente o que fazer. Sem microgestão. Sem perguntas constantes. Sem trabalho a ser esquecido.</p>
-                        <ul class="feature-list">
-                            <li>Quem fez o quê e quando</li>
-                            <li>Distribuição automática de trabalho</li>
-                            <li>Controlo de horas por pessoa</li>
-                            <li>Permissões por tipo de cliente</li>
+                    <div class="demo-info">
+                        <h3>Equipa Organizada Automaticamente</h3>
+                        <p>Distribuição inteligente de trabalho baseada na carga atual e especialização de cada pessoa.</p>
+                        <ul class="benefit-list">
+                            <li class="benefit-item">
+                                <div class="benefit-icon">✓</div>
+                                <span>Quem fez o quê e quando</span>
+                            </li>
+                            <li class="benefit-item">
+                                <div class="benefit-icon">✓</div>
+                                <span>Balanceamento automático de carga</span>
+                            </li>
+                            <li class="benefit-item">
+                                <div class="benefit-icon">✓</div>
+                                <span>Permissões por tipo de cliente</span>
+                            </li>
+                            <li class="benefit-item">
+                                <div class="benefit-icon">✓</div>
+                                <span>Relatórios de produtividade</span>
+                            </li>
                         </ul>
                     </div>
                 </div>
             </div>
 
-            <div id="notificacoes" class="screenshot-content">
-                <div class="screenshot-grid">
-                    <div class="screenshot-info">
-                        <h3>Alertas que Realmente Importam</h3>
-                        <p>Apenas notificações que fazem diferença: prazos próximos, clientes não rentáveis, tarefas paradas há muito tempo.</p>
-                        <ul class="feature-list">
-                            <li>"Prazo em 3 dias" (não em 30)</li>
-                            <li>"Cliente A não é rentável"</li>
-                            <li>"Tarefa parada há 1 semana"</li>
-                            <li>Configurável para o seu estilo</li>
+            <!-- Insights Demo -->
+            <div id="insights" class="demo-content">
+                <div class="demo-grid">
+                    <div class="demo-info">
+                        <h3>IA que Trabalha Para Si</h3>
+                        <p>Insights automáticos que identificam oportunidades e problemas antes que se tornem críticos.</p>
+                        <ul class="benefit-list">
+                            <li class="benefit-item">
+                                <div class="benefit-icon">✓</div>
+                                <span>"Cliente X pronto para serviço premium"</span>
+                            </li>
+                            <li class="benefit-item">
+                                <div class="benefit-icon">✓</div>
+                                <span>"Risco de perder Cliente Y"</span>
+                            </li>
+                            <li class="benefit-item">
+                                <div class="benefit-icon">✓</div>
+                                <span>"Tarefa parada há muito tempo"</span>
+                            </li>
+                            <li class="benefit-item">
+                                <div class="benefit-icon">✓</div>
+                                <span>"Oportunidade de upselling"</span>
+                            </li>
                         </ul>
                     </div>
-                    <div class="screenshot-image">
-                        <div style="width: 100%; height: 300px; background: linear-gradient(135deg, #1e293b, #334155); border-radius: 12px; display: flex; align-items: center; justify-content: center; color: #94a3b8; font-size: 1.1rem;">
-                            "⚠️ Cliente X: -150€ este mês"
+                    <div class="demo-mockup">
+                        <div class="mockup-header">
+                            <div class="mockup-dot dot-red"></div>
+                            <div class="mockup-dot dot-yellow"></div>
+                            <div class="mockup-dot dot-green"></div>
+                        </div>
+                        <div class="mockup-content">
+                            <div class="mockup-row" style="background: rgba(16, 185, 129, 0.1);">
+                                <div class="client-name">💡 Farmácia Silva → Upgrade para plano premium</div>
+                            </div>
+                            <div class="mockup-row" style="background: rgba(239, 68, 68, 0.1);">
+                                <div class="client-name">⚠️ Empresa ABC → Risco de cancelamento</div>
+                            </div>
+                            <div class="mockup-row" style="background: rgba(245, 158, 11, 0.1);">
+                                <div class="client-name">🔔 Café Central → Tarefa parada 5 dias</div>
+                            </div>
                         </div>
                     </div>
                 </div>
@@ -885,199 +1733,291 @@
         </div>
     </section>
 
-    <!-- Stats Section -->
-    <section class="stats scroll-animate" style="padding: 6rem 2rem; background: rgba(15, 23, 42, 0.3);">
-        <div style="max-width: 1200px; margin: 0 auto;">
-            <h2 class="section-title">Resultados Comprovados</h2>
-            <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: 2rem; margin-top: 3rem;">
-                <div style="text-align: center; background: var(--glass-bg); padding: 2rem; border-radius: 20px; border: 1px solid var(--border-glass); backdrop-filter: blur(20px);">
-                    <div style="font-size: 3rem; font-weight: 800; color: var(--accent-green); margin-bottom: 0.5rem;">30%</div>
-                    <div style="color: var(--text-secondary); font-size: 1.1rem;">Aumento Médio no Lucro</div>
-                    <div style="color: var(--text-secondary); font-size: 0.9rem; margin-top: 0.5rem;">em 90 dias</div>
+    <!-- Testimonials -->
+    <section class="testimonials-section scroll-animate">
+        <div class="testimonials-container">
+            <div class="section-header">
+                <h2 class="section-title">O Que Dizem os Nossos Clientes</h2>
+                <p class="section-subtitle">Resultados reais de escritórios que transformaram a sua gestão</p>
+            </div>
+            
+            <div class="testimonials-grid">
+                <div class="testimonial-card">
+                    <div class="testimonial-content">
+                        "Em 30 dias descobri que 3 dos meus clientes estavam a custar-me €450/mês. Ajustei os preços e recuperei €1.200 só no primeiro trimestre."
+                    </div>
+                    <div class="testimonial-author">
+                        <div class="author-avatar">AS</div>
+                        <div class="author-info">
+                            <h4>Ana Silva</h4>
+                            <p>Contabilista Certificada, Porto</p>
+                        </div>
+                    </div>
                 </div>
-                <div style="text-align: center; background: var(--glass-bg); padding: 2rem; border-radius: 20px; border: 1px solid var(--border-glass); backdrop-filter: blur(20px);">
-                    <div style="font-size: 3rem; font-weight: 800; color: var(--primary-blue); margin-bottom: 0.5rem;">15h</div>
-                    <div style="color: var(--text-secondary); font-size: 1.1rem;">Tempo Poupado por Semana</div>
-                    <div style="color: var(--text-secondary); font-size: 0.9rem; margin-top: 0.5rem;">para gestão administrativa</div>
+                
+                <div class="testimonial-card">
+                    <div class="testimonial-content">
+                        "Finalmente consigo dormir tranquilo. Zero prazos perdidos nos últimos 6 meses e a equipa funciona sem eu ter que estar sempre em cima."
+                    </div>
+                    <div class="testimonial-author">
+                        <div class="author-avatar">JF</div>
+                        <div class="author-info">
+                            <h4>João Ferreira</h4>
+                            <p>Sócio-Gerente, Lisboa</p>
+                        </div>
+                    </div>
                 </div>
-                <div style="text-align: center; background: var(--glass-bg); padding: 2rem; border-radius: 20px; border: 1px solid var(--border-glass); backdrop-filter: blur(20px);">
-                    <div style="font-size: 3rem; font-weight: 800; color: var(--accent-orange); margin-bottom: 0.5rem;">0</div>
-                    <div style="color: var(--text-secondary); font-size: 1.1rem;">Prazos Perdidos</div>
-                    <div style="color: var(--text-secondary); font-size: 0.9rem; margin-top: 0.5rem;">após 30 dias de uso</div>
-                </div>
-                <div style="text-align: center; background: var(--glass-bg); padding: 2rem; border-radius: 20px; border: 1px solid var(--border-glass); backdrop-filter: blur(20px);">
-                    <div style="font-size: 3rem; font-weight: 800; color: var(--primary-purple); margin-bottom: 0.5rem;">60s</div>
-                    <div style="color: var(--text-secondary); font-size: 1.1rem;">Para Identificar Problemas</div>
-                    <div style="color: var(--text-secondary); font-size: 0.9rem; margin-top: 0.5rem;">de rentabilidade</div>
+                
+                <div class="testimonial-card">
+                    <div class="testimonial-content">
+                        "Consegui reduzir as horas de trabalho de 60 para 45 por semana mantendo a mesma receita. A diferença na qualidade de vida é enorme."
+                    </div>
+                    <div class="testimonial-author">
+                        <div class="author-avatar">MC</div>
+                        <div class="author-info">
+                            <h4>Maria Costa</h4>
+                            <p>Escritório de Contabilidade, Braga</p>
+                        </div>
+                    </div>
                 </div>
             </div>
         </div>
     </section>
 
     <!-- Pricing Section -->
-    <section class="pricing scroll-animate" id="pricing" style="padding: 6rem 2rem;">
+    <section class="pricing-section scroll-animate" id="preco" style="padding: 6rem 2rem; background: rgba(15, 23, 42, 0.3);">
         <div style="max-width: 1000px; margin: 0 auto;">
-            <h2 class="section-title">Veja o Exato Momento em que Vai Recuperar o Seu Investimento</h2>
-            <p class="section-subtitle">A maioria dos clientes recupera o custo em 30 dias descobrindo apenas 1 cliente não rentável</p>
+            <div class="section-header">
+                <h2 class="section-title">Recupere o Investimento em 30 Dias</h2>
+                <p class="section-subtitle">A maioria dos clientes recupera o custo descobrindo apenas 1 cliente não rentável</p>
+            </div>
             
-            <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 2rem; margin-top: 3rem;">
+            <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(320px, 1fr)); gap: 2rem; margin-top: 3rem;">
                 <!-- Plano Starter -->
-                <div style="background: var(--glass-bg); border: 1px solid var(--border-glass); border-radius: 20px; padding: 2rem; backdrop-filter: blur(20px); transition: all 0.3s ease;" onmouseover="this.style.transform='translateY(-10px)'; this.style.boxShadow='0 25px 50px rgba(30, 41, 59, 0.7)'" onmouseout="this.style.transform='translateY(0)'; this.style.boxShadow='none'">
+                <div style="background: var(--glass); border: 1px solid var(--glass-border); border-radius: 20px; padding: 2rem; backdrop-filter: blur(20px); transition: all 0.3s ease; position: relative;" onmouseover="this.style.transform='translateY(-10px)'; this.style.boxShadow='0 25px 50px rgba(0, 0, 0, 0.3)'" onmouseout="this.style.transform='translateY(0)'; this.style.boxShadow='none'">
                     <div style="text-align: center; margin-bottom: 2rem;">
-                        <h3 style="font-size: 1.5rem; font-weight: 700; color: var(--text-primary); margin-bottom: 0.5rem;">Starter</h3>
-                        <p style="color: var(--text-secondary);">Para pequenos escritórios</p>
-                        <div style="font-size: 3rem; font-weight: 800; color: var(--primary-blue); margin: 1rem 0;">49€</div>
-                        <p style="color: var(--text-secondary);">por mês</p>
+                        <h3 style="font-size: 1.5rem; font-weight: 700; color: var(--white); margin-bottom: 0.5rem;">Starter</h3>
+                        <p style="color: var(--gray-400);">Para pequenos escritórios</p>
+                        <div style="font-size: 3rem; font-weight: 800; color: var(--primary); margin: 1rem 0;">€49</div>
+                        <p style="color: var(--gray-400);">por mês</p>
                     </div>
-                    <ul style="list-style: none; margin-bottom: 2rem;">
-                        <li style="display: flex; align-items: center; gap: 0.75rem; margin-bottom: 0.75rem; color: var(--text-secondary);"><span style="color: var(--accent-green); font-weight: bold;">✓</span> Até 5 utilizadores</li>
-                        <li style="display: flex; align-items: center; gap: 0.75rem; margin-bottom: 0.75rem; color: var(--text-secondary);"><span style="color: var(--accent-green); font-weight: bold;">✓</span> Gestão de clientes</li>
-                        <li style="display: flex; align-items: center; gap: 0.75rem; margin-bottom: 0.75rem; color: var(--text-secondary);"><span style="color: var(--accent-green); font-weight: bold;">✓</span> Registo de tempo</li>
-                        <li style="display: flex; align-items: center; gap: 0.75rem; margin-bottom: 0.75rem; color: var(--text-secondary);"><span style="color: var(--accent-green); font-weight: bold;">✓</span> Relatórios básicos</li>
-                        <li style="display: flex; align-items: center; gap: 0.75rem; margin-bottom: 0.75rem; color: var(--text-secondary);"><span style="color: var(--accent-green); font-weight: bold;">✓</span> Suporte por email</li>
+                    <ul style="list-style: none; margin-bottom: 2rem; space-y: 0.75rem;">
+                        <li style="display: flex; align-items: center; gap: 0.75rem; margin-bottom: 0.75rem; color: var(--gray-300);"><span style="color: var(--success); font-weight: bold; font-size: 1.1rem;">✓</span> Até 5 utilizadores</li>
+                        <li style="display: flex; align-items: center; gap: 0.75rem; margin-bottom: 0.75rem; color: var(--gray-300);"><span style="color: var(--success); font-weight: bold; font-size: 1.1rem;">✓</span> Análise de rentabilidade</li>
+                        <li style="display: flex; align-items: center; gap: 0.75rem; margin-bottom: 0.75rem; color: var(--gray-300);"><span style="color: var(--success); font-weight: bold; font-size: 1.1rem;">✓</span> Gestão de prazos</li>
+                        <li style="display: flex; align-items: center; gap: 0.75rem; margin-bottom: 0.75rem; color: var(--gray-300);"><span style="color: var(--success); font-weight: bold; font-size: 1.1rem;">✓</span> Registo de tempo inteligente</li>
+                        <li style="display: flex; align-items: center; gap: 0.75rem; margin-bottom: 0.75rem; color: var(--gray-300);"><span style="color: var(--success); font-weight: bold; font-size: 1.1rem;">✓</span> Relatórios básicos</li>
                     </ul>
-                    <a href="#" class="btn-secondary" style="width: 100%; text-align: center;">Começar Agora</a>
+                    <a href="#" class="btn btn-secondary" style="width: 100%; text-align: center; justify-content: center;">Experimentar 14 Dias Grátis</a>
                 </div>
 
-                <!-- Plano Professional -->
-                <div style="background: linear-gradient(135deg, var(--primary-blue), var(--primary-purple)); border: none; border-radius: 20px; padding: 2rem; transition: all 0.3s ease; position: relative; overflow: hidden;" onmouseover="this.style.transform='translateY(-10px)'; this.style.boxShadow='0 25px 50px rgba(37, 99, 235, 0.4)'" onmouseout="this.style.transform='translateY(0)'; this.style.boxShadow='none'">
-                    <div style="position: absolute; top: 1rem; right: 1rem; background: rgba(255,255,255,0.2); padding: 0.5rem 1rem; border-radius: 20px; font-size: 0.875rem; font-weight: 600; color: white;">Popular</div>
+                <!-- Plano Professional (Popular) -->
+                <div style="background: linear-gradient(135deg, var(--primary), var(--secondary)); border: none; border-radius: 20px; padding: 2rem; transition: all 0.3s ease; position: relative; overflow: hidden;" onmouseover="this.style.transform='translateY(-15px)'; this.style.boxShadow='0 30px 60px rgba(99, 102, 241, 0.4)'" onmouseout="this.style.transform='translateY(0)'; this.style.boxShadow='none'">
+                    <div style="position: absolute; top: 1rem; right: 1rem; background: rgba(255,255,255,0.2); padding: 0.5rem 1rem; border-radius: 20px; font-size: 0.875rem; font-weight: 600; color: white; backdrop-filter: blur(10px);">✨ POPULAR</div>
                     <div style="text-align: center; margin-bottom: 2rem;">
                         <h3 style="font-size: 1.5rem; font-weight: 700; color: white; margin-bottom: 0.5rem;">Professional</h3>
                         <p style="color: rgba(255,255,255,0.8);">Para escritórios em crescimento</p>
-                        <div style="font-size: 3rem; font-weight: 800; color: white; margin: 1rem 0;">99€</div>
+                        <div style="font-size: 3rem; font-weight: 800; color: white; margin: 1rem 0;">€99</div>
                         <p style="color: rgba(255,255,255,0.8);">por mês</p>
                     </div>
-                    <ul style="list-style: none; margin-bottom: 2rem;">
-                        <li style="display: flex; align-items: center; gap: 0.75rem; margin-bottom: 0.75rem; color: rgba(255,255,255,0.9);"><span style="color: var(--accent-green); font-weight: bold;">✓</span> Até 15 utilizadores</li>
-                        <li style="display: flex; align-items: center; gap: 0.75rem; margin-bottom: 0.75rem; color: rgba(255,255,255,0.9);"><span style="color: var(--accent-green); font-weight: bold;">✓</span> Workflows personalizáveis</li>
-                        <li style="display: flex; align-items: center; gap: 0.75rem; margin-bottom: 0.75rem; color: rgba(255,255,255,0.9);"><span style="color: var(--accent-green); font-weight: bold;">✓</span> Análise de rentabilidade</li>
-                        <li style="display: flex; align-items: center; gap: 0.75rem; margin-bottom: 0.75rem; color: rgba(255,255,255,0.9);"><span style="color: var(--accent-green); font-weight: bold;">✓</span> Notificações avançadas</li>
-                        <li style="display: flex; align-items: center; gap: 0.75rem; margin-bottom: 0.75rem; color: rgba(255,255,255,0.9);"><span style="color: var(--accent-green); font-weight: bold;">✓</span> AI Insights</li>
-                        <li style="display: flex; align-items: center; gap: 0.75rem; margin-bottom: 0.75rem; color: rgba(255,255,255,0.9);"><span style="color: var(--accent-green); font-weight: bold;">✓</span> Suporte prioritário</li>
+                    <ul style="list-style: none; margin-bottom: 2rem; space-y: 0.75rem;">
+                        <li style="display: flex; align-items: center; gap: 0.75rem; margin-bottom: 0.75rem; color: rgba(255,255,255,0.9);"><span style="color: white; font-weight: bold; font-size: 1.1rem;">✓</span> Até 15 utilizadores</li>
+                        <li style="display: flex; align-items: center; gap: 0.75rem; margin-bottom: 0.75rem; color: rgba(255,255,255,0.9);"><span style="color: white; font-weight: bold; font-size: 1.1rem;">✓</span> IA Insights avançados</li>
+                        <li style="display: flex; align-items: center; gap: 0.75rem; margin-bottom: 0.75rem; color: rgba(255,255,255,0.9);"><span style="color: white; font-weight: bold; font-size: 1.1rem;">✓</span> Workflows personalizáveis</li>
+                        <li style="display: flex; align-items: center; gap: 0.75rem; margin-bottom: 0.75rem; color: rgba(255,255,255,0.9);"><span style="color: white; font-weight: bold; font-size: 1.1rem;">✓</span> Alertas avançados</li>
+                        <li style="display: flex; align-items: center; gap: 0.75rem; margin-bottom: 0.75rem; color: rgba(255,255,255,0.9);"><span style="color: white; font-weight: bold; font-size: 1.1rem;">✓</span> Análise predictiva</li>
+                        <li style="display: flex; align-items: center; gap: 0.75rem; margin-bottom: 0.75rem; color: rgba(255,255,255,0.9);"><span style="color: white; font-weight: bold; font-size: 1.1rem;">✓</span> Suporte prioritário</li>
                     </ul>
-                    <a href="#" style="width: 100%; text-align: center; padding: 1rem 2rem; background: white; color: var(--primary-blue); border: none; border-radius: 12px; font-weight: 600; font-size: 1.1rem; cursor: pointer; transition: all 0.3s ease; text-decoration: none; display: inline-block;" onmouseover="this.style.transform='translateY(-2px)'" onmouseout="this.style.transform='translateY(0)'">Experimentar Grátis</a>
+                    <a href="#" style="width: 100%; text-align: center; justify-content: center; padding: 1rem 2rem; background: white; color: var(--primary); border: none; border-radius: 12px; font-weight: 600; font-size: 1rem; cursor: pointer; transition: all 0.3s ease; text-decoration: none; display: inline-flex; align-items: center;" onmouseover="this.style.transform='translateY(-2px)'; this.style.boxShadow='0 10px 30px rgba(255,255,255,0.3)'" onmouseout="this.style.transform='translateY(0)'; this.style.boxShadow='none'">🚀 Começar Teste Grátis</a>
                 </div>
 
                 <!-- Plano Enterprise -->
-                <div style="background: var(--glass-bg); border: 1px solid var(--border-glass); border-radius: 20px; padding: 2rem; backdrop-filter: blur(20px); transition: all 0.3s ease;" onmouseover="this.style.transform='translateY(-10px)'; this.style.boxShadow='0 25px 50px rgba(30, 41, 59, 0.7)'" onmouseout="this.style.transform='translateY(0)'; this.style.boxShadow='none'">
+                <div style="background: var(--glass); border: 1px solid var(--glass-border); border-radius: 20px; padding: 2rem; backdrop-filter: blur(20px); transition: all 0.3s ease;" onmouseover="this.style.transform='translateY(-10px)'; this.style.boxShadow='0 25px 50px rgba(0, 0, 0, 0.3)'" onmouseout="this.style.transform='translateY(0)'; this.style.boxShadow='none'">
                     <div style="text-align: center; margin-bottom: 2rem;">
-                        <h3 style="font-size: 1.5rem; font-weight: 700; color: var(--text-primary); margin-bottom: 0.5rem;">Enterprise</h3>
-                        <p style="color: var(--text-secondary);">Para grandes escritórios</p>
-                        <div style="font-size: 3rem; font-weight: 800; color: var(--primary-purple); margin: 1rem 0;">199€</div>
-                        <p style="color: var(--text-secondary);">por mês</p>
+                        <h3 style="font-size: 1.5rem; font-weight: 700; color: var(--white); margin-bottom: 0.5rem;">Enterprise</h3>
+                        <p style="color: var(--gray-400);">Para grandes escritórios</p>
+                        <div style="font-size: 3rem; font-weight: 800; background: linear-gradient(135deg, var(--primary), var(--secondary)); -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text; margin: 1rem 0;">€199</div>
+                        <p style="color: var(--gray-400);">por mês</p>
                     </div>
                     <ul style="list-style: none; margin-bottom: 2rem;">
-                        <li style="display: flex; align-items: center; gap: 0.75rem; margin-bottom: 0.75rem; color: var(--text-secondary);"><span style="color: var(--accent-green); font-weight: bold;">✓</span> Utilizadores ilimitados</li>
-                        <li style="display: flex; align-items: center; gap: 0.75rem; margin-bottom: 0.75rem; color: var(--text-secondary);"><span style="color: var(--accent-green); font-weight: bold;">✓</span> Integração personalizada</li>
-                        <li style="display: flex; align-items: center; gap: 0.75rem; margin-bottom: 0.75rem; color: var(--text-secondary);"><span style="color: var(--accent-green); font-weight: bold;">✓</span> Relatórios avançados</li>
-                        <li style="display: flex; align-items: center; gap: 0.75rem; margin-bottom: 0.75rem; color: var(--text-secondary);"><span style="color: var(--accent-green); font-weight: bold;">✓</span> API completa</li>
-                        <li style="display: flex; align-items: center; gap: 0.75rem; margin-bottom: 0.75rem; color: var(--text-secondary);"><span style="color: var(--accent-green); font-weight: bold;">✓</span> Gestor de conta dedicado</li>
+                        <li style="display: flex; align-items: center; gap: 0.75rem; margin-bottom: 0.75rem; color: var(--gray-300);"><span style="color: var(--success); font-weight: bold; font-size: 1.1rem;">✓</span> Utilizadores ilimitados</li>
+                        <li style="display: flex; align-items: center; gap: 0.75rem; margin-bottom: 0.75rem; color: var(--gray-300);"><span style="color: var(--success); font-weight: bold; font-size: 1.1rem;">✓</span> Integração personalizada</li>
+                        <li style="display: flex; align-items: center; gap: 0.75rem; margin-bottom: 0.75rem; color: var(--gray-300);"><span style="color: var(--success); font-weight: bold; font-size: 1.1rem;">✓</span> API completa</li>
+                        <li style="display: flex; align-items: center; gap: 0.75rem; margin-bottom: 0.75rem; color: var(--gray-300);"><span style="color: var(--success); font-weight: bold; font-size: 1.1rem;">✓</span> Relatórios executivos</li>
+                        <li style="display: flex; align-items: center; gap: 0.75rem; margin-bottom: 0.75rem; color: var(--gray-300);"><span style="color: var(--success); font-weight: bold; font-size: 1.1rem;">✓</span> Gestor de conta dedicado</li>
                     </ul>
-                    <a href="#" class="btn-secondary" style="width: 100%; text-align: center;">Contactar Vendas</a>
+                    <a href="#" class="btn btn-secondary" style="width: 100%; text-align: center; justify-content: center;">Contactar Vendas</a>
                 </div>
+            </div>
+
+            <!-- ROI Calculator -->
+            <div style="max-width: 600px; margin: 4rem auto 0; background: var(--glass); border: 1px solid var(--glass-border); border-radius: 20px; padding: 2rem; backdrop-filter: blur(20px); text-align: center;">
+                <h3 style="color: var(--white); margin-bottom: 1rem; font-weight: 700;">💡 Calculadora de ROI</h3>
+                <p style="color: var(--gray-400); margin-bottom: 1.5rem;">Se descobrir apenas 1 cliente que está a custar €200/mês em prejuízo:</p>
+                <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(150px, 1fr)); gap: 1rem; margin: 1.5rem 0;">
+                    <div style="background: rgba(16, 185, 129, 0.1); padding: 1rem; border-radius: 12px; border: 1px solid rgba(16, 185, 129, 0.3);">
+                        <div style="font-size: 1.5rem; font-weight: 800; color: var(--success);">€2.400</div>
+                        <div style="color: var(--gray-400); font-size: 0.875rem;">poupados por ano</div>
+                    </div>
+                    <div style="background: rgba(99, 102, 241, 0.1); padding: 1rem; border-radius: 12px; border: 1px solid rgba(99, 102, 241, 0.3);">
+                        <div style="font-size: 1.5rem; font-weight: 800; color: var(--primary);">2000%</div>
+                        <div style="color: var(--gray-400); font-size: 0.875rem;">retorno do investimento</div>
+                    </div>
+                </div>
+                <p style="color: var(--success); font-weight: 600; font-size: 0.9rem;">✅ Recupera o investimento anual em apenas 2 semanas</p>
             </div>
         </div>
     </section>
 
-    <!-- CTA Section -->
-    <section class="cta scroll-animate">
+    <!-- Final CTA Section -->
+    <section class="cta-section scroll-animate">
         <div class="cta-container">
-            <h2>Está a Perder Dinheiro Todos os Meses com Clientes Não Rentáveis?</h2>
-            <p>Em 60 segundos, descubra exatamente quanto. Teste grátis por 14 dias - se não encontrar pelo menos um problema que vale mais que o custo, devolvemos o dinheiro.</p>
-            <div style="display: flex; gap: 1rem; justify-content: center; flex-wrap: wrap;">
-                <a href="#demo" class="btn-primary">Descobrir Meus Prejuízos Agora</a>
-                <a href="#contact" class="btn-secondary">Falar com um Especialista</a>
+            <h2 class="cta-title">Pare de Perder Dinheiro Hoje Mesmo</h2>
+            <p class="cta-subtitle">
+                Em 60 segundos descubra exatamente quanto está a perder com clientes não rentáveis. 
+                Teste grátis por 14 dias - se não encontrar pelo menos um problema que vale mais que o custo, devolvemos o dinheiro.
+            </p>
+            
+            <div class="cta-buttons">
+                <a href="#" class="btn btn-primary" style="font-size: 1.1rem; padding: 1.25rem 2.5rem;">
+                    🚀 Descobrir Meus Prejuízos Agora
+                </a>
+                <a href="#" class="btn btn-secondary">
+                    📞 Falar com Especialista
+                </a>
             </div>
-            <p style="font-size: 0.9rem; color: var(--text-secondary); margin-top: 1rem;">✅ 14 dias grátis • ✅ Configuração em 5 minutos • ✅ Cancelamento automático</p>
+            
+            <div class="cta-guarantee">
+                <div class="guarantee-item">
+                    <span class="guarantee-icon">✅</span>
+                    <span>14 dias grátis</span>
+                </div>
+                <div class="guarantee-item">
+                    <span class="guarantee-icon">✅</span>
+                    <span>Configuração em 5 minutos</span>
+                </div>
+                <div class="guarantee-item">
+                    <span class="guarantee-icon">✅</span>
+                    <span>Cancelamento automático</span>
+                </div>
+                <div class="guarantee-item">
+                    <span class="guarantee-icon">✅</span>
+                    <span>Garantia de satisfação</span>
+                </div>
+            </div>
         </div>
     </section>
 
     <!-- Footer -->
     <footer class="footer">
         <div class="footer-container">
-            <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: 2rem; margin-bottom: 2rem; text-align: left;">
-                <div>
-                    <div class="logo" style="margin-bottom: 1rem;">
+            <div class="footer-grid">
+                <div class="footer-brand">
+                    <div class="logo">
                         <div class="logo-icon">T</div>
                         TarefAI
                     </div>
-                    <p style="color: var(--text-secondary); line-height: 1.6;">
-                        Plataforma completa para gestão de escritórios de contabilidade com inteligência artificial.
-                    </p>
+                    <p>Plataforma inteligente para gestão de escritórios de contabilidade. Identifique clientes não rentáveis, organize a equipa e nunca mais perca um prazo.</p>
                 </div>
-                <div>
-                    <h4 style="color: var(--text-primary); margin-bottom: 1rem; font-weight: 600;">Produto</h4>
-                    <ul style="list-style: none;">
-                        <li style="margin-bottom: 0.5rem;"><a href="#" style="color: var(--text-secondary); text-decoration: none;">Funcionalidades</a></li>
-                        <li style="margin-bottom: 0.5rem;"><a href="#" style="color: var(--text-secondary); text-decoration: none;">Preços</a></li>
-                        <li style="margin-bottom: 0.5rem;"><a href="#" style="color: var(--text-secondary); text-decoration: none;">Demonstração</a></li>
-                        <li style="margin-bottom: 0.5rem;"><a href="#" style="color: var(--text-secondary); text-decoration: none;">API</a></li>
+                
+                <div class="footer-section">
+                    <h4>Produto</h4>
+                    <ul class="footer-links">
+                        <li><a href="#solucao">Funcionalidades</a></li>
+                        <li><a href="#demo">Demo Interativo</a></li>
+                        <li><a href="#preco">Preços</a></li>
+                        <li><a href="#">Integrações</a></li>
+                        <li><a href="#">API</a></li>
                     </ul>
                 </div>
-                <div>
-                    <h4 style="color: var(--text-primary); margin-bottom: 1rem; font-weight: 600;">Suporte</h4>
-                    <ul style="list-style: none;">
-                        <li style="margin-bottom: 0.5rem;"><a href="#" style="color: var(--text-secondary); text-decoration: none;">Centro de Ajuda</a></li>
-                        <li style="margin-bottom: 0.5rem;"><a href="#" style="color: var(--text-secondary); text-decoration: none;">Documentação</a></li>
-                        <li style="margin-bottom: 0.5rem;"><a href="#" style="color: var(--text-secondary); text-decoration: none;">Contacto</a></li>
-                        <li style="margin-bottom: 0.5rem;"><a href="#" style="color: var(--text-secondary); text-decoration: none;">Estado do Sistema</a></li>
+                
+                <div class="footer-section">
+                    <h4>Suporte</h4>
+                    <ul class="footer-links">
+                        <li><a href="#">Centro de Ajuda</a></li>
+                        <li><a href="#">Documentação</a></li>
+                        <li><a href="#">Tutoriais</a></li>
+                        <li><a href="#">Estado do Sistema</a></li>
+                        <li><a href="#">Contacto</a></li>
                     </ul>
                 </div>
-                <div>
-                    <h4 style="color: var(--text-primary); margin-bottom: 1rem; font-weight: 600;">Empresa</h4>
-                    <ul style="list-style: none;">
-                        <li style="margin-bottom: 0.5rem;"><a href="#" style="color: var(--text-secondary); text-decoration: none;">Sobre Nós</a></li>
-                        <li style="margin-bottom: 0.5rem;"><a href="#" style="color: var(--text-secondary); text-decoration: none;">Blog</a></li>
-                        <li style="margin-bottom: 0.5rem;"><a href="#" style="color: var(--text-secondary); text-decoration: none;">Carreiras</a></li>
-                        <li style="margin-bottom: 0.5rem;"><a href="#" style="color: var(--text-secondary); text-decoration: none;">Privacidade</a></li>
+                
+                <div class="footer-section">
+                    <h4>Empresa</h4>
+                    <ul class="footer-links">
+                        <li><a href="#">Sobre Nós</a></li>
+                        <li><a href="#">Blog</a></li>
+                        <li><a href="#">Carreiras</a></li>
+                        <li><a href="#">Imprensa</a></li>
+                        <li><a href="#">Parceiros</a></li>
                     </ul>
                 </div>
             </div>
-            <div style="border-top: 1px solid var(--border-glass); padding-top: 2rem; display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 1rem;">
+            
+            <div class="footer-bottom">
                 <p>&copy; 2024 TarefAI. Todos os direitos reservados.</p>
-                <div style="display: flex; gap: 1rem;">
-                    <a href="#" style="color: var(--text-secondary); text-decoration: none;">Termos</a>
-                    <a href="#" style="color: var(--text-secondary); text-decoration: none;">Privacidade</a>
-                    <a href="#" style="color: var(--text-secondary); text-decoration: none;">Cookies</a>
+                <div style="display: flex; gap: 2rem; align-items: center; flex-wrap: wrap;">
+                    <div style="display: flex; gap: 1rem;">
+                        <a href="#" style="color: var(--gray-400); text-decoration: none; font-size: 0.875rem;">Privacidade</a>
+                        <a href="#" style="color: var(--gray-400); text-decoration: none; font-size: 0.875rem;">Termos</a>
+                        <a href="#" style="color: var(--gray-400); text-decoration: none; font-size: 0.875rem;">Cookies</a>
+                    </div>
+                    <div class="footer-social">
+                        <a href="#" class="social-link">📧</a>
+                        <a href="#" class="social-link">💬</a>
+                        <a href="#" class="social-link">📱</a>
+                    </div>
                 </div>
             </div>
         </div>
     </footer>
 
     <script>
-        // Remove loading overlay when page loads
-        window.addEventListener('load', function() {
-            const loadingOverlay = document.getElementById('loadingOverlay');
-            loadingOverlay.style.opacity = '0';
-            setTimeout(() => {
-                loadingOverlay.style.display = 'none';
-            }, 500);
+        // Navbar scroll effect
+        window.addEventListener('scroll', function() {
+            const navbar = document.getElementById('navbar');
+            if (window.scrollY > 50) {
+                navbar.classList.add('scrolled');
+            } else {
+                navbar.classList.remove('scrolled');
+            }
         });
 
-        // Tab functionality
-        function showTab(tabName) {
-            // Hide all tabs
-            const tabs = document.querySelectorAll('.screenshot-content');
-            tabs.forEach(tab => {
+        // Smooth scrolling
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
+                const target = document.querySelector(this.getAttribute('href'));
+                if (target) {
+                    target.scrollIntoView({
+                        behavior: 'smooth',
+                        block: 'start'
+                    });
+                }
+            });
+        });
+
+        // Demo tabs functionality
+        function showDemo(tabName) {
+            // Hide all demo contents
+            document.querySelectorAll('.demo-content').forEach(content => {
+                content.classList.remove('active');
+            });
+            
+            // Remove active class from all tabs
+            document.querySelectorAll('.demo-tab').forEach(tab => {
                 tab.classList.remove('active');
             });
-
-            // Remove active class from all buttons
-            const buttons = document.querySelectorAll('.tab-btn');
-            buttons.forEach(btn => {
-                btn.classList.remove('active');
-            });
-
-            // Show selected tab
+            
+            // Show selected demo content
             document.getElementById(tabName).classList.add('active');
             
-            // Add active class to clicked button
+            // Add active class to clicked tab
             event.target.classList.add('active');
         }
 
         // Scroll animations
-        function checkScrollAnimations() {
+        function revealOnScroll() {
             const elements = document.querySelectorAll('.scroll-animate');
             
             elements.forEach(element => {
@@ -1090,132 +2030,160 @@
             });
         }
 
-        // Navbar scroll effect
-        function handleNavbarScroll() {
-            const navbar = document.querySelector('.navbar');
-            if (window.scrollY > 50) {
-                navbar.style.background = 'rgba(15, 23, 42, 0.98)';
-                navbar.style.boxShadow = '0 10px 30px rgba(0, 0, 0, 0.3)';
-            } else {
-                navbar.style.background = 'rgba(15, 23, 42, 0.95)';
-                navbar.style.boxShadow = 'none';
-            }
-        }
+        window.addEventListener('scroll', revealOnScroll);
+        
+        // Initial check
+        revealOnScroll();
 
-        // Smooth scrolling for anchor links
-        function smoothScroll() {
-            const links = document.querySelectorAll('a[href^="#"]');
-            
-            links.forEach(link => {
-                link.addEventListener('click', function(e) {
-                    e.preventDefault();
-                    
-                    const targetId = this.getAttribute('href');
-                    const targetElement = document.querySelector(targetId);
-                    
-                    if (targetElement) {
-                        const offsetTop = targetElement.offsetTop - 100;
-                        
-                        window.scrollTo({
-                            top: offsetTop,
-                            behavior: 'smooth'
-                        });
-                    }
-                });
+        // Interactive metric cards animation
+        document.querySelectorAll('.metric-card').forEach(card => {
+            card.addEventListener('mouseenter', function() {
+                const value = this.querySelector('.metric-value');
+                if (value) {
+                    value.style.transform = 'scale(1.1)';
+                    value.style.transition = 'transform 0.3s ease';
+                }
             });
-        }
-
-        // Parallax effect for hero section
-        function handleParallax() {
-            const scrolled = window.pageYOffset;
-            const parallaxElements = document.querySelectorAll('.hero::before');
             
-            parallaxElements.forEach(element => {
-                element.style.transform = `translateY(${scrolled * 0.5}px)`;
-            });
-        }
-
-        // Initialize all functions
-        document.addEventListener('DOMContentLoaded', function() {
-            smoothScroll();
-            checkScrollAnimations();
-            
-            // Add scroll listeners
-            window.addEventListener('scroll', function() {
-                checkScrollAnimations();
-                handleNavbarScroll();
-                handleParallax();
-            });
-
-            // Add resize listener for responsive checks
-            window.addEventListener('resize', checkScrollAnimations);
-        });
-
-        // Demo interaction simulation
-        function simulateDemo() {
-            alert('Demo interativo em desenvolvimento! Em breve você poderá experimentar todas as funcionalidades da plataforma.');
-        }
-
-        // Contact form simulation
-        function openContact() {
-            alert('Formulário de contacto em desenvolvimento! Envie um email para info@tarefai.com para mais informações.');
-        }
-
-        // Add click handlers for demo buttons
-        document.addEventListener('DOMContentLoaded', function() {
-            const demoButtons = document.querySelectorAll('a[href="#demo"]');
-            const contactButtons = document.querySelectorAll('a[href="#contact"]');
-            
-            demoButtons.forEach(button => {
-                button.addEventListener('click', function(e) {
-                    e.preventDefault();
-                    simulateDemo();
-                });
-            });
-
-            contactButtons.forEach(button => {
-                button.addEventListener('click', function(e) {
-                    e.preventDefault();
-                    openContact();
-                });
+            card.addEventListener('mouseleave', function() {
+                const value = this.querySelector('.metric-value');
+                if (value) {
+                    value.style.transform = 'scale(1)';
+                }
             });
         });
 
-        // Add hover effects for feature cards
-        document.addEventListener('DOMContentLoaded', function() {
-            const featureCards = document.querySelectorAll('.feature-card');
+        // Feature cards enhanced hover
+        document.querySelectorAll('.feature-card').forEach(card => {
+            card.addEventListener('mouseenter', function() {
+                this.style.zIndex = '10';
+            });
             
-            featureCards.forEach(card => {
-                card.addEventListener('mouseenter', function() {
-                    this.style.transform = 'translateY(-10px) scale(1.02)';
-                });
+            card.addEventListener('mouseleave', function() {
+                this.style.zIndex = '1';
+            });
+        });
+
+        // CTA buttons click tracking
+        document.querySelectorAll('.btn-primary').forEach(button => {
+            button.addEventListener('click', function(e) {
+                e.preventDefault();
                 
-                card.addEventListener('mouseleave', function() {
-                    this.style.transform = 'translateY(0) scale(1)';
-                });
+                // Add loading state
+                const originalText = this.innerHTML;
+                this.innerHTML = '<div class="loading-dots"><div class="loading-dot"></div><div class="loading-dot"></div><div class="loading-dot"></div></div> A processar...';
+                this.style.pointerEvents = 'none';
+                
+                // Simulate processing
+                setTimeout(() => {
+                    this.innerHTML = originalText;
+                    this.style.pointerEvents = 'auto';
+                    alert('🚀 Demo em desenvolvimento! Em breve poderá experimentar todas as funcionalidades da TarefAI.');
+                }, 2000);
             });
         });
 
-        // Performance optimization: throttle scroll events
-        function throttle(func, limit) {
-            let inThrottle;
-            return function() {
-                const args = arguments;
-                const context = this;
-                if (!inThrottle) {
-                    func.apply(context, args);
-                    inThrottle = true;
-                    setTimeout(() => inThrottle = false, limit);
+        // Testimonial cards stagger animation
+        const observerOptions = {
+            threshold: 0.1,
+            rootMargin: '0px 0px -50px 0px'
+        };
+
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach((entry, index) => {
+                if (entry.isIntersecting) {
+                    setTimeout(() => {
+                        entry.target.style.opacity = '1';
+                        entry.target.style.transform = 'translateY(0)';
+                    }, index * 150);
+                }
+            });
+        }, observerOptions);
+
+        document.querySelectorAll('.testimonial-card').forEach(card => {
+            card.style.opacity = '0';
+            card.style.transform = 'translateY(30px)';
+            card.style.transition = 'all 0.6s ease';
+            observer.observe(card);
+        });
+
+        // Enhanced scroll performance
+        let ticking = false;
+        
+        function updateOnScroll() {
+            revealOnScroll();
+            ticking = false;
+        }
+        
+        window.addEventListener('scroll', function() {
+            if (!ticking) {
+                requestAnimationFrame(updateOnScroll);
+                ticking = true;
+            }
+        });
+
+        // Mobile menu toggle (basic implementation)
+        const createMobileMenu = () => {
+            if (window.innerWidth <= 768) {
+                const navLinks = document.querySelector('.nav-links');
+                if (navLinks && !document.querySelector('.mobile-menu-toggle')) {
+                    const toggleButton = document.createElement('button');
+                    toggleButton.className = 'mobile-menu-toggle';
+                    toggleButton.innerHTML = '☰';
+                    toggleButton.style.cssText = `
+                        background: none;
+                        border: none;
+                        color: white;
+                        font-size: 1.5rem;
+                        cursor: pointer;
+                        display: block;
+                    `;
+                    
+                    toggleButton.addEventListener('click', () => {
+                        navLinks.style.display = navLinks.style.display === 'flex' ? 'none' : 'flex';
+                        navLinks.style.flexDirection = 'column';
+                        navLinks.style.position = 'absolute';
+                        navLinks.style.top = '100%';
+                        navLinks.style.left = '0';
+                        navLinks.style.right = '0';
+                        navLinks.style.background = 'rgba(15, 23, 42, 0.95)';
+                        navLinks.style.padding = '2rem';
+                        navLinks.style.backdropFilter = 'blur(20px)';
+                    });
+                    
+                    document.querySelector('.nav-container').appendChild(toggleButton);
                 }
             }
-        }
+        };
 
-        // Replace scroll listeners with throttled versions
-        window.addEventListener('scroll', throttle(function() {
-            checkScrollAnimations();
-            handleNavbarScroll();
-            handleParallax();
-        }, 16)); // ~60fps
+        window.addEventListener('resize', createMobileMenu);
+        createMobileMenu();
+
+        // Add some dynamic content updates
+        setInterval(() => {
+            const liveIndicator = document.querySelector('.status-indicator');
+            if (liveIndicator) {
+                liveIndicator.style.opacity = '0.5';
+                setTimeout(() => {
+                    liveIndicator.style.opacity = '1';
+                }, 500);
+            }
+        }, 3000);
+
+        // Performance optimization: Lazy load animations
+        const lazyAnimationObserver = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.style.animationPlayState = 'running';
+                } else {
+                    entry.target.style.animationPlayState = 'paused';
+                }
+            });
+        });
+
+        document.querySelectorAll('.chart-bar, .loading-dot').forEach(el => {
+            lazyAnimationObserver.observe(el);
+        });
     </script>
 </body>
 </html>
