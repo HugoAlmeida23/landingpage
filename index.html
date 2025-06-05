@@ -1,0 +1,1217 @@
+<!DOCTYPE html>
+<html lang="pt">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>TarefAI - Gestão Inteligente de Escritório de Contabilidade</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        :root {
+            --primary-blue: #2563eb;
+            --primary-purple: #8b5cf6;
+            --dark-bg: #0f172a;
+            --card-bg: #1e293b;
+            --text-primary: #f8fafc;
+            --text-secondary: #94a3b8;
+            --accent-green: #10b981;
+            --accent-orange: #f59e0b;
+            --accent-red: #ef4444;
+            --gradient-bg: linear-gradient(135deg, #0f172a 0%, #1e293b 50%, #334155 100%);
+            --glass-bg: rgba(30, 41, 59, 0.8);
+            --border-glass: rgba(148, 163, 184, 0.2);
+        }
+
+        body {
+            font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+            background: var(--gradient-bg);
+            color: var(--text-primary);
+            overflow-x: hidden;
+            line-height: 1.6;
+        }
+
+        /* Navigation */
+        .navbar {
+            position: fixed;
+            top: 0;
+            width: 100%;
+            padding: 1rem 2rem;
+            background: rgba(15, 23, 42, 0.95);
+            backdrop-filter: blur(20px);
+            border-bottom: 1px solid var(--border-glass);
+            z-index: 1000;
+            transition: all 0.3s ease;
+        }
+
+        .nav-container {
+            max-width: 1200px;
+            margin: 0 auto;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .logo {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            font-size: 1.5rem;
+            font-weight: 700;
+            background: linear-gradient(45deg, var(--primary-blue), var(--primary-purple));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+
+        .logo-icon {
+            width: 40px;
+            height: 40px;
+            background: linear-gradient(45deg, var(--primary-blue), var(--primary-purple));
+            border-radius: 12px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.2rem;
+        }
+
+        .nav-links {
+            display: flex;
+            gap: 2rem;
+            list-style: none;
+            align-items: center;
+        }
+
+        .nav-links a {
+            color: var(--text-secondary);
+            text-decoration: none;
+            transition: color 0.3s ease;
+            font-weight: 500;
+        }
+
+        .nav-links a:hover {
+            color: var(--text-primary);
+        }
+
+        .btn-login {
+            padding: 0.75rem 1.5rem;
+            background: linear-gradient(45deg, var(--primary-blue), var(--primary-purple));
+            border: none;
+            border-radius: 12px;
+            color: white;
+            font-weight: 600;
+            text-decoration: none;
+            transition: all 0.3s ease;
+            cursor: pointer;
+        }
+
+        .btn-login:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 10px 30px rgba(37, 99, 235, 0.3);
+        }
+
+        /* Hero Section */
+        .hero {
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            padding: 0 2rem;
+            background: 
+                radial-gradient(circle at 20% 80%, rgba(37, 99, 235, 0.1) 0%, transparent 50%),
+                radial-gradient(circle at 80% 20%, rgba(139, 92, 246, 0.1) 0%, transparent 50%),
+                var(--gradient-bg);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .hero::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: url("data:image/svg+xml,%3Csvg width='60' height='60' viewBox='0 0 60 60' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='none' fill-rule='evenodd'%3E%3Cg fill='%234f46e5' fill-opacity='0.05'%3E%3Ccircle cx='30' cy='30' r='2'/%3E%3C/g%3E%3C/g%3E%3C/svg%3E");
+            animation: float 20s ease-in-out infinite;
+        }
+
+        @keyframes float {
+            0%, 100% { transform: translateY(0px); }
+            50% { transform: translateY(-20px); }
+        }
+
+        .hero-container {
+            max-width: 1200px;
+            margin: 0 auto;
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 4rem;
+            align-items: center;
+        }
+
+        .hero-content h1 {
+            font-size: 3.5rem;
+            font-weight: 800;
+            line-height: 1.2;
+            margin-bottom: 1.5rem;
+            background: linear-gradient(135deg, var(--text-primary) 0%, var(--primary-blue) 50%, var(--primary-purple) 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+
+        .hero-content p {
+            font-size: 1.25rem;
+            color: var(--text-secondary);
+            margin-bottom: 2rem;
+            line-height: 1.7;
+        }
+
+        .hero-buttons {
+            display: flex;
+            gap: 1rem;
+            flex-wrap: wrap;
+        }
+
+        .btn-primary {
+            padding: 1rem 2rem;
+            background: linear-gradient(45deg, var(--primary-blue), var(--primary-purple));
+            border: none;
+            border-radius: 12px;
+            color: white;
+            font-weight: 600;
+            font-size: 1.1rem;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            text-decoration: none;
+            display: inline-block;
+        }
+
+        .btn-primary:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 15px 35px rgba(37, 99, 235, 0.4);
+        }
+
+        .btn-secondary {
+            padding: 1rem 2rem;
+            background: var(--glass-bg);
+            border: 1px solid var(--border-glass);
+            border-radius: 12px;
+            color: var(--text-primary);
+            font-weight: 600;
+            font-size: 1.1rem;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            text-decoration: none;
+            display: inline-block;
+            backdrop-filter: blur(10px);
+        }
+
+        .btn-secondary:hover {
+            transform: translateY(-3px);
+            border-color: var(--primary-blue);
+            box-shadow: 0 10px 30px rgba(30, 41, 59, 0.5);
+        }
+
+        /* Dashboard Preview */
+        .dashboard-preview {
+            background: var(--glass-bg);
+            border: 1px solid var(--border-glass);
+            border-radius: 20px;
+            backdrop-filter: blur(20px);
+            padding: 2rem;
+            transition: all 0.5s ease;
+            animation: slideInRight 1s ease-out;
+        }
+
+        @keyframes slideInRight {
+            from {
+                opacity: 0;
+                transform: translateX(50px);
+            }
+            to {
+                opacity: 1;
+                transform: translateX(0);
+            }
+        }
+
+        .dashboard-preview:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 25px 50px rgba(30, 41, 59, 0.7);
+        }
+
+        .preview-header {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            margin-bottom: 1.5rem;
+        }
+
+        .preview-icon {
+            width: 50px;
+            height: 50px;
+            background: linear-gradient(45deg, var(--accent-green), var(--primary-blue));
+            border-radius: 12px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.5rem;
+        }
+
+        .preview-title {
+            font-size: 1.25rem;
+            font-weight: 700;
+            color: var(--text-primary);
+        }
+
+        .preview-metrics {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 1rem;
+            margin-bottom: 1.5rem;
+        }
+
+        .metric-card {
+            background: rgba(15, 23, 42, 0.5);
+            padding: 1rem;
+            border-radius: 12px;
+            border: 1px solid var(--border-glass);
+        }
+
+        .metric-value {
+            font-size: 1.5rem;
+            font-weight: 700;
+            color: var(--accent-green);
+            margin-bottom: 0.25rem;
+        }
+
+        .metric-label {
+            font-size: 0.875rem;
+            color: var(--text-secondary);
+        }
+
+        /* Features Section */
+        .features {
+            padding: 6rem 2rem;
+            background: rgba(15, 23, 42, 0.5);
+        }
+
+        .features-container {
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        .section-title {
+            text-align: center;
+            font-size: 2.5rem;
+            font-weight: 800;
+            margin-bottom: 1rem;
+            background: linear-gradient(45deg, var(--text-primary), var(--primary-blue));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+
+        .section-subtitle {
+            text-align: center;
+            font-size: 1.25rem;
+            color: var(--text-secondary);
+            margin-bottom: 4rem;
+            max-width: 600px;
+            margin-left: auto;
+            margin-right: auto;
+        }
+
+        .features-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+            gap: 2rem;
+        }
+
+        .feature-card {
+            background: var(--glass-bg);
+            border: 1px solid var(--border-glass);
+            border-radius: 20px;
+            padding: 2rem;
+            backdrop-filter: blur(20px);
+            transition: all 0.3s ease;
+            cursor: pointer;
+            overflow: hidden;
+            position: relative;
+        }
+
+        .feature-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 4px;
+            background: linear-gradient(90deg, var(--primary-blue), var(--primary-purple));
+            transform: scaleX(0);
+            transition: transform 0.3s ease;
+        }
+
+        .feature-card:hover::before {
+            transform: scaleX(1);
+        }
+
+        .feature-card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 25px 50px rgba(30, 41, 59, 0.7);
+            border-color: var(--primary-blue);
+        }
+
+        .feature-icon {
+            width: 60px;
+            height: 60px;
+            border-radius: 16px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.5rem;
+            margin-bottom: 1.5rem;
+        }
+
+        .feature-title {
+            font-size: 1.5rem;
+            font-weight: 700;
+            margin-bottom: 1rem;
+            color: var(--text-primary);
+        }
+
+        .feature-description {
+            color: var(--text-secondary);
+            line-height: 1.7;
+            margin-bottom: 1.5rem;
+        }
+
+        .feature-link {
+            color: var(--primary-blue);
+            font-weight: 600;
+            text-decoration: none;
+            display: inline-flex;
+            align-items: center;
+            gap: 0.5rem;
+            transition: gap 0.3s ease;
+        }
+
+        .feature-link:hover {
+            gap: 1rem;
+        }
+
+        /* Screenshot Section */
+        .screenshots {
+            padding: 6rem 2rem;
+        }
+
+        .screenshots-container {
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        .screenshot-tabs {
+            display: flex;
+            justify-content: center;
+            gap: 1rem;
+            margin-bottom: 3rem;
+            flex-wrap: wrap;
+        }
+
+        .tab-btn {
+            padding: 0.75rem 1.5rem;
+            background: var(--glass-bg);
+            border: 1px solid var(--border-glass);
+            border-radius: 12px;
+            color: var(--text-secondary);
+            cursor: pointer;
+            transition: all 0.3s ease;
+            backdrop-filter: blur(10px);
+        }
+
+        .tab-btn.active {
+            background: linear-gradient(45deg, var(--primary-blue), var(--primary-purple));
+            color: white;
+            border-color: transparent;
+        }
+
+        .tab-btn:hover:not(.active) {
+            border-color: var(--primary-blue);
+            color: var(--text-primary);
+        }
+
+        .screenshot-content {
+            display: none;
+            animation: fadeIn 0.5s ease;
+        }
+
+        .screenshot-content.active {
+            display: block;
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(20px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        .screenshot-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 3rem;
+            align-items: center;
+        }
+
+        .screenshot-image {
+            background: var(--glass-bg);
+            border: 1px solid var(--border-glass);
+            border-radius: 20px;
+            padding: 1.5rem;
+            backdrop-filter: blur(20px);
+            transition: all 0.3s ease;
+            overflow: hidden;
+        }
+
+        .screenshot-image:hover {
+            transform: scale(1.02);
+            box-shadow: 0 25px 50px rgba(30, 41, 59, 0.7);
+        }
+
+        .screenshot-image img {
+            width: 100%;
+            height: auto;
+            border-radius: 12px;
+            display: block;
+        }
+
+        .screenshot-info h3 {
+            font-size: 2rem;
+            font-weight: 700;
+            margin-bottom: 1rem;
+            color: var(--text-primary);
+        }
+
+        .screenshot-info p {
+            font-size: 1.1rem;
+            color: var(--text-secondary);
+            line-height: 1.7;
+            margin-bottom: 1.5rem;
+        }
+
+        .feature-list {
+            list-style: none;
+        }
+
+        .feature-list li {
+            display: flex;
+            align-items: center;
+            gap: 0.75rem;
+            margin-bottom: 0.75rem;
+            color: var(--text-secondary);
+        }
+
+        .feature-list li::before {
+            content: '✓';
+            color: var(--accent-green);
+            font-weight: bold;
+            font-size: 1.1rem;
+        }
+
+        /* CTA Section */
+        .cta {
+            padding: 6rem 2rem;
+            background: 
+                radial-gradient(circle at 50% 50%, rgba(37, 99, 235, 0.1) 0%, transparent 50%),
+                var(--gradient-bg);
+        }
+
+        .cta-container {
+            max-width: 800px;
+            margin: 0 auto;
+            text-align: center;
+            background: var(--glass-bg);
+            border: 1px solid var(--border-glass);
+            border-radius: 20px;
+            padding: 4rem 2rem;
+            backdrop-filter: blur(20px);
+        }
+
+        .cta h2 {
+            font-size: 2.5rem;
+            font-weight: 800;
+            margin-bottom: 1rem;
+            background: linear-gradient(45deg, var(--text-primary), var(--primary-blue));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+
+        .cta p {
+            font-size: 1.25rem;
+            color: var(--text-secondary);
+            margin-bottom: 2.5rem;
+        }
+
+        /* Footer */
+        .footer {
+            padding: 3rem 2rem 1rem;
+            background: rgba(15, 23, 42, 0.8);
+            border-top: 1px solid var(--border-glass);
+        }
+
+        .footer-container {
+            max-width: 1200px;
+            margin: 0 auto;
+            text-align: center;
+            color: var(--text-secondary);
+        }
+
+        /* Responsive Design */
+        @media (max-width: 768px) {
+            .navbar {
+                padding: 1rem;
+            }
+
+            .nav-links {
+                display: none;
+            }
+
+            .hero-container {
+                grid-template-columns: 1fr;
+                gap: 2rem;
+                text-align: center;
+            }
+
+            .hero-content h1 {
+                font-size: 2.5rem;
+            }
+
+            .hero-buttons {
+                justify-content: center;
+            }
+
+            .features-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .screenshot-grid {
+                grid-template-columns: 1fr;
+                text-align: center;
+            }
+
+            .screenshot-tabs {
+                flex-direction: column;
+                align-items: center;
+            }
+
+            .section-title {
+                font-size: 2rem;
+            }
+
+            .cta h2 {
+                font-size: 2rem;
+            }
+        }
+
+        /* Scroll animations */
+        .scroll-animate {
+            opacity: 0;
+            transform: translateY(30px);
+            transition: all 0.6s ease;
+        }
+
+        .scroll-animate.visible {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        /* Loading overlay */
+        .loading-overlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: var(--dark-bg);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            z-index: 9999;
+            transition: opacity 0.5s ease;
+        }
+
+        .loading-spinner {
+            width: 50px;
+            height: 50px;
+            border: 3px solid var(--border-glass);
+            border-top: 3px solid var(--primary-blue);
+            border-radius: 50%;
+            animation: spin 1s linear infinite;
+        }
+
+        @keyframes spin {
+            0% { transform: rotate(0deg); }
+            100% { transform: rotate(360deg); }
+        }
+    </style>
+</head>
+<body>
+    <!-- Loading Overlay -->
+    <div class="loading-overlay" id="loadingOverlay">
+        <div class="loading-spinner"></div>
+    </div>
+
+    <!-- Navigation -->
+    <nav class="navbar">
+        <div class="nav-container">
+            <div class="logo">
+                <div class="logo-icon">T</div>
+                TarefAI
+            </div>
+            <ul class="nav-links">
+                <li><a href="#features">Funcionalidades</a></li>
+                <li><a href="#screenshots">Screenshots</a></li>
+                <li><a href="#pricing">Preços</a></li>
+                <li><a href="#contact">Contacto</a></li>
+                <li><a href="#login" class="btn-login">Iniciar Sessão</a></li>
+            </ul>
+        </div>
+    </nav>
+
+    <!-- Hero Section -->
+    <section class="hero">
+        <div class="hero-container">
+            <div class="hero-content">
+                <h1>Otimize a gestão do seu escritório de contabilidade</h1>
+                <p>Controle rentabilidade, organize tarefas e maximize a eficiência da sua equipa com inteligência artificial.</p>
+                <div class="hero-buttons">
+                    <a href="#demo" class="btn-primary">Demonstração Gratuita</a>
+                    <a href="#features" class="btn-secondary">Ver Funcionalidades</a>
+                </div>
+            </div>
+            <div class="dashboard-preview">
+                <div class="preview-header">
+                    <div class="preview-icon">📊</div>
+                    <div class="preview-title">Dashboard Executivo</div>
+                </div>
+                <div class="preview-metrics">
+                    <div class="metric-card">
+                        <div class="metric-value">1.200€</div>
+                        <div class="metric-label">Receita Mensal</div>
+                    </div>
+                    <div class="metric-card">
+                        <div class="metric-value">85%</div>
+                        <div class="metric-label">Eficiência</div>
+                    </div>
+                    <div class="metric-card">
+                        <div class="metric-value">4</div>
+                        <div class="metric-label">Clientes Ativos</div>
+                    </div>
+                    <div class="metric-card">
+                        <div class="metric-value">2</div>
+                        <div class="metric-label">Insights Ativos</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Features Section -->
+    <section class="features scroll-animate" id="features">
+        <div class="features-container">
+            <h2 class="section-title">Funcionalidades Principais</h2>
+            <p class="section-subtitle">Aceda a uma plataforma completa que transforma a forma como gere o seu escritório</p>
+            
+            <div class="features-grid">
+                <div class="feature-card">
+                    <div class="feature-icon" style="background: linear-gradient(45deg, #10b981, #059669);">📈</div>
+                    <h3 class="feature-title">Análise de Rentabilidade</h3>
+                    <p class="feature-description">Identifique quais clientes são mais lucrativos com análises detalhadas de custos, receitas e margens de lucro em tempo real.</p>
+                    <a href="#" class="feature-link">Ver detalhes →</a>
+                </div>
+
+                <div class="feature-card">
+                    <div class="feature-icon" style="background: linear-gradient(45deg, #f59e0b, #d97706);">⏰</div>
+                    <h3 class="feature-title">Registo de Tempo</h3>
+                    <p class="feature-description">Monitorize o tempo gasto em cada cliente e projeto com precisão. Sistema integrado de timesheet com relatórios automáticos.</p>
+                    <a href="#" class="feature-link">Experimentar →</a>
+                </div>
+
+                <div class="feature-card">
+                    <div class="feature-icon" style="background: linear-gradient(45deg, #8b5cf6, #7c3aed);">👥</div>
+                    <h3 class="feature-title">Gestão de Equipas</h3>
+                    <p class="feature-description">Organize tarefas e colaboradores eficientemente. Atribuição automática, controlo de permissões e acompanhamento de progresso.</p>
+                    <a href="#" class="feature-link">Saber mais →</a>
+                </div>
+
+                <div class="feature-card">
+                    <div class="feature-icon" style="background: linear-gradient(45deg, #ef4444, #dc2626);">🔔</div>
+                    <h3 class="feature-title">Notificações Inteligentes</h3>
+                    <p class="feature-description">Sistema avançado de alertas para prazos, aprovações pendentes e tarefas críticas. Nunca mais perca um deadline.</p>
+                    <a href="#" class="feature-link">Configurar →</a>
+                </div>
+
+                <div class="feature-card">
+                    <div class="feature-icon" style="background: linear-gradient(45deg, #06b6d4, #0891b2);">🔄</div>
+                    <h3 class="feature-title">Workflows Personalizáveis</h3>
+                    <p class="feature-description">Crie fluxos de trabalho adaptados aos seus processos. Aprovações hierárquicas, passos sequenciais e automações.</p>
+                    <a href="#" class="feature-link">Personalizar →</a>
+                </div>
+
+                <div class="feature-card">
+                    <div class="feature-icon" style="background: linear-gradient(45deg, #84cc16, #65a30d);">🤖</div>
+                    <h3 class="feature-title">AI Insights</h3>
+                    <p class="feature-description">Análise inteligente em tempo real. Identifique tendências, otimize processos e tome decisões baseadas em dados.</p>
+                    <a href="#" class="feature-link">Descobrir →</a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Screenshots Section -->
+    <section class="screenshots scroll-animate" id="screenshots">
+        <div class="screenshots-container">
+            <h2 class="section-title">Veja o Sistema em Ação</h2>
+            <p class="section-subtitle">Explore as principais interfaces da plataforma</p>
+
+            <div class="screenshot-tabs">
+                <button class="tab-btn active" onclick="showTab('dashboard')">Dashboard</button>
+                <button class="tab-btn" onclick="showTab('rentabilidade')">Rentabilidade</button>
+                <button class="tab-btn" onclick="showTab('tarefas')">Tarefas</button>
+                <button class="tab-btn" onclick="showTab('organizacao')">Organização</button>
+                <button class="tab-btn" onclick="showTab('notificacoes')">Notificações</button>
+            </div>
+
+            <div id="dashboard" class="screenshot-content active">
+                <div class="screenshot-grid">
+                    <div class="screenshot-info">
+                        <h3>Dashboard Inteligente</h3>
+                        <p>Visão completa do seu escritório com insights AI, métricas de produtividade e ações rápidas baseadas no seu contexto.</p>
+                        <ul class="feature-list">
+                            <li>KPIs em tempo real</li>
+                            <li>Insights baseados em IA</li>
+                            <li>Ações rápidas contextuais</li>
+                            <li>Alertas prioritários</li>
+                        </ul>
+                    </div>
+                    <div class="screenshot-image">
+                        <div style="width: 100%; height: 300px; background: linear-gradient(135deg, #1e293b, #334155); border-radius: 12px; display: flex; align-items: center; justify-content: center; color: #94a3b8; font-size: 1.1rem;">
+                            Preview do Dashboard Principal
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div id="rentabilidade" class="screenshot-content">
+                <div class="screenshot-grid">
+                    <div class="screenshot-image">
+                        <div style="width: 100%; height: 300px; background: linear-gradient(135deg, #1e293b, #334155); border-radius: 12px; display: flex; align-items: center; justify-content: center; color: #94a3b8; font-size: 1.1rem;">
+                            Análise de Rentabilidade
+                        </div>
+                    </div>
+                    <div class="screenshot-info">
+                        <h3>Análise de Rentabilidade</h3>
+                        <p>Insights inteligentes sobre a performance dos seus clientes com identificação automática de oportunidades de crescimento.</p>
+                        <ul class="feature-list">
+                            <li>Margem de lucro por cliente</li>
+                            <li>Comparação de custos vs receitas</li>
+                            <li>Clientes não rentáveis</li>
+                            <li>Recomendações de otimização</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+
+            <div id="tarefas" class="screenshot-content">
+                <div class="screenshot-grid">
+                    <div class="screenshot-info">
+                        <h3>Gestão de Tarefas</h3>
+                        <p>Organize e acompanhe todas as suas tarefas com workflows personalizáveis e notificações automáticas para nunca perder prazos.</p>
+                        <ul class="feature-list">
+                            <li>Workflows personalizáveis</li>
+                            <li>Priorização automática</li>
+                            <li>Aprovações hierárquicas</li>
+                            <li>Acompanhamento de progresso</li>
+                        </ul>
+                    </div>
+                    <div class="screenshot-image">
+                        <div style="width: 100%; height: 300px; background: linear-gradient(135deg, #1e293b, #334155); border-radius: 12px; display: flex; align-items: center; justify-content: center; color: #94a3b8; font-size: 1.1rem;">
+                            Gestão de Tarefas e Workflows
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div id="organizacao" class="screenshot-content">
+                <div class="screenshot-grid">
+                    <div class="screenshot-image">
+                        <div style="width: 100%; height: 300px; background: linear-gradient(135deg, #1e293b, #334155); border-radius: 12px; display: flex; align-items: center; justify-content: center; color: #94a3b8; font-size: 1.1rem;">
+                            Gestão da Organização
+                        </div>
+                    </div>
+                    <div class="screenshot-info">
+                        <h3>Gestão da Organização</h3>
+                        <p>Configure sua organização e gerencie membros com permissões detalhadas e códigos de convite para maior segurança.</p>
+                        <ul class="feature-list">
+                            <li>Gestão de utilizadores</li>
+                            <li>Permissões granulares</li>
+                            <li>Códigos de convite</li>
+                            <li>Hierarquia organizacional</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+
+            <div id="notificacoes" class="screenshot-content">
+                <div class="screenshot-grid">
+                    <div class="screenshot-info">
+                        <h3>Centro de Notificações</h3>
+                        <p>Sistema avançado de notificações com 11 tipos diferentes de alertas, escalação automática e configurações personalizáveis.</p>
+                        <ul class="feature-list">
+                            <li>11 tipos de notificações</li>
+                            <li>Escalação hierárquica</li>
+                            <li>Configurações personalizáveis</li>
+                            <li>Digestos automáticos</li>
+                        </ul>
+                    </div>
+                    <div class="screenshot-image">
+                        <div style="width: 100%; height: 300px; background: linear-gradient(135deg, #1e293b, #334155); border-radius: 12px; display: flex; align-items: center; justify-content: center; color: #94a3b8; font-size: 1.1rem;">
+                            Centro de Notificações
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Stats Section -->
+    <section class="stats scroll-animate" style="padding: 6rem 2rem; background: rgba(15, 23, 42, 0.3);">
+        <div style="max-width: 1200px; margin: 0 auto;">
+            <h2 class="section-title">Resultados Comprovados</h2>
+            <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: 2rem; margin-top: 3rem;">
+                <div style="text-align: center; background: var(--glass-bg); padding: 2rem; border-radius: 20px; border: 1px solid var(--border-glass); backdrop-filter: blur(20px);">
+                    <div style="font-size: 3rem; font-weight: 800; color: var(--accent-green); margin-bottom: 0.5rem;">85%</div>
+                    <div style="color: var(--text-secondary); font-size: 1.1rem;">Aumento na Eficiência</div>
+                </div>
+                <div style="text-align: center; background: var(--glass-bg); padding: 2rem; border-radius: 20px; border: 1px solid var(--border-glass); backdrop-filter: blur(20px);">
+                    <div style="font-size: 3rem; font-weight: 800; color: var(--primary-blue); margin-bottom: 0.5rem;">60%</div>
+                    <div style="color: var(--text-secondary); font-size: 1.1rem;">Redução no Tempo de Gestão</div>
+                </div>
+                <div style="text-align: center; background: var(--glass-bg); padding: 2rem; border-radius: 20px; border: 1px solid var(--border-glass); backdrop-filter: blur(20px);">
+                    <div style="font-size: 3rem; font-weight: 800; color: var(--accent-orange); margin-bottom: 0.5rem;">95%</div>
+                    <div style="color: var(--text-secondary); font-size: 1.1rem;">Satisfação dos Clientes</div>
+                </div>
+                <div style="text-align: center; background: var(--glass-bg); padding: 2rem; border-radius: 20px; border: 1px solid var(--border-glass); backdrop-filter: blur(20px);">
+                    <div style="font-size: 3rem; font-weight: 800; color: var(--primary-purple); margin-bottom: 0.5rem;">0</div>
+                    <div style="color: var(--text-secondary); font-size: 1.1rem;">Prazos Perdidos</div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Pricing Section -->
+    <section class="pricing scroll-animate" id="pricing" style="padding: 6rem 2rem;">
+        <div style="max-width: 1000px; margin: 0 auto;">
+            <h2 class="section-title">Planos Adequados ao Seu Escritório</h2>
+            <p class="section-subtitle">Escolha o plano ideal para o tamanho da sua equipa</p>
+            
+            <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 2rem; margin-top: 3rem;">
+                <!-- Plano Starter -->
+                <div style="background: var(--glass-bg); border: 1px solid var(--border-glass); border-radius: 20px; padding: 2rem; backdrop-filter: blur(20px); transition: all 0.3s ease;" onmouseover="this.style.transform='translateY(-10px)'; this.style.boxShadow='0 25px 50px rgba(30, 41, 59, 0.7)'" onmouseout="this.style.transform='translateY(0)'; this.style.boxShadow='none'">
+                    <div style="text-align: center; margin-bottom: 2rem;">
+                        <h3 style="font-size: 1.5rem; font-weight: 700; color: var(--text-primary); margin-bottom: 0.5rem;">Starter</h3>
+                        <p style="color: var(--text-secondary);">Para pequenos escritórios</p>
+                        <div style="font-size: 3rem; font-weight: 800; color: var(--primary-blue); margin: 1rem 0;">49€</div>
+                        <p style="color: var(--text-secondary);">por mês</p>
+                    </div>
+                    <ul style="list-style: none; margin-bottom: 2rem;">
+                        <li style="display: flex; align-items: center; gap: 0.75rem; margin-bottom: 0.75rem; color: var(--text-secondary);"><span style="color: var(--accent-green); font-weight: bold;">✓</span> Até 5 utilizadores</li>
+                        <li style="display: flex; align-items: center; gap: 0.75rem; margin-bottom: 0.75rem; color: var(--text-secondary);"><span style="color: var(--accent-green); font-weight: bold;">✓</span> Gestão de clientes</li>
+                        <li style="display: flex; align-items: center; gap: 0.75rem; margin-bottom: 0.75rem; color: var(--text-secondary);"><span style="color: var(--accent-green); font-weight: bold;">✓</span> Registo de tempo</li>
+                        <li style="display: flex; align-items: center; gap: 0.75rem; margin-bottom: 0.75rem; color: var(--text-secondary);"><span style="color: var(--accent-green); font-weight: bold;">✓</span> Relatórios básicos</li>
+                        <li style="display: flex; align-items: center; gap: 0.75rem; margin-bottom: 0.75rem; color: var(--text-secondary);"><span style="color: var(--accent-green); font-weight: bold;">✓</span> Suporte por email</li>
+                    </ul>
+                    <a href="#" class="btn-secondary" style="width: 100%; text-align: center;">Começar Agora</a>
+                </div>
+
+                <!-- Plano Professional -->
+                <div style="background: linear-gradient(135deg, var(--primary-blue), var(--primary-purple)); border: none; border-radius: 20px; padding: 2rem; transition: all 0.3s ease; position: relative; overflow: hidden;" onmouseover="this.style.transform='translateY(-10px)'; this.style.boxShadow='0 25px 50px rgba(37, 99, 235, 0.4)'" onmouseout="this.style.transform='translateY(0)'; this.style.boxShadow='none'">
+                    <div style="position: absolute; top: 1rem; right: 1rem; background: rgba(255,255,255,0.2); padding: 0.5rem 1rem; border-radius: 20px; font-size: 0.875rem; font-weight: 600; color: white;">Popular</div>
+                    <div style="text-align: center; margin-bottom: 2rem;">
+                        <h3 style="font-size: 1.5rem; font-weight: 700; color: white; margin-bottom: 0.5rem;">Professional</h3>
+                        <p style="color: rgba(255,255,255,0.8);">Para escritórios em crescimento</p>
+                        <div style="font-size: 3rem; font-weight: 800; color: white; margin: 1rem 0;">99€</div>
+                        <p style="color: rgba(255,255,255,0.8);">por mês</p>
+                    </div>
+                    <ul style="list-style: none; margin-bottom: 2rem;">
+                        <li style="display: flex; align-items: center; gap: 0.75rem; margin-bottom: 0.75rem; color: rgba(255,255,255,0.9);"><span style="color: var(--accent-green); font-weight: bold;">✓</span> Até 15 utilizadores</li>
+                        <li style="display: flex; align-items: center; gap: 0.75rem; margin-bottom: 0.75rem; color: rgba(255,255,255,0.9);"><span style="color: var(--accent-green); font-weight: bold;">✓</span> Workflows personalizáveis</li>
+                        <li style="display: flex; align-items: center; gap: 0.75rem; margin-bottom: 0.75rem; color: rgba(255,255,255,0.9);"><span style="color: var(--accent-green); font-weight: bold;">✓</span> Análise de rentabilidade</li>
+                        <li style="display: flex; align-items: center; gap: 0.75rem; margin-bottom: 0.75rem; color: rgba(255,255,255,0.9);"><span style="color: var(--accent-green); font-weight: bold;">✓</span> Notificações avançadas</li>
+                        <li style="display: flex; align-items: center; gap: 0.75rem; margin-bottom: 0.75rem; color: rgba(255,255,255,0.9);"><span style="color: var(--accent-green); font-weight: bold;">✓</span> AI Insights</li>
+                        <li style="display: flex; align-items: center; gap: 0.75rem; margin-bottom: 0.75rem; color: rgba(255,255,255,0.9);"><span style="color: var(--accent-green); font-weight: bold;">✓</span> Suporte prioritário</li>
+                    </ul>
+                    <a href="#" style="width: 100%; text-align: center; padding: 1rem 2rem; background: white; color: var(--primary-blue); border: none; border-radius: 12px; font-weight: 600; font-size: 1.1rem; cursor: pointer; transition: all 0.3s ease; text-decoration: none; display: inline-block;" onmouseover="this.style.transform='translateY(-2px)'" onmouseout="this.style.transform='translateY(0)'">Experimentar Grátis</a>
+                </div>
+
+                <!-- Plano Enterprise -->
+                <div style="background: var(--glass-bg); border: 1px solid var(--border-glass); border-radius: 20px; padding: 2rem; backdrop-filter: blur(20px); transition: all 0.3s ease;" onmouseover="this.style.transform='translateY(-10px)'; this.style.boxShadow='0 25px 50px rgba(30, 41, 59, 0.7)'" onmouseout="this.style.transform='translateY(0)'; this.style.boxShadow='none'">
+                    <div style="text-align: center; margin-bottom: 2rem;">
+                        <h3 style="font-size: 1.5rem; font-weight: 700; color: var(--text-primary); margin-bottom: 0.5rem;">Enterprise</h3>
+                        <p style="color: var(--text-secondary);">Para grandes escritórios</p>
+                        <div style="font-size: 3rem; font-weight: 800; color: var(--primary-purple); margin: 1rem 0;">199€</div>
+                        <p style="color: var(--text-secondary);">por mês</p>
+                    </div>
+                    <ul style="list-style: none; margin-bottom: 2rem;">
+                        <li style="display: flex; align-items: center; gap: 0.75rem; margin-bottom: 0.75rem; color: var(--text-secondary);"><span style="color: var(--accent-green); font-weight: bold;">✓</span> Utilizadores ilimitados</li>
+                        <li style="display: flex; align-items: center; gap: 0.75rem; margin-bottom: 0.75rem; color: var(--text-secondary);"><span style="color: var(--accent-green); font-weight: bold;">✓</span> Integração personalizada</li>
+                        <li style="display: flex; align-items: center; gap: 0.75rem; margin-bottom: 0.75rem; color: var(--text-secondary);"><span style="color: var(--accent-green); font-weight: bold;">✓</span> Relatórios avançados</li>
+                        <li style="display: flex; align-items: center; gap: 0.75rem; margin-bottom: 0.75rem; color: var(--text-secondary);"><span style="color: var(--accent-green); font-weight: bold;">✓</span> API completa</li>
+                        <li style="display: flex; align-items: center; gap: 0.75rem; margin-bottom: 0.75rem; color: var(--text-secondary);"><span style="color: var(--accent-green); font-weight: bold;">✓</span> Gestor de conta dedicado</li>
+                    </ul>
+                    <a href="#" class="btn-secondary" style="width: 100%; text-align: center;">Contactar Vendas</a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- CTA Section -->
+    <section class="cta scroll-animate">
+        <div class="cta-container">
+            <h2>Pronto para transformar o seu escritório?</h2>
+            <p>Comece hoje mesmo com uma demonstração gratuita de 14 dias. Sem compromissos, sem configurações complexas.</p>
+            <div style="display: flex; gap: 1rem; justify-content: center; flex-wrap: wrap;">
+                <a href="#demo" class="btn-primary">Demonstração Gratuita</a>
+                <a href="#contact" class="btn-secondary">Agendar Reunião</a>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="footer-container">
+            <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: 2rem; margin-bottom: 2rem; text-align: left;">
+                <div>
+                    <div class="logo" style="margin-bottom: 1rem;">
+                        <div class="logo-icon">T</div>
+                        TarefAI
+                    </div>
+                    <p style="color: var(--text-secondary); line-height: 1.6;">
+                        Plataforma completa para gestão de escritórios de contabilidade com inteligência artificial.
+                    </p>
+                </div>
+                <div>
+                    <h4 style="color: var(--text-primary); margin-bottom: 1rem; font-weight: 600;">Produto</h4>
+                    <ul style="list-style: none;">
+                        <li style="margin-bottom: 0.5rem;"><a href="#" style="color: var(--text-secondary); text-decoration: none;">Funcionalidades</a></li>
+                        <li style="margin-bottom: 0.5rem;"><a href="#" style="color: var(--text-secondary); text-decoration: none;">Preços</a></li>
+                        <li style="margin-bottom: 0.5rem;"><a href="#" style="color: var(--text-secondary); text-decoration: none;">Demonstração</a></li>
+                        <li style="margin-bottom: 0.5rem;"><a href="#" style="color: var(--text-secondary); text-decoration: none;">API</a></li>
+                    </ul>
+                </div>
+                <div>
+                    <h4 style="color: var(--text-primary); margin-bottom: 1rem; font-weight: 600;">Suporte</h4>
+                    <ul style="list-style: none;">
+                        <li style="margin-bottom: 0.5rem;"><a href="#" style="color: var(--text-secondary); text-decoration: none;">Centro de Ajuda</a></li>
+                        <li style="margin-bottom: 0.5rem;"><a href="#" style="color: var(--text-secondary); text-decoration: none;">Documentação</a></li>
+                        <li style="margin-bottom: 0.5rem;"><a href="#" style="color: var(--text-secondary); text-decoration: none;">Contacto</a></li>
+                        <li style="margin-bottom: 0.5rem;"><a href="#" style="color: var(--text-secondary); text-decoration: none;">Estado do Sistema</a></li>
+                    </ul>
+                </div>
+                <div>
+                    <h4 style="color: var(--text-primary); margin-bottom: 1rem; font-weight: 600;">Empresa</h4>
+                    <ul style="list-style: none;">
+                        <li style="margin-bottom: 0.5rem;"><a href="#" style="color: var(--text-secondary); text-decoration: none;">Sobre Nós</a></li>
+                        <li style="margin-bottom: 0.5rem;"><a href="#" style="color: var(--text-secondary); text-decoration: none;">Blog</a></li>
+                        <li style="margin-bottom: 0.5rem;"><a href="#" style="color: var(--text-secondary); text-decoration: none;">Carreiras</a></li>
+                        <li style="margin-bottom: 0.5rem;"><a href="#" style="color: var(--text-secondary); text-decoration: none;">Privacidade</a></li>
+                    </ul>
+                </div>
+            </div>
+            <div style="border-top: 1px solid var(--border-glass); padding-top: 2rem; display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 1rem;">
+                <p>&copy; 2024 TarefAI. Todos os direitos reservados.</p>
+                <div style="display: flex; gap: 1rem;">
+                    <a href="#" style="color: var(--text-secondary); text-decoration: none;">Termos</a>
+                    <a href="#" style="color: var(--text-secondary); text-decoration: none;">Privacidade</a>
+                    <a href="#" style="color: var(--text-secondary); text-decoration: none;">Cookies</a>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        // Remove loading overlay when page loads
+        window.addEventListener('load', function() {
+            const loadingOverlay = document.getElementById('loadingOverlay');
+            loadingOverlay.style.opacity = '0';
+            setTimeout(() => {
+                loadingOverlay.style.display = 'none';
+            }, 500);
+        });
+
+        // Tab functionality
+        function showTab(tabName) {
+            // Hide all tabs
+            const tabs = document.querySelectorAll('.screenshot-content');
+            tabs.forEach(tab => {
+                tab.classList.remove('active');
+            });
+
+            // Remove active class from all buttons
+            const buttons = document.querySelectorAll('.tab-btn');
+            buttons.forEach(btn => {
+                btn.classList.remove('active');
+            });
+
+            // Show selected tab
+            document.getElementById(tabName).classList.add('active');
+            
+            // Add active class to clicked button
+            event.target.classList.add('active');
+        }
+
+        // Scroll animations
+        function checkScrollAnimations() {
+            const elements = document.querySelectorAll('.scroll-animate');
+            
+            elements.forEach(element => {
+                const elementTop = element.getBoundingClientRect().top;
+                const elementVisible = 150;
+                
+                if (elementTop < window.innerHeight - elementVisible) {
+                    element.classList.add('visible');
+                }
+            });
+        }
+
+        // Navbar scroll effect
+        function handleNavbarScroll() {
+            const navbar = document.querySelector('.navbar');
+            if (window.scrollY > 50) {
+                navbar.style.background = 'rgba(15, 23, 42, 0.98)';
+                navbar.style.boxShadow = '0 10px 30px rgba(0, 0, 0, 0.3)';
+            } else {
+                navbar.style.background = 'rgba(15, 23, 42, 0.95)';
+                navbar.style.boxShadow = 'none';
+            }
+        }
+
+        // Smooth scrolling for anchor links
+        function smoothScroll() {
+            const links = document.querySelectorAll('a[href^="#"]');
+            
+            links.forEach(link => {
+                link.addEventListener('click', function(e) {
+                    e.preventDefault();
+                    
+                    const targetId = this.getAttribute('href');
+                    const targetElement = document.querySelector(targetId);
+                    
+                    if (targetElement) {
+                        const offsetTop = targetElement.offsetTop - 100;
+                        
+                        window.scrollTo({
+                            top: offsetTop,
+                            behavior: 'smooth'
+                        });
+                    }
+                });
+            });
+        }
+
+        // Parallax effect for hero section
+        function handleParallax() {
+            const scrolled = window.pageYOffset;
+            const parallaxElements = document.querySelectorAll('.hero::before');
+            
+            parallaxElements.forEach(element => {
+                element.style.transform = `translateY(${scrolled * 0.5}px)`;
+            });
+        }
+
+        // Initialize all functions
+        document.addEventListener('DOMContentLoaded', function() {
+            smoothScroll();
+            checkScrollAnimations();
+            
+            // Add scroll listeners
+            window.addEventListener('scroll', function() {
+                checkScrollAnimations();
+                handleNavbarScroll();
+                handleParallax();
+            });
+
+            // Add resize listener for responsive checks
+            window.addEventListener('resize', checkScrollAnimations);
+        });
+
+        // Demo interaction simulation
+        function simulateDemo() {
+            alert('Demo interativo em desenvolvimento! Em breve você poderá experimentar todas as funcionalidades da plataforma.');
+        }
+
+        // Contact form simulation
+        function openContact() {
+            alert('Formulário de contacto em desenvolvimento! Envie um email para info@tarefai.com para mais informações.');
+        }
+
+        // Add click handlers for demo buttons
+        document.addEventListener('DOMContentLoaded', function() {
+            const demoButtons = document.querySelectorAll('a[href="#demo"]');
+            const contactButtons = document.querySelectorAll('a[href="#contact"]');
+            
+            demoButtons.forEach(button => {
+                button.addEventListener('click', function(e) {
+                    e.preventDefault();
+                    simulateDemo();
+                });
+            });
+
+            contactButtons.forEach(button => {
+                button.addEventListener('click', function(e) {
+                    e.preventDefault();
+                    openContact();
+                });
+            });
+        });
+
+        // Add hover effects for feature cards
+        document.addEventListener('DOMContentLoaded', function() {
+            const featureCards = document.querySelectorAll('.feature-card');
+            
+            featureCards.forEach(card => {
+                card.addEventListener('mouseenter', function() {
+                    this.style.transform = 'translateY(-10px) scale(1.02)';
+                });
+                
+                card.addEventListener('mouseleave', function() {
+                    this.style.transform = 'translateY(0) scale(1)';
+                });
+            });
+        });
+
+        // Performance optimization: throttle scroll events
+        function throttle(func, limit) {
+            let inThrottle;
+            return function() {
+                const args = arguments;
+                const context = this;
+                if (!inThrottle) {
+                    func.apply(context, args);
+                    inThrottle = true;
+                    setTimeout(() => inThrottle = false, limit);
+                }
+            }
+        }
+
+        // Replace scroll listeners with throttled versions
+        window.addEventListener('scroll', throttle(function() {
+            checkScrollAnimations();
+            handleNavbarScroll();
+            handleParallax();
+        }, 16)); // ~60fps
+    </script>
+</body>
+</html>
