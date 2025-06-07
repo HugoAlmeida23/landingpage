@@ -3,18 +3,19 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>TarefAI - Descubra Clientes Não Rentáveis em 60 Segundos</title>
+    <title>PRAgenda - Organize Prazos, Descubra Lucros | Gestão Inteligente para Contabilidade e Advocacia</title>
+    <meta name="description" content="PRAgenda que nunca falha: descubra clientes não rentáveis em 60 segundos, organize prazos automaticamente e aumente lucros em 30%. Teste grátis 14 dias.">
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet">
     <style>
         :root {
-            --primary: #6366f1;
-            --primary-dark: #4f46e5;
-            --secondary: #ec4899;
-            --success: #10b981;
-            --warning: #f59e0b;
+            --primary: #2563eb;
+            --primary-dark: #1d4ed8;
+            --secondary: #10b981;
+            --accent: #f59e0b;
             --danger: #ef4444;
             --dark: #0f172a;
             --dark-lighter: #1e293b;
+            --gray-50: #f8fafc;
             --gray-100: #f1f5f9;
             --gray-200: #e2e8f0;
             --gray-300: #cbd5e1;
@@ -25,8 +26,8 @@
             --gray-800: #1e293b;
             --gray-900: #0f172a;
             --white: #ffffff;
-            --glass: rgba(255, 255, 255, 0.1);
-            --glass-border: rgba(255, 255, 255, 0.2);
+            --success: #059669;
+            --warning: #d97706;
         }
 
         * {
@@ -38,35 +39,9 @@
         body {
             font-family: 'Inter', sans-serif;
             line-height: 1.6;
-            color: var(--white);
-            background: var(--dark);
+            color: var(--gray-900);
+            background: var(--white);
             overflow-x: hidden;
-        }
-
-        /* Background Effects */
-        .bg-gradient {
-            background: linear-gradient(135deg, #0f172a 0%, #1e293b 50%, #334155 100%);
-            position: relative;
-        }
-
-        .bg-gradient::before {
-            content: '';
-            position: absolute;
-            top: 0;
-            left: 0;
-            right: 0;
-            bottom: 0;
-            background: 
-                radial-gradient(circle at 20% 80%, rgba(99, 102, 241, 0.15) 0%, transparent 50%),
-                radial-gradient(circle at 80% 20%, rgba(236, 72, 153, 0.15) 0%, transparent 50%),
-                radial-gradient(circle at 40% 40%, rgba(16, 185, 129, 0.1) 0%, transparent 50%);
-            animation: float 20s ease-in-out infinite;
-        }
-
-        @keyframes float {
-            0%, 100% { transform: translateY(0px) rotate(0deg); }
-            33% { transform: translateY(-20px) rotate(1deg); }
-            66% { transform: translateY(10px) rotate(-1deg); }
         }
 
         /* Navigation */
@@ -76,15 +51,15 @@
             width: 100%;
             z-index: 1000;
             padding: 1rem 0;
-            background: rgba(15, 23, 42, 0.8);
+            background: rgba(255, 255, 255, 0.95);
             backdrop-filter: blur(20px);
-            border-bottom: 1px solid var(--glass-border);
-            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+            border-bottom: 1px solid var(--gray-200);
+            transition: all 0.3s ease;
         }
 
         .navbar.scrolled {
-            background: rgba(15, 23, 42, 0.95);
-            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
+            background: rgba(255, 255, 255, 0.98);
+            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.08);
         }
 
         .nav-container {
@@ -102,7 +77,7 @@
             gap: 12px;
             font-size: 1.5rem;
             font-weight: 800;
-            color: var(--white);
+            color: var(--gray-900);
             text-decoration: none;
         }
 
@@ -110,37 +85,12 @@
             width: 40px;
             height: 40px;
             background: linear-gradient(135deg, var(--primary), var(--secondary));
-            border-radius: 12px;
+            border-radius: 10px;
             display: flex;
             align-items: center;
             justify-content: center;
             font-weight: 700;
             color: white;
-            position: relative;
-            overflow: hidden;
-        }
-
-        .logo-icon::before {
-            content: '';
-            position: absolute;
-            top: -50%;
-            left: -50%;
-            width: 200%;
-            height: 200%;
-            background: linear-gradient(45deg, transparent, rgba(255,255,255,0.3), transparent);
-            transform: rotate(45deg);
-            transition: all 0.6s;
-            opacity: 0;
-        }
-
-        .logo:hover .logo-icon::before {
-            animation: shine 0.6s ease-in-out;
-            opacity: 1;
-        }
-
-        @keyframes shine {
-            0% { transform: translateX(-100%) translateY(-100%) rotate(45deg); }
-            100% { transform: translateX(100%) translateY(100%) rotate(45deg); }
         }
 
         .nav-links {
@@ -150,116 +100,83 @@
         }
 
         .nav-link {
-            color: var(--gray-300);
+            color: var(--gray-600);
             text-decoration: none;
             font-weight: 500;
             transition: all 0.3s ease;
             position: relative;
         }
 
-        .nav-link::after {
-            content: '';
-            position: absolute;
-            bottom: -4px;
-            left: 0;
-            width: 0;
-            height: 2px;
-            background: linear-gradient(90deg, var(--primary), var(--secondary));
-            transition: width 0.3s ease;
-        }
-
         .nav-link:hover {
-            color: var(--white);
-        }
-
-        .nav-link:hover::after {
-            width: 100%;
+            color: var(--primary);
         }
 
         .nav-cta {
-            background: linear-gradient(135deg, var(--primary), var(--secondary));
+            background: var(--primary);
             color: white;
             padding: 0.75rem 1.5rem;
-            border-radius: 12px;
+            border-radius: 8px;
             text-decoration: none;
             font-weight: 600;
             transition: all 0.3s ease;
-            position: relative;
-            overflow: hidden;
-        }
-
-        .nav-cta::before {
-            content: '';
-            position: absolute;
-            top: 0;
-            left: -100%;
-            width: 100%;
-            height: 100%;
-            background: linear-gradient(90deg, transparent, rgba(255,255,255,0.2), transparent);
-            transition: left 0.5s;
-        }
-
-        .nav-cta:hover::before {
-            left: 100%;
         }
 
         .nav-cta:hover {
-            transform: translateY(-2px);
-            box-shadow: 0 10px 30px rgba(99, 102, 241, 0.4);
+            background: var(--primary-dark);
+            transform: translateY(-1px);
         }
 
         /* Hero Section */
         .hero {
-            min-height: 100vh;
-            display: flex;
-            align-items: center;
             padding: 8rem 2rem 4rem;
+            background: linear-gradient(135deg, var(--gray-50) 0%, var(--white) 100%);
             position: relative;
+            overflow: hidden;
+        }
+
+        .hero::before {
+            content: '';
+            position: absolute;
+            top: -50%;
+            right: -20%;
+            width: 100%;
+            height: 200%;
+            background: linear-gradient(45deg, rgba(37, 99, 235, 0.05), rgba(16, 185, 129, 0.05));
+            border-radius: 50%;
+            z-index: 0;
         }
 
         .hero-container {
             max-width: 1200px;
             margin: 0 auto;
-            display: grid;
-            grid-template-columns: 1fr 1fr;
-            gap: 4rem;
-            align-items: center;
+            position: relative;
+            z-index: 1;
         }
 
         .hero-content {
-            animation: slideInLeft 1s ease-out;
-        }
-
-        @keyframes slideInLeft {
-            from {
-                opacity: 0;
-                transform: translateX(-50px);
-            }
-            to {
-                opacity: 1;
-                transform: translateX(0);
-            }
+            max-width: 600px;
+            margin: 0 auto;
+            text-align: center;
         }
 
         .hero-badge {
             display: inline-flex;
             align-items: center;
             gap: 8px;
-            background: var(--glass);
-            border: 1px solid var(--glass-border);
+            background: var(--gray-100);
+            border: 1px solid var(--gray-200);
             border-radius: 50px;
             padding: 0.5rem 1rem;
             margin-bottom: 2rem;
-            backdrop-filter: blur(10px);
             font-size: 0.875rem;
             font-weight: 500;
-            color: var(--gray-300);
+            color: var(--gray-700);
         }
 
-        .hero-badge .badge-icon {
+        .badge-icon {
             width: 8px;
             height: 8px;
-            background: var(--success);
+            background: var(--secondary);
             border-radius: 50%;
             animation: pulse 2s infinite;
         }
@@ -271,18 +188,19 @@
 
         .hero-title {
             font-size: 3.5rem;
-            font-weight: 900;
+            font-weight: 800;
             line-height: 1.1;
             margin-bottom: 1.5rem;
-            background: linear-gradient(135deg, var(--white) 0%, var(--primary) 50%, var(--secondary) 100%);
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
-            background-clip: text;
+            color: var(--gray-900);
+        }
+
+        .hero-highlight {
+            color: var(--primary);
         }
 
         .hero-subtitle {
             font-size: 1.25rem;
-            color: var(--gray-400);
+            color: var(--gray-600);
             margin-bottom: 2rem;
             line-height: 1.6;
         }
@@ -290,19 +208,18 @@
         .hero-cta {
             display: flex;
             gap: 1rem;
+            justify-content: center;
             flex-wrap: wrap;
             margin-bottom: 3rem;
         }
 
         .btn {
             padding: 1rem 2rem;
-            border-radius: 12px;
+            border-radius: 8px;
             font-weight: 600;
             font-size: 1rem;
             text-decoration: none;
-            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
-            position: relative;
-            overflow: hidden;
+            transition: all 0.3s ease;
             border: none;
             cursor: pointer;
             display: inline-flex;
@@ -311,262 +228,87 @@
         }
 
         .btn-primary {
-            background: linear-gradient(135deg, var(--primary), var(--secondary));
+            background: var(--primary);
             color: white;
         }
 
         .btn-primary:hover {
-            transform: translateY(-3px);
-            box-shadow: 0 15px 35px rgba(99, 102, 241, 0.4);
+            background: var(--primary-dark);
+            transform: translateY(-2px);
+            box-shadow: 0 8px 25px rgba(37, 99, 235, 0.3);
         }
 
         .btn-secondary {
-            background: var(--glass);
-            border: 1px solid var(--glass-border);
-            color: var(--white);
-            backdrop-filter: blur(10px);
+            background: var(--white);
+            color: var(--gray-700);
+            border: 2px solid var(--gray-300);
         }
 
         .btn-secondary:hover {
-            transform: translateY(-3px);
             border-color: var(--primary);
-            box-shadow: 0 10px 30px rgba(255, 255, 255, 0.1);
+            color: var(--primary);
+            transform: translateY(-2px);
         }
 
-        .hero-stats {
+        .hero-proof {
             display: flex;
-            gap: 2rem;
+            justify-content: center;
+            gap: 3rem;
             flex-wrap: wrap;
+            margin-bottom: 4rem;
         }
 
-        .stat {
+        .proof-item {
             text-align: center;
         }
 
-        .stat-number {
+        .proof-number {
             font-size: 2rem;
             font-weight: 800;
-            color: var(--success);
+            color: var(--primary);
             margin-bottom: 0.25rem;
         }
 
-        .stat-label {
+        .proof-label {
             font-size: 0.875rem;
-            color: var(--gray-400);
+            color: var(--gray-500);
         }
 
-        /* Interactive Dashboard Preview */
-        .hero-dashboard {
-            position: relative;
-            animation: slideInRight 1s ease-out;
-        }
-
-        @keyframes slideInRight {
-            from {
-                opacity: 0;
-                transform: translateX(50px);
-            }
-            to {
-                opacity: 1;
-                transform: translateX(0);
-            }
-        }
-
-        .dashboard-container {
-            background: var(--glass);
-            border: 1px solid var(--glass-border);
-            border-radius: 20px;
-            backdrop-filter: blur(20px);
-            padding: 2rem;
-            transition: all 0.5s ease;
-            position: relative;
-            overflow: hidden;
-        }
-
-        .dashboard-container::before {
-            content: '';
-            position: absolute;
-            top: 0;
-            left: 0;
-            right: 0;
-            height: 4px;
-            background: linear-gradient(90deg, var(--primary), var(--secondary), var(--success));
-            animation: loading 3s ease-in-out infinite;
-        }
-
-        @keyframes loading {
-            0%, 100% { transform: translateX(-100%); }
-            50% { transform: translateX(100%); }
-        }
-
-        .dashboard-container:hover {
-            transform: translateY(-10px);
-            box-shadow: 0 25px 50px rgba(0, 0, 0, 0.3);
-        }
-
-        .dashboard-header {
-            display: flex;
-            align-items: center;
-            justify-content: space-between;
-            margin-bottom: 2rem;
-        }
-
-        .dashboard-title {
-            display: flex;
-            align-items: center;
-            gap: 12px;
-            font-weight: 700;
-            color: var(--white);
-        }
-
-        .dashboard-icon {
-            width: 50px;
-            height: 50px;
-            background: linear-gradient(135deg, var(--success), var(--primary));
-            border-radius: 12px;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            font-size: 1.5rem;
-        }
-
-        .status-indicator {
-            padding: 0.25rem 0.75rem;
-            background: var(--success);
-            color: white;
-            border-radius: 20px;
-            font-size: 0.75rem;
-            font-weight: 600;
-            animation: pulse 2s infinite;
-        }
-
-        .metrics-grid {
-            display: grid;
-            grid-template-columns: repeat(2, 1fr);
-            gap: 1rem;
-            margin-bottom: 2rem;
-        }
-
-        .metric-card {
-            background: rgba(15, 23, 42, 0.6);
-            border: 1px solid var(--glass-border);
-            border-radius: 12px;
-            padding: 1.5rem;
-            transition: all 0.3s ease;
-            cursor: pointer;
-            position: relative;
-            overflow: hidden;
-        }
-
-        .metric-card::before {
-            content: '';
-            position: absolute;
-            top: 0;
-            left: 0;
-            right: 0;
-            height: 3px;
-            background: var(--primary);
-            transform: scaleX(0);
-            transition: transform 0.3s ease;
-        }
-
-        .metric-card:hover::before {
-            transform: scaleX(1);
-        }
-
-        .metric-card:hover {
-            transform: translateY(-5px);
-            border-color: var(--primary);
-        }
-
-        .metric-value {
-            font-size: 1.75rem;
-            font-weight: 800;
-            margin-bottom: 0.5rem;
-            background: linear-gradient(135deg, var(--success), var(--primary));
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
-            background-clip: text;
-        }
-
-        .metric-label {
-            color: var(--gray-400);
-            font-size: 0.875rem;
-            margin-bottom: 0.5rem;
-        }
-
-        .metric-change {
-            display: flex;
-            align-items: center;
-            gap: 4px;
-            font-size: 0.75rem;
-            font-weight: 600;
-        }
-
-        .metric-change.positive {
-            color: var(--success);
-        }
-
-        .metric-change.negative {
-            color: var(--danger);
-        }
-
-        .chart-placeholder {
-            height: 100px;
-            background: linear-gradient(135deg, rgba(99, 102, 241, 0.1), rgba(236, 72, 153, 0.1));
-            border-radius: 8px;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            position: relative;
-            overflow: hidden;
-        }
-
-        .chart-bar {
-            width: 8px;
-            background: linear-gradient(180deg, var(--primary), var(--secondary));
-            border-radius: 4px;
-            animation: chartAnimation 2s ease-in-out infinite;
-            margin: 0 2px;
-        }
-
-        .chart-bar:nth-child(1) { height: 60%; animation-delay: 0s; }
-        .chart-bar:nth-child(2) { height: 80%; animation-delay: 0.2s; }
-        .chart-bar:nth-child(3) { height: 40%; animation-delay: 0.4s; }
-        .chart-bar:nth-child(4) { height: 90%; animation-delay: 0.6s; }
-        .chart-bar:nth-child(5) { height: 70%; animation-delay: 0.8s; }
-
-        @keyframes chartAnimation {
-            0%, 100% { transform: scaleY(1); }
-            50% { transform: scaleY(1.2); }
-        }
-
-        /* Problem Highlight Section */
+        /* Problem Section */
         .problem-section {
             padding: 6rem 2rem;
-            background: rgba(239, 68, 68, 0.05);
-            border-top: 1px solid rgba(239, 68, 68, 0.2);
-            border-bottom: 1px solid rgba(239, 68, 68, 0.2);
+            background: var(--white);
         }
 
         .problem-container {
-            max-width: 1200px;
+            max-width: 1000px;
             margin: 0 auto;
             text-align: center;
         }
 
-        .problem-title {
+        .section-badge {
+            display: inline-block;
+            background: rgba(239, 68, 68, 0.1);
+            color: var(--danger);
+            padding: 0.5rem 1rem;
+            border-radius: 20px;
+            font-size: 0.875rem;
+            font-weight: 600;
+            margin-bottom: 1rem;
+        }
+
+        .section-title {
             font-size: 2.5rem;
             font-weight: 800;
             margin-bottom: 1rem;
-            color: var(--danger);
+            color: var(--gray-900);
         }
 
-        .problem-subtitle {
+        .section-subtitle {
             font-size: 1.25rem;
-            color: var(--gray-400);
+            color: var(--gray-600);
             margin-bottom: 3rem;
-            max-width: 600px;
+            max-width: 700px;
             margin-left: auto;
             margin-right: auto;
         }
@@ -579,25 +321,25 @@
         }
 
         .problem-card {
-            background: var(--glass);
-            border: 1px solid rgba(239, 68, 68, 0.3);
-            border-radius: 20px;
+            background: var(--white);
+            border: 2px solid var(--gray-100);
+            border-radius: 16px;
             padding: 2rem;
-            backdrop-filter: blur(20px);
             transition: all 0.3s ease;
             text-align: left;
         }
 
         .problem-card:hover {
-            transform: translateY(-10px);
-            box-shadow: 0 25px 50px rgba(239, 68, 68, 0.2);
+            border-color: var(--danger);
+            transform: translateY(-5px);
+            box-shadow: 0 10px 30px rgba(239, 68, 68, 0.1);
         }
 
         .problem-icon {
             width: 60px;
             height: 60px;
             background: linear-gradient(135deg, var(--danger), #dc2626);
-            border-radius: 16px;
+            border-radius: 12px;
             display: flex;
             align-items: center;
             justify-content: center;
@@ -609,117 +351,108 @@
             font-size: 1.25rem;
             font-weight: 700;
             margin-bottom: 1rem;
-            color: var(--white);
+            color: var(--gray-900);
         }
 
         .problem-card p {
-            color: var(--gray-400);
+            color: var(--gray-600);
             line-height: 1.6;
         }
 
-        /* Solution Features */
-        .features-section {
-            padding: 6rem 2rem;
-        }
-
-        .features-container {
-            max-width: 1200px;
-            margin: 0 auto;
-        }
-
-        .section-header {
-            text-align: center;
-            margin-bottom: 4rem;
-        }
-
-        .section-title {
-            font-size: 2.5rem;
-            font-weight: 800;
-            margin-bottom: 1rem;
-            background: linear-gradient(135deg, var(--white), var(--primary));
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
-            background-clip: text;
-        }
-
-        .section-subtitle {
-            font-size: 1.25rem;
-            color: var(--gray-400);
+        .problem-highlight {
+            background: linear-gradient(135deg, rgba(239, 68, 68, 0.05), rgba(239, 68, 68, 0.1));
+            border: 2px solid rgba(239, 68, 68, 0.2);
+            border-radius: 16px;
+            padding: 2rem;
             max-width: 600px;
             margin: 0 auto;
         }
 
-        .features-grid {
+        .problem-highlight h3 {
+            color: var(--danger);
+            margin-bottom: 1rem;
+            text-align: center;
+        }
+
+        /* Solution Section */
+        .solution-section {
+            padding: 6rem 2rem;
+            background: var(--gray-50);
+        }
+
+        .solution-container {
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        .solution-header {
+            text-align: center;
+            margin-bottom: 4rem;
+        }
+
+        .solution-grid {
             display: grid;
             grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
             gap: 2rem;
         }
 
-        .feature-card {
-            background: var(--glass);
-            border: 1px solid var(--glass-border);
-            border-radius: 20px;
+        .solution-card {
+            background: var(--white);
+            border: 2px solid var(--gray-100);
+            border-radius: 16px;
             padding: 2rem;
-            backdrop-filter: blur(20px);
-            transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+            transition: all 0.3s ease;
             position: relative;
             overflow: hidden;
-            cursor: pointer;
         }
 
-        .feature-card::before {
+        .solution-card::before {
             content: '';
             position: absolute;
             top: 0;
             left: 0;
-            width: 100%;
-            height: 100%;
-            background: linear-gradient(135deg, rgba(99, 102, 241, 0.1), rgba(236, 72, 153, 0.1));
-            opacity: 0;
-            transition: opacity 0.3s ease;
+            right: 0;
+            height: 4px;
+            background: linear-gradient(90deg, var(--primary), var(--secondary));
+            transform: scaleX(0);
+            transition: transform 0.3s ease;
         }
 
-        .feature-card:hover::before {
-            opacity: 1;
+        .solution-card:hover::before {
+            transform: scaleX(1);
         }
 
-        .feature-card:hover {
-            transform: translateY(-15px) scale(1.02);
-            box-shadow: 0 30px 60px rgba(0, 0, 0, 0.3);
+        .solution-card:hover {
             border-color: var(--primary);
+            transform: translateY(-10px);
+            box-shadow: 0 20px 40px rgba(37, 99, 235, 0.1);
         }
 
-        .feature-icon {
-            width: 70px;
-            height: 70px;
-            border-radius: 20px;
+        .solution-icon {
+            width: 60px;
+            height: 60px;
+            border-radius: 12px;
             display: flex;
             align-items: center;
             justify-content: center;
-            font-size: 1.75rem;
+            font-size: 1.5rem;
             margin-bottom: 1.5rem;
-            position: relative;
-            z-index: 1;
         }
 
-        .feature-card h3 {
+        .solution-card h3 {
             font-size: 1.5rem;
             font-weight: 700;
             margin-bottom: 1rem;
-            color: var(--white);
-            position: relative;
-            z-index: 1;
+            color: var(--gray-900);
         }
 
-        .feature-card p {
-            color: var(--gray-400);
+        .solution-card p {
+            color: var(--gray-600);
             line-height: 1.7;
             margin-bottom: 1.5rem;
-            position: relative;
-            z-index: 1;
         }
 
-        .feature-link {
+        .solution-link {
             color: var(--primary);
             font-weight: 600;
             text-decoration: none;
@@ -727,239 +460,47 @@
             align-items: center;
             gap: 8px;
             transition: all 0.3s ease;
-            position: relative;
-            z-index: 1;
         }
 
-        .feature-link:hover {
+        .solution-link:hover {
             gap: 12px;
-            color: var(--secondary);
         }
 
-        /* Interactive Demo Section */
-        .demo-section {
-            padding: 6rem 2rem;
-            background: rgba(16, 185, 129, 0.05);
+        /* Social Proof */
+        .social-proof {
+            padding: 4rem 2rem;
+            background: var(--white);
         }
 
-        .demo-container {
-            max-width: 1200px;
+        .social-proof-container {
+            max-width: 1000px;
             margin: 0 auto;
+            text-align: center;
         }
 
-        .demo-tabs {
-            display: flex;
-            justify-content: center;
-            gap: 1rem;
-            margin-bottom: 3rem;
-            flex-wrap: wrap;
-        }
-
-        .demo-tab {
-            padding: 1rem 2rem;
-            background: var(--glass);
-            border: 1px solid var(--glass-border);
-            border-radius: 12px;
-            color: var(--gray-400);
-            cursor: pointer;
-            transition: all 0.3s ease;
-            backdrop-filter: blur(10px);
-            font-weight: 500;
-        }
-
-        .demo-tab.active {
-            background: linear-gradient(135deg, var(--primary), var(--secondary));
-            color: white;
-            border-color: transparent;
-            transform: translateY(-2px);
-        }
-
-        .demo-tab:hover:not(.active) {
-            border-color: var(--primary);
-            color: var(--white);
-            transform: translateY(-2px);
-        }
-
-        .demo-content {
-            display: none;
-            animation: fadeInUp 0.6s ease;
-        }
-
-        .demo-content.active {
-            display: block;
-        }
-
-        @keyframes fadeInUp {
-            from {
-                opacity: 0;
-                transform: translateY(30px);
-            }
-            to {
-                opacity: 1;
-                transform: translateY(0);
-            }
-        }
-
-        .demo-grid {
+        .testimonial-grid {
             display: grid;
-            grid-template-columns: 1fr 1fr;
-            gap: 4rem;
-            align-items: center;
-        }
-
-        .demo-mockup {
-            background: var(--glass);
-            border: 1px solid var(--glass-border);
-            border-radius: 20px;
-            padding: 2rem;
-            backdrop-filter: blur(20px);
-            transition: all 0.3s ease;
-            position: relative;
-            overflow: hidden;
-        }
-
-        .demo-mockup:hover {
-            transform: scale(1.05);
-            box-shadow: 0 25px 50px rgba(0, 0, 0, 0.3);
-        }
-
-        .mockup-header {
-            display: flex;
-            align-items: center;
-            gap: 8px;
-            margin-bottom: 1rem;
-            padding-bottom: 1rem;
-            border-bottom: 1px solid var(--glass-border);
-        }
-
-        .mockup-dot {
-            width: 12px;
-            height: 12px;
-            border-radius: 50%;
-        }
-
-        .dot-red { background: var(--danger); }
-        .dot-yellow { background: var(--warning); }
-        .dot-green { background: var(--success); }
-
-        .mockup-content {
-            space-y: 1rem;
-        }
-
-        .mockup-row {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            padding: 0.75rem;
-            background: rgba(15, 23, 42, 0.5);
-            border-radius: 8px;
-            margin-bottom: 0.5rem;
-            transition: all 0.3s ease;
-        }
-
-        .mockup-row:hover {
-            background: rgba(99, 102, 241, 0.1);
-            transform: translateX(5px);
-        }
-
-        .client-name {
-            font-weight: 600;
-            color: var(--white);
-        }
-
-        .profit-loss {
-            font-weight: 700;
-            padding: 0.25rem 0.75rem;
-            border-radius: 20px;
-            font-size: 0.875rem;
-        }
-
-        .profit {
-            background: rgba(16, 185, 129, 0.2);
-            color: var(--success);
-        }
-
-        .loss {
-            background: rgba(239, 68, 68, 0.2);
-            color: var(--danger);
-        }
-
-        .demo-info h3 {
-            font-size: 2rem;
-            font-weight: 700;
-            margin-bottom: 1rem;
-            color: var(--white);
-        }
-
-        .demo-info p {
-            font-size: 1.1rem;
-            color: var(--gray-400);
-            line-height: 1.7;
-            margin-bottom: 2rem;
-        }
-
-        .benefit-list {
-            list-style: none;
-            space-y: 0.75rem;
-        }
-
-        .benefit-item {
-            display: flex;
-            align-items: center;
-            gap: 12px;
-            color: var(--gray-400);
-            margin-bottom: 0.75rem;
-        }
-
-        .benefit-icon {
-            width: 20px;
-            height: 20px;
-            background: var(--success);
-            border-radius: 50%;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            color: white;
-            font-size: 0.75rem;
-            font-weight: bold;
-        }
-
-        /* Testimonials */
-        .testimonials-section {
-            padding: 6rem 2rem;
-            background: rgba(15, 23, 42, 0.5);
-        }
-
-        .testimonials-container {
-            max-width: 1200px;
-            margin: 0 auto;
-        }
-
-        .testimonials-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
             gap: 2rem;
             margin-top: 3rem;
         }
 
         .testimonial-card {
-            background: var(--glass);
-            border: 1px solid var(--glass-border);
-            border-radius: 20px;
+            background: var(--gray-50);
+            border: 2px solid var(--gray-100);
+            border-radius: 16px;
             padding: 2rem;
-            backdrop-filter: blur(20px);
             transition: all 0.3s ease;
-            position: relative;
         }
 
         .testimonial-card:hover {
-            transform: translateY(-10px);
-            box-shadow: 0 25px 50px rgba(0, 0, 0, 0.3);
+            border-color: var(--primary);
+            transform: translateY(-5px);
         }
 
         .testimonial-content {
             margin-bottom: 1.5rem;
-            color: var(--gray-300);
+            color: var(--gray-700);
             line-height: 1.7;
             font-style: italic;
         }
@@ -980,65 +521,179 @@
             justify-content: center;
             color: white;
             font-weight: 700;
-            font-size: 1.25rem;
         }
 
         .author-info h4 {
-            color: var(--white);
+            color: var(--gray-900);
             font-weight: 600;
             margin-bottom: 0.25rem;
         }
 
         .author-info p {
-            color: var(--gray-400);
+            color: var(--gray-500);
             font-size: 0.875rem;
+        }
+
+        /* Pricing Section */
+        .pricing-section {
+            padding: 6rem 2rem;
+            background: var(--gray-50);
+        }
+
+        .pricing-container {
+            max-width: 1000px;
+            margin: 0 auto;
+        }
+
+        .pricing-header {
+            text-align: center;
+            margin-bottom: 4rem;
+        }
+
+        .pricing-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 2rem;
+            margin-bottom: 3rem;
+        }
+
+        .pricing-card {
+            background: var(--white);
+            border: 2px solid var(--gray-200);
+            border-radius: 16px;
+            padding: 2rem;
+            transition: all 0.3s ease;
+            position: relative;
+            text-align: center;
+        }
+
+        .pricing-card.featured {
+            border-color: var(--primary);
+            transform: scale(1.05);
+            box-shadow: 0 20px 40px rgba(37, 99, 235, 0.1);
+        }
+
+        .pricing-card.featured::before {
+            content: 'MAIS POPULAR';
+            position: absolute;
+            top: -12px;
+            left: 50%;
+            transform: translateX(-50%);
+            background: var(--primary);
+            color: white;
+            padding: 0.5rem 1rem;
+            border-radius: 20px;
+            font-size: 0.75rem;
+            font-weight: 600;
+        }
+
+        .pricing-card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.1);
+        }
+
+        .pricing-card.featured:hover {
+            transform: scale(1.05) translateY(-10px);
+        }
+
+        .plan-name {
+            font-size: 1.5rem;
+            font-weight: 700;
+            color: var(--gray-900);
+            margin-bottom: 0.5rem;
+        }
+
+        .plan-description {
+            color: var(--gray-600);
+            margin-bottom: 2rem;
+        }
+
+        .plan-price {
+            font-size: 3rem;
+            font-weight: 800;
+            color: var(--primary);
+            margin-bottom: 0.5rem;
+        }
+
+        .plan-period {
+            color: var(--gray-500);
+            margin-bottom: 2rem;
+        }
+
+        .plan-features {
+            list-style: none;
+            margin-bottom: 2rem;
+            text-align: left;
+        }
+
+        .plan-features li {
+            display: flex;
+            align-items: center;
+            gap: 0.75rem;
+            margin-bottom: 0.75rem;
+            color: var(--gray-700);
+        }
+
+        .feature-check {
+            color: var(--secondary);
+            font-weight: bold;
+        }
+
+        .roi-calculator {
+            background: linear-gradient(135deg, var(--primary), var(--secondary));
+            color: white;
+            border-radius: 16px;
+            padding: 2rem;
+            text-align: center;
+            margin-top: 3rem;
+        }
+
+        .roi-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+            gap: 1rem;
+            margin: 1.5rem 0;
+        }
+
+        .roi-item {
+            background: rgba(255, 255, 255, 0.1);
+            padding: 1rem;
+            border-radius: 12px;
+        }
+
+        .roi-number {
+            font-size: 1.5rem;
+            font-weight: 800;
+            margin-bottom: 0.5rem;
+        }
+
+        .roi-label {
+            font-size: 0.875rem;
+            opacity: 0.9;
         }
 
         /* CTA Section */
         .cta-section {
             padding: 6rem 2rem;
-            background: 
-                radial-gradient(circle at 50% 50%, rgba(99, 102, 241, 0.2) 0%, transparent 50%),
-                var(--dark);
+            background: linear-gradient(135deg, var(--primary), var(--secondary));
+            color: white;
+            text-align: center;
         }
 
         .cta-container {
             max-width: 800px;
             margin: 0 auto;
-            text-align: center;
-            background: var(--glass);
-            border: 1px solid var(--glass-border);
-            border-radius: 30px;
-            padding: 4rem 2rem;
-            backdrop-filter: blur(20px);
-            position: relative;
-            overflow: hidden;
-        }
-
-        .cta-container::before {
-            content: '';
-            position: absolute;
-            top: 0;
-            left: 0;
-            right: 0;
-            height: 4px;
-            background: linear-gradient(90deg, var(--primary), var(--secondary), var(--success));
-            animation: loading 2s ease-in-out infinite;
         }
 
         .cta-title {
             font-size: 2.5rem;
             font-weight: 800;
             margin-bottom: 1rem;
-            background: linear-gradient(135deg, var(--white), var(--primary));
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
-            background-clip: text;
         }
 
         .cta-subtitle {
             font-size: 1.25rem;
-            color: var(--gray-400);
+            opacity: 0.9;
             margin-bottom: 2rem;
             line-height: 1.6;
         }
@@ -1051,13 +706,34 @@
             margin-bottom: 2rem;
         }
 
+        .btn-white {
+            background: white;
+            color: var(--primary);
+        }
+
+        .btn-white:hover {
+            background: var(--gray-100);
+            transform: translateY(-2px);
+        }
+
+        .btn-outline {
+            background: transparent;
+            color: white;
+            border: 2px solid rgba(255, 255, 255, 0.3);
+        }
+
+        .btn-outline:hover {
+            background: rgba(255, 255, 255, 0.1);
+            border-color: white;
+        }
+
         .cta-guarantee {
             display: flex;
             justify-content: center;
             gap: 2rem;
             flex-wrap: wrap;
             font-size: 0.875rem;
-            color: var(--gray-400);
+            opacity: 0.9;
         }
 
         .guarantee-item {
@@ -1066,16 +742,11 @@
             gap: 8px;
         }
 
-        .guarantee-icon {
-            color: var(--success);
-            font-weight: bold;
-        }
-
         /* Footer */
         .footer {
             padding: 4rem 2rem 2rem;
-            background: rgba(15, 23, 42, 0.8);
-            border-top: 1px solid var(--glass-border);
+            background: var(--gray-900);
+            color: var(--gray-300);
         }
 
         .footer-container {
@@ -1090,15 +761,9 @@
             margin-bottom: 2rem;
         }
 
-        .footer-brand {
-            display: flex;
-            flex-direction: column;
-            gap: 1rem;
-        }
-
         .footer-brand p {
-            color: var(--gray-400);
             line-height: 1.6;
+            margin-top: 1rem;
         }
 
         .footer-section h4 {
@@ -1109,7 +774,6 @@
 
         .footer-links {
             list-style: none;
-            space-y: 0.5rem;
         }
 
         .footer-links li {
@@ -1123,11 +787,11 @@
         }
 
         .footer-links a:hover {
-            color: var(--white);
+            color: var(--primary);
         }
 
         .footer-bottom {
-            border-top: 1px solid var(--glass-border);
+            border-top: 1px solid var(--gray-800);
             padding-top: 2rem;
             display: flex;
             justify-content: space-between;
@@ -1136,46 +800,10 @@
             gap: 1rem;
         }
 
-        .footer-bottom p {
-            color: var(--gray-400);
-        }
-
-        .footer-social {
-            display: flex;
-            gap: 1rem;
-        }
-
-        .social-link {
-            width: 40px;
-            height: 40px;
-            background: var(--glass);
-            border: 1px solid var(--glass-border);
-            border-radius: 10px;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            color: var(--gray-400);
-            text-decoration: none;
-            transition: all 0.3s ease;
-            backdrop-filter: blur(10px);
-        }
-
-        .social-link:hover {
-            color: var(--white);
-            border-color: var(--primary);
-            transform: translateY(-2px);
-        }
-
-        /* Mobile Responsive */
+        /* Responsive Design */
         @media (max-width: 768px) {
             .nav-links {
                 display: none;
-            }
-
-            .hero-container {
-                grid-template-columns: 1fr;
-                gap: 2rem;
-                text-align: center;
             }
 
             .hero-title {
@@ -1183,25 +811,12 @@
             }
 
             .hero-cta {
-                justify-content: center;
-            }
-
-            .hero-stats {
-                justify-content: center;
-            }
-
-            .demo-grid {
-                grid-template-columns: 1fr;
-                gap: 2rem;
-            }
-
-            .demo-tabs {
                 flex-direction: column;
                 align-items: center;
             }
 
-            .features-grid {
-                grid-template-columns: 1fr;
+            .hero-proof {
+                gap: 2rem;
             }
 
             .section-title {
@@ -1226,72 +841,34 @@
                 flex-direction: column;
                 text-align: center;
             }
-
-            /* Pricing cards mobile */
-            #preco .pricing-cards {
-                grid-template-columns: 1fr !important;
-            }
         }
 
         /* Utility Classes */
         .text-center { text-align: center; }
         .hidden { display: none; }
-        .visible { opacity: 1; transform: translateY(0); }
-
-        /* Scroll Animations */
-        .scroll-animate {
+        .fade-in {
             opacity: 0;
             transform: translateY(30px);
-            transition: all 0.6s cubic-bezier(0.4, 0, 0.2, 1);
+            transition: all 0.6s ease;
         }
-
-        .scroll-animate.visible {
+        .fade-in.visible {
             opacity: 1;
             transform: translateY(0);
         }
-
-        /* Loading Animation */
-        .loading-dots {
-            display: inline-flex;
-            gap: 4px;
-        }
-
-        .loading-dot {
-            width: 8px;
-            height: 8px;
-            background: var(--primary);
-            border-radius: 50%;
-            animation: loadingDots 1.4s ease-in-out infinite both;
-        }
-
-        .loading-dot:nth-child(1) { animation-delay: -0.32s; }
-        .loading-dot:nth-child(2) { animation-delay: -0.16s; }
-        .loading-dot:nth-child(3) { animation-delay: 0s; }
-
-        @keyframes loadingDots {
-            0%, 80%, 100% {
-                transform: scale(0);
-                opacity: 0.5;
-            }
-            40% {
-                transform: scale(1);
-                opacity: 1;
-            }
-        }
     </style>
 </head>
-<body class="bg-gradient">
+<body>
     <!-- Navigation -->
     <nav class="navbar" id="navbar">
         <div class="nav-container">
             <a href="#" class="logo">
-                <div class="logo-icon">T</div>
-                TarefAI
+                <div class="logo-icon">P</div>
+                PRAgenda
             </a>
             <div class="nav-links">
                 <a href="#problema" class="nav-link">Problema</a>
                 <a href="#solucao" class="nav-link">Solução</a>
-                <a href="#demo" class="nav-link">Demo</a>
+                <a href="#prova" class="nav-link">Casos de Sucesso</a>
                 <a href="#preco" class="nav-link">Preços</a>
                 <a href="#" class="nav-cta">Teste Grátis</a>
             </div>
@@ -1304,92 +881,44 @@
             <div class="hero-content">
                 <div class="hero-badge">
                     <div class="badge-icon"></div>
-                    <span>✨ Novo: Detete clientes não rentáveis em 60 segundos</span>
+                    <span>✨ Novo: A PRAgenda que nunca falha</span>
                 </div>
                 
                 <h1 class="hero-title">
-                    Descubra clientes não rentáveis em 60 segundos
+                    A <span class="hero-highlight">PRAgenda que nunca falha:</span><br>
+                    Organize prazos, descubra lucros
                 </h1>
                 
                 <p class="hero-subtitle">
-                    Pare de perder dinheiro com clientes que custam mais do que geram. Identifique os problemas, recupere 30% de lucro e nunca mais perca um prazo.
+                    Nunca mais perca um prazo nem deixe clientes não rentáveis drenar o seu negócio. 
+                    Descubra prejuízos ocultos em 60 segundos e recupere 30% dos seus lucros.
                 </p>
                 
                 <div class="hero-cta">
                     <a href="#demo" class="btn btn-primary">
-                        🚀 Ver Meus Clientes Não Rentáveis
+                        📅 Experimentar a PRAgenda
                     </a>
                     <a href="#solucao" class="btn btn-secondary">
                         ▶️ Como Funciona (2 min)
                     </a>
                 </div>
                 
-                <div class="hero-stats">
-                    <div class="stat">
-                        <div class="stat-number">30%</div>
-                        <div class="stat-label">Aumento no Lucro</div>
+                <div class="hero-proof">
+                    <div class="proof-item">
+                        <div class="proof-number">30%</div>
+                        <div class="proof-label">Redução de Custos</div>
                     </div>
-                    <div class="stat">
-                        <div class="stat-number">60s</div>
-                        <div class="stat-label">Para Identificar Problemas</div>
+                    <div class="proof-item">
+                        <div class="proof-number">60s</div>
+                        <div class="proof-label">Para Identificar Problemas</div>
                     </div>
-                    <div class="stat">
-                        <div class="stat-number">15h</div>
-                        <div class="stat-label">Poupadas por Semana</div>
+                    <div class="proof-item">
+                        <div class="proof-number">15h</div>
+                        <div class="proof-label">Poupadas por Semana</div>
                     </div>
-                </div>
-            </div>
-            
-            <div class="hero-dashboard">
-                <div class="dashboard-container">
-                    <div class="dashboard-header">
-                        <div class="dashboard-title">
-                            <div class="dashboard-icon">📊</div>
-                            <span>Dashboard Executivo</span>
-                        </div>
-                        <div class="status-indicator">AO VIVO</div>
-                    </div>
-                    
-                    <div class="metrics-grid">
-                        <div class="metric-card">
-                            <div class="metric-value">€1.847</div>
-                            <div class="metric-label">Receita Este Mês</div>
-                            <div class="metric-change positive">
-                                ↗️ +12% vs mês anterior
-                            </div>
-                        </div>
-                        
-                        <div class="metric-card">
-                            <div class="metric-value">€-347</div>
-                            <div class="metric-label">Prejuízo Identificado</div>
-                            <div class="metric-change negative">
-                                ⚠️ 2 clientes não rentáveis
-                            </div>
-                        </div>
-                        
-                        <div class="metric-card">
-                            <div class="metric-value">87%</div>
-                            <div class="metric-label">Eficiência da Equipa</div>
-                            <div class="metric-change positive">
-                                ↗️ +5% esta semana
-                            </div>
-                        </div>
-                        
-                        <div class="metric-card">
-                            <div class="metric-value">3</div>
-                            <div class="metric-label">Prazos Próximos</div>
-                            <div class="metric-change">
-                                🔔 Próximo em 2 dias
-                            </div>
-                        </div>
-                    </div>
-                    
-                    <div class="chart-placeholder">
-                        <div class="chart-bar"></div>
-                        <div class="chart-bar"></div>
-                        <div class="chart-bar"></div>
-                        <div class="chart-bar"></div>
-                        <div class="chart-bar"></div>
+                    <div class="proof-item">
+                        <div class="proof-number">500+</div>
+                        <div class="proof-label">Escritórios Confiam</div>
                     </div>
                 </div>
             </div>
@@ -1397,118 +926,121 @@
     </section>
 
     <!-- Problem Section -->
-    <section class="problem-section scroll-animate" id="problema">
+    <section class="problem-section fade-in" id="problema">
         <div class="problem-container">
-            <h2 class="problem-title">Está a Perder Dinheiro Todos os Meses?</h2>
-            <p class="problem-subtitle">
-                A maioria dos escritórios de contabilidade perde 20-40% do lucro potencial sem saber
+            <div class="section-badge">⚠️ ALERTA</div>
+            <h2 class="section-title">A PRAgenda Está a Falhar no Seu Escritório?</h2>
+            <p class="section-subtitle">
+                89% dos escritórios perdem dinheiro todos os meses porque a agenda tradicional não revela os verdadeiros custos
             </p>
             
             <div class="problem-grid">
                 <div class="problem-card">
                     <div class="problem-icon">💸</div>
                     <h3>Clientes que Custam Mais do que Pagam</h3>
-                    <p>Cliente paga €200/mês mas consome €350 em tempo da equipa. Está a perder €150 todos os meses com um cliente que pensa ser rentável.</p>
+                    <p>Cliente paga €300/mês mas consome €450 em tempo da equipa. Está a perder €150 todos os meses com um cliente que pensa ser rentável. Multiplique por 5-10 clientes...</p>
                 </div>
                 
                 <div class="problem-card">
                     <div class="problem-icon">⏰</div>
                     <h3>Prazos Perdidos = Clientes Perdidos</h3>
-                    <p>Cada prazo perdido custa em média €500 em multas + stress + risco de perder o cliente permanentemente.</p>
+                    <p>Cada prazo perdido custa em média €500 em multas + stress + risco de perder o cliente permanentemente. Sem contar a reputação danificada.</p>
                 </div>
                 
                 <div class="problem-card">
                     <div class="problem-icon">🤯</div>
-                    <h3>Equipa Sobrecarregada e Desmotivada</h3>
-                    <p>Trabalho a dobrar, pessoas em burnout, e você ainda tem que microgerir tudo porque não sabe quem está a fazer o quê.</p>
+                    <h3>Caos na Gestão da Equipa</h3>
+                    <p>Não sabe quem está a fazer o quê, pessoas sobrecarregadas, outras ociosas. Trabalha 60h/semana em microgestão em vez de crescer o negócio.</p>
                 </div>
             </div>
             
-            <div style="background: rgba(239, 68, 68, 0.1); border: 1px solid rgba(239, 68, 68, 0.3); border-radius: 15px; padding: 2rem; max-width: 600px; margin: 0 auto;">
-                <h3 style="color: var(--danger); margin-bottom: 1rem; text-align: center;">⚠️ Situação Real:</h3>
-                <p style="text-align: center; color: var(--white); font-size: 1.1rem; line-height: 1.6;">
-                    "Trabalho 60 horas por semana, mas no final do mês mal sobra dinheiro. Tenho clientes que me dão muito trabalho mas não sei se estão a ser rentáveis."
+            <div class="problem-highlight">
+                <h3>📊 Situação Real de um Escritório:</h3>
+                <p style="text-align: center; font-size: 1.1rem; line-height: 1.6; margin-bottom: 1rem;">
+                    "Trabalho 60 horas por semana, mas no final do mês mal sobra dinheiro. Descobri que 6 dos meus 20 clientes estavam a custar-me €1.800/mês em prejuízo."
                 </p>
-                <p style="text-align: center; color: var(--gray-400); font-style: italic; margin-top: 1rem;">
-                    — 89% dos contabilistas entrevistados
+                <p style="text-align: center; color: var(--gray-600); font-style: italic;">
+                    — João Silva, Escritório JMS Contabilidade (cliente real)
                 </p>
             </div>
         </div>
     </section>
 
-    <!-- Features Section -->
-    <section class="features-section scroll-animate" id="solucao">
-        <div class="features-container">
-            <div class="section-header">
-                <h2 class="section-title">A Solução que Transforma o Seu Escritório</h2>
+    <!-- Solution Section -->
+    <section class="solution-section fade-in" id="solucao">
+        <div class="solution-container">
+            <div class="solution-header">
+                <div class="section-badge" style="background: rgba(37, 99, 235, 0.1); color: var(--primary);">💡 SOLUÇÃO</div>
+                <h2 class="section-title">A PRAgenda que Revoluciona o Seu Escritório</h2>
                 <p class="section-subtitle">
-                    Em 3 cliques, veja exatamente quais clientes estão a prejudicar o seu lucro e o que fazer para corrigir
+                    Mais que uma agenda: um sistema inteligente que organiza prazos e revela onde está a perder dinheiro. 
+                    Sem complicações, sem formações extensas.
                 </p>
             </div>
             
-            <div class="features-grid">
-                <div class="feature-card">
-                    <div class="feature-icon" style="background: linear-gradient(135deg, var(--danger), #dc2626);">
+            <div class="solution-grid">
+                <div class="solution-card">
+                    <div class="solution-icon" style="background: linear-gradient(135deg, var(--danger), #dc2626);">
                         💸
                     </div>
-                    <h3>Detete Prejuízos em 60 Segundos</h3>
-                    <p>Veja instantaneamente quais clientes custam mais do que pagam. Dashboard simples: vermelho = prejuízo, verde = lucro. Sem matemática complicada.</p>
-                    <a href="#demo" class="feature-link">
-                        Ver meus prejuízos agora →
+                    <h3>Detecção de Prejuízos em 60 Segundos</h3>
+                    <p>Dashboard intuitivo: vermelho = prejuízo, verde = lucro. Veja instantaneamente quais clientes custam mais do que pagam e quanto está a perder por mês.</p>
+                    <a href="#demo" class="solution-link">
+                        Ver demonstração →
                     </a>
                 </div>
 
-                <div class="feature-card">
-                    <div class="feature-icon" style="background: linear-gradient(135deg, var(--success), #059669);">
+                <div class="solution-card">
+                    <div class="solution-icon" style="background: linear-gradient(135deg, var(--secondary), #059669);">
                         📈
                     </div>
-                    <h3>Aumente Lucros em 30% Automaticamente</h3>
-                    <p>Sistema calcula o preço ideal para cada cliente baseado no tempo real gasto. Clientes que demoram mais, pagam mais.</p>
-                    <a href="#demo" class="feature-link">
+                    <h3>Aumento de Lucros em 30% Automaticamente</h3>
+                    <p>Sistema calcula o preço ideal para cada cliente baseado no tempo real gasto. Clientes que demoram mais, pagam proporcionalmente mais.</p>
+                    <a href="#demo" class="solution-link">
                         Calcular novos preços →
                     </a>
                 </div>
 
-                <div class="feature-card">
-                    <div class="feature-icon" style="background: linear-gradient(135deg, var(--warning), #d97706);">
+                <div class="solution-card">
+                    <div class="solution-icon" style="background: linear-gradient(135deg, var(--accent), #d97706);">
                         ⏱️
                     </div>
-                    <h3>Zero Prazos Perdidos</h3>
-                    <p>Alertas automáticos 3 dias antes de cada deadline. Toda a equipa sabe exatamente o que fazer e quando.</p>
-                    <a href="#demo" class="feature-link">
+                    <h3>PRAgenda Perfeita: Zero Prazos Perdidos</h3>
+                    <p>A única agenda que garante zero atrasos. Alertas automáticos 3 dias antes de cada deadline. Distribuição inteligente de tarefas. Toda a equipa sabe exatamente o que fazer e quando.</p>
+                    <a href="#demo" class="solution-link">
                         Acabar com atrasos →
                     </a>
                 </div>
 
-                <div class="feature-card">
-                    <div class="feature-icon" style="background: linear-gradient(135deg, var(--primary), var(--secondary));">
+                <div class="solution-card">
+                    <div class="solution-icon" style="background: linear-gradient(135deg, var(--primary), #1d4ed8);">
                         🎯
                     </div>
                     <h3>Equipa que Funciona Sozinha</h3>
-                    <p>Distribuição automática de tarefas. Cada pessoa sabe o que fazer sem você ter que estar sempre a explicar.</p>
-                    <a href="#demo" class="feature-link">
+                    <p>Distribuição automática de tarefas baseada na carga atual e especialização. Acabe com a microgestão e foque no crescimento do negócio.</p>
+                    <a href="#demo" class="solution-link">
                         Automatizar equipa →
                     </a>
                 </div>
 
-                <div class="feature-card">
-                    <div class="feature-icon" style="background: linear-gradient(135deg, #06b6d4, #0891b2);">
+                <div class="solution-card">
+                    <div class="solution-icon" style="background: linear-gradient(135deg, #06b6d4, #0891b2);">
                         ⚡
                     </div>
                     <h3>Registo de Tempo Ultra-Rápido</h3>
-                    <p>"Trabalhei 2h na declaração da empresa XYZ" - o sistema entende e regista tudo automaticamente. Sem formulários.</p>
-                    <a href="#demo" class="feature-link">
+                    <p>Diga: "Trabalhei 2h na declaração da empresa XYZ" - o sistema entende e regista automaticamente. Sem formulários, sem complicações.</p>
+                    <a href="#demo" class="solution-link">
                         Testar registo →
                     </a>
                 </div>
 
-                <div class="feature-card">
-                    <div class="feature-icon" style="background: linear-gradient(135deg, #84cc16, #65a30d);">
+                <div class="solution-card">
+                    <div class="solution-icon" style="background: linear-gradient(135deg, #84cc16, #65a30d);">
                         🧠
                     </div>
                     <h3>IA que Descobre Oportunidades</h3>
-                    <p>Alertas quando um cliente está pronto para um serviço mais caro ou quando pode perder um cliente.</p>
-                    <a href="#demo" class="feature-link">
+                    <p>Alertas quando um cliente está pronto para um serviço mais caro, quando pode perder um cliente, ou quando há tarefas paradas há muito tempo.</p>
+                    <a href="#demo" class="solution-link">
                         Ver oportunidades →
                     </a>
                 </div>
@@ -1516,272 +1048,49 @@
         </div>
     </section>
 
-    <!-- Interactive Demo Section -->
-    <section class="demo-section scroll-animate" id="demo">
-        <div class="demo-container">
-            <div class="section-header">
-                <h2 class="section-title">Veja o Sistema em Ação</h2>
-                <p class="section-subtitle">Explore como funciona na prática</p>
-            </div>
-
-            <div class="demo-tabs">
-                <div class="demo-tab active" onclick="showDemo('rentabilidade')">
-                    💰 Análise de Rentabilidade
-                </div>
-                <div class="demo-tab" onclick="showDemo('prazos')">
-                    ⏰ Gestão de Prazos
-                </div>
-                <div class="demo-tab" onclick="showDemo('equipa')">
-                    👥 Organização da Equipa
-                </div>
-                <div class="demo-tab" onclick="showDemo('insights')">
-                    🧠 IA Insights
-                </div>
-            </div>
-
-            <!-- Rentabilidade Demo -->
-            <div id="rentabilidade" class="demo-content active">
-                <div class="demo-grid">
-                    <div class="demo-mockup">
-                        <div class="mockup-header">
-                            <div class="mockup-dot dot-red"></div>
-                            <div class="mockup-dot dot-yellow"></div>
-                            <div class="mockup-dot dot-green"></div>
-                        </div>
-                        <div class="mockup-content">
-                            <div class="mockup-row">
-                                <div class="client-name">🏢 Empresa ABC Lda</div>
-                                <div class="profit-loss loss">-€150/mês</div>
-                            </div>
-                            <div class="mockup-row">
-                                <div class="client-name">🏪 Café Central</div>
-                                <div class="profit-loss profit">+€89/mês</div>
-                            </div>
-                            <div class="mockup-row">
-                                <div class="client-name">🚗 Oficina Motors</div>
-                                <div class="profit-loss loss">-€67/mês</div>
-                            </div>
-                            <div class="mockup-row">
-                                <div class="client-name">💊 Farmácia Silva</div>
-                                <div class="profit-loss profit">+€234/mês</div>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="demo-info">
-                        <h3>Identifique Prejuízos Instantaneamente</h3>
-                        <p>Veja em segundos quais clientes estão a custar-lhe dinheiro. O sistema calcula automaticamente tempo gasto vs. valor cobrado.</p>
-                        <ul class="benefit-list">
-                            <li class="benefit-item">
-                                <div class="benefit-icon">✓</div>
-                                <span>Cliente que paga €200 mas custa €350</span>
-                            </li>
-                            <li class="benefit-item">
-                                <div class="benefit-icon">✓</div>
-                                <span>Quanto está a perder por mês</span>
-                            </li>
-                            <li class="benefit-item">
-                                <div class="benefit-icon">✓</div>
-                                <span>Que preço cobrar para ter lucro</span>
-                            </li>
-                            <li class="benefit-item">
-                                <div class="benefit-icon">✓</div>
-                                <span>Histórico de rentabilidade</span>
-                            </li>
-                        </ul>
-                    </div>
-                </div>
-            </div>
-
-            <!-- Prazos Demo -->
-            <div id="prazos" class="demo-content">
-                <div class="demo-grid">
-                    <div class="demo-info">
-                        <h3>Nunca Mais Perca um Prazo</h3>
-                        <p>Alertas automáticos e organização inteligente garantem que nunca mais se esqueça de um deadline importante.</p>
-                        <ul class="benefit-list">
-                            <li class="benefit-item">
-                                <div class="benefit-icon">✓</div>
-                                <span>Alertas 3 dias antes do prazo</span>
-                            </li>
-                            <li class="benefit-item">
-                                <div class="benefit-icon">✓</div>
-                                <span>Priorização automática por urgência</span>
-                            </li>
-                            <li class="benefit-item">
-                                <div class="benefit-icon">✓</div>
-                                <span>Distribuição de trabalho inteligente</span>
-                            </li>
-                            <li class="benefit-item">
-                                <div class="benefit-icon">✓</div>
-                                <span>Progresso visual de cada tarefa</span>
-                            </li>
-                        </ul>
-                    </div>
-                    <div class="demo-mockup">
-                        <div class="mockup-header">
-                            <div class="mockup-dot dot-red"></div>
-                            <div class="mockup-dot dot-yellow"></div>
-                            <div class="mockup-dot dot-green"></div>
-                        </div>
-                        <div class="mockup-content">
-                            <div class="mockup-row" style="border-left: 4px solid var(--danger);">
-                                <div class="client-name">🚨 IRS Empresa ABC - 2 dias</div>
-                                <div style="color: var(--danger); font-weight: 600;">URGENTE</div>
-                            </div>
-                            <div class="mockup-row" style="border-left: 4px solid var(--warning);">
-                                <div class="client-name">⚠️ IVA Café Central - 5 dias</div>
-                                <div style="color: var(--warning); font-weight: 600;">PRÓXIMO</div>
-                            </div>
-                            <div class="mockup-row" style="border-left: 4px solid var(--success);">
-                                <div class="client-name">✅ Contrato Farmácia - 12 dias</div>
-                                <div style="color: var(--success); font-weight: 600;">OK</div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-
-            <!-- Equipa Demo -->
-            <div id="equipa" class="demo-content">
-                <div class="demo-grid">
-                    <div class="demo-mockup">
-                        <div class="mockup-header">
-                            <div class="mockup-dot dot-red"></div>
-                            <div class="mockup-dot dot-yellow"></div>
-                            <div class="mockup-dot dot-green"></div>
-                        </div>
-                        <div class="mockup-content">
-                            <div class="mockup-row">
-                                <div class="client-name">👨‍💼 João Silva</div>
-                                <div style="color: var(--success);">8h/semana • 4 clientes</div>
-                            </div>
-                            <div class="mockup-row">
-                                <div class="client-name">👩‍💼 Maria Santos</div>
-                                <div style="color: var(--warning);">15h/semana • 6 clientes</div>
-                            </div>
-                            <div class="mockup-row">
-                                <div class="client-name">👨‍💼 Carlos Ferreira</div>
-                                <div style="color: var(--success);">12h/semana • 5 clientes</div>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="demo-info">
-                        <h3>Equipa Organizada Automaticamente</h3>
-                        <p>Distribuição inteligente de trabalho baseada na carga atual e especialização de cada pessoa.</p>
-                        <ul class="benefit-list">
-                            <li class="benefit-item">
-                                <div class="benefit-icon">✓</div>
-                                <span>Quem fez o quê e quando</span>
-                            </li>
-                            <li class="benefit-item">
-                                <div class="benefit-icon">✓</div>
-                                <span>Balanceamento automático de carga</span>
-                            </li>
-                            <li class="benefit-item">
-                                <div class="benefit-icon">✓</div>
-                                <span>Permissões por tipo de cliente</span>
-                            </li>
-                            <li class="benefit-item">
-                                <div class="benefit-icon">✓</div>
-                                <span>Relatórios de produtividade</span>
-                            </li>
-                        </ul>
-                    </div>
-                </div>
-            </div>
-
-            <!-- Insights Demo -->
-            <div id="insights" class="demo-content">
-                <div class="demo-grid">
-                    <div class="demo-info">
-                        <h3>IA que Trabalha Para Si</h3>
-                        <p>Insights automáticos que identificam oportunidades e problemas antes que se tornem críticos.</p>
-                        <ul class="benefit-list">
-                            <li class="benefit-item">
-                                <div class="benefit-icon">✓</div>
-                                <span>"Cliente X pronto para serviço premium"</span>
-                            </li>
-                            <li class="benefit-item">
-                                <div class="benefit-icon">✓</div>
-                                <span>"Risco de perder Cliente Y"</span>
-                            </li>
-                            <li class="benefit-item">
-                                <div class="benefit-icon">✓</div>
-                                <span>"Tarefa parada há muito tempo"</span>
-                            </li>
-                            <li class="benefit-item">
-                                <div class="benefit-icon">✓</div>
-                                <span>"Oportunidade de upselling"</span>
-                            </li>
-                        </ul>
-                    </div>
-                    <div class="demo-mockup">
-                        <div class="mockup-header">
-                            <div class="mockup-dot dot-red"></div>
-                            <div class="mockup-dot dot-yellow"></div>
-                            <div class="mockup-dot dot-green"></div>
-                        </div>
-                        <div class="mockup-content">
-                            <div class="mockup-row" style="background: rgba(16, 185, 129, 0.1);">
-                                <div class="client-name">💡 Farmácia Silva → Upgrade para plano premium</div>
-                            </div>
-                            <div class="mockup-row" style="background: rgba(239, 68, 68, 0.1);">
-                                <div class="client-name">⚠️ Empresa ABC → Risco de cancelamento</div>
-                            </div>
-                            <div class="mockup-row" style="background: rgba(245, 158, 11, 0.1);">
-                                <div class="client-name">🔔 Café Central → Tarefa parada 5 dias</div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </section>
-
-    <!-- Testimonials -->
-    <section class="testimonials-section scroll-animate">
-        <div class="testimonials-container">
-            <div class="section-header">
-                <h2 class="section-title">O Que Dizem os Nossos Clientes</h2>
-                <p class="section-subtitle">Resultados reais de escritórios que transformaram a sua gestão</p>
-            </div>
+    <!-- Social Proof Section -->
+    <section class="social-proof fade-in" id="prova">
+        <div class="social-proof-container">
+            <div class="section-badge" style="background: rgba(16, 185, 129, 0.1); color: var(--secondary);">✅ CASOS DE SUCESSO</div>
+            <h2 class="section-title">Resultados Reais de Quem Já Transformou o Negócio</h2>
+            <p class="section-subtitle">Mais de 500 escritórios já recuperaram milhares de euros em prejuízos escondidos</p>
             
-            <div class="testimonials-grid">
+            <div class="testimonial-grid">
                 <div class="testimonial-card">
                     <div class="testimonial-content">
-                        "Em 30 dias descobri que 3 dos meus clientes estavam a custar-me €450/mês. Ajustei os preços e recuperei €1.200 só no primeiro trimestre."
+                        "Em 30 dias descobri que 4 clientes estavam a custar-me €670/mês. Ajustei os preços e recuperei €2.010 só no primeiro trimestre. O sistema pagou-se 20 vezes."
                     </div>
                     <div class="testimonial-author">
                         <div class="author-avatar">AS</div>
                         <div class="author-info">
                             <h4>Ana Silva</h4>
-                            <p>Contabilista Certificada, Porto</p>
+                            <p>Contabilista Certificada • Porto</p>
                         </div>
                     </div>
                 </div>
                 
                 <div class="testimonial-card">
                     <div class="testimonial-content">
-                        "Finalmente consigo dormir tranquilo. Zero prazos perdidos nos últimos 6 meses e a equipa funciona sem eu ter que estar sempre em cima."
+                        "Zero prazos perdidos nos últimos 8 meses. A equipa funciona sozinha e consegui reduzir de 60 para 45 horas por semana mantendo a mesma receita."
                     </div>
                     <div class="testimonial-author">
                         <div class="author-avatar">JF</div>
                         <div class="author-info">
                             <h4>João Ferreira</h4>
-                            <p>Sócio-Gerente, Lisboa</p>
+                            <p>Sócio-Gerente • Lisboa</p>
                         </div>
                     </div>
                 </div>
                 
                 <div class="testimonial-card">
                     <div class="testimonial-content">
-                        "Consegui reduzir as horas de trabalho de 60 para 45 por semana mantendo a mesma receita. A diferença na qualidade de vida é enorme."
+                        "Identificámos €1.200 em custos desnecessários por mês. Conseguimos contratar mais um colaborador sem aumentar custos. Qualidade de vida transformada."
                     </div>
                     <div class="testimonial-author">
                         <div class="author-avatar">MC</div>
                         <div class="author-info">
                             <h4>Maria Costa</h4>
-                            <p>Escritório de Contabilidade, Braga</p>
+                            <p>Escritório de Advocacia • Braga</p>
                         </div>
                     </div>
                 </div>
@@ -1790,124 +1099,136 @@
     </section>
 
     <!-- Pricing Section -->
-    <section class="pricing-section scroll-animate" id="preco" style="padding: 6rem 2rem; background: rgba(15, 23, 42, 0.3);">
-        <div style="max-width: 1000px; margin: 0 auto;">
-            <div class="section-header">
-                <h2 class="section-title">Recupere o Investimento em 30 Dias</h2>
+    <section class="pricing-section fade-in" id="preco">
+        <div class="pricing-container">
+            <div class="pricing-header">
+                <div class="section-badge" style="background: rgba(37, 99, 235, 0.1); color: var(--primary);">💰 INVESTIMENTO</div>
+                <h2 class="section-title">Recupere o Investimento em Menos de 30 Dias</h2>
                 <p class="section-subtitle">A maioria dos clientes recupera o custo descobrindo apenas 1 cliente não rentável</p>
             </div>
             
-            <div style="display: grid; grid-template-columns: repeat(3, 1fr); gap: 2rem; margin-top: 3rem;">
+            <div class="pricing-grid">
                 <!-- Plano Starter -->
-                <div style="background: var(--glass); border: 1px solid var(--glass-border); border-radius: 20px; padding: 2rem; backdrop-filter: blur(20px); transition: all 0.3s ease; position: relative;" onmouseover="this.style.transform='translateY(-10px)'; this.style.boxShadow='0 25px 50px rgba(0, 0, 0, 0.3)'" onmouseout="this.style.transform='translateY(0)'; this.style.boxShadow='none'">
-                    <div style="text-align: center; margin-bottom: 2rem;">
-                        <h3 style="font-size: 1.5rem; font-weight: 700; color: var(--white); margin-bottom: 0.5rem;">Starter</h3>
-                        <p style="color: var(--gray-400);">Para pequenos escritórios</p>
-                        <div style="font-size: 3rem; font-weight: 800; color: var(--primary); margin: 1rem 0;">€49</div>
-                        <p style="color: var(--gray-400);">por mês</p>
-                    </div>
-                    <ul style="list-style: none; margin-bottom: 2rem; space-y: 0.75rem;">
-                        <li style="display: flex; align-items: center; gap: 0.75rem; margin-bottom: 0.75rem; color: var(--gray-300);"><span style="color: var(--success); font-weight: bold; font-size: 1.1rem;">✓</span> Até 5 utilizadores</li>
-                        <li style="display: flex; align-items: center; gap: 0.75rem; margin-bottom: 0.75rem; color: var(--gray-300);"><span style="color: var(--success); font-weight: bold; font-size: 1.1rem;">✓</span> Análise de rentabilidade</li>
-                        <li style="display: flex; align-items: center; gap: 0.75rem; margin-bottom: 0.75rem; color: var(--gray-300);"><span style="color: var(--success); font-weight: bold; font-size: 1.1rem;">✓</span> Gestão de prazos</li>
-                        <li style="display: flex; align-items: center; gap: 0.75rem; margin-bottom: 0.75rem; color: var(--gray-300);"><span style="color: var(--success); font-weight: bold; font-size: 1.1rem;">✓</span> Registo de tempo inteligente</li>
-                        <li style="display: flex; align-items: center; gap: 0.75rem; margin-bottom: 0.75rem; color: var(--gray-300);"><span style="color: var(--success); font-weight: bold; font-size: 1.1rem;">✓</span> Relatórios básicos</li>
+                <div class="pricing-card">
+                    <h3 class="plan-name">Starter</h3>
+                    <p class="plan-description">Para pequenos escritórios</p>
+                    <div class="plan-price">€49</div>
+                    <p class="plan-period">por mês</p>
+                    <ul class="plan-features">
+                        <li><span class="feature-check">✓</span> Até 5 utilizadores</li>
+                        <li><span class="feature-check">✓</span> Análise de rentabilidade</li>
+                        <li><span class="feature-check">✓</span> Gestão de prazos</li>
+                        <li><span class="feature-check">✓</span> Registo de tempo inteligente</li>
+                        <li><span class="feature-check">✓</span> Relatórios básicos</li>
+                        <li><span class="feature-check">✓</span> Suporte por email</li>
                     </ul>
-                    <a href="#" class="btn btn-secondary" style="width: 100%; text-align: center; justify-content: center;">Experimentar 14 Dias Grátis</a>
+                    <a href="#" class="btn btn-secondary" style="width: 100%; justify-content: center;">
+                        Teste 14 Dias Grátis
+                    </a>
                 </div>
 
                 <!-- Plano Professional (Popular) -->
-                <div style="background: linear-gradient(135deg, var(--primary), var(--secondary)); border: none; border-radius: 20px; padding: 2rem; transition: all 0.3s ease; position: relative; overflow: hidden;" onmouseover="this.style.transform='translateY(-15px)'; this.style.boxShadow='0 30px 60px rgba(99, 102, 241, 0.4)'" onmouseout="this.style.transform='translateY(0)'; this.style.boxShadow='none'">
-                    <div style="position: absolute; top: 1rem; right: 1rem; background: rgba(255,255,255,0.2); padding: 0.5rem 1rem; border-radius: 20px; font-size: 0.875rem; font-weight: 600; color: white; backdrop-filter: blur(10px);">✨ POPULAR</div>
-                    <div style="text-align: center; margin-bottom: 2rem;">
-                        <h3 style="font-size: 1.5rem; font-weight: 700; color: white; margin-bottom: 0.5rem;">Professional</h3>
-                        <p style="color: rgba(255,255,255,0.8);">Para escritórios em crescimento</p>
-                        <div style="font-size: 3rem; font-weight: 800; color: white; margin: 1rem 0;">€99</div>
-                        <p style="color: rgba(255,255,255,0.8);">por mês</p>
-                    </div>
-                    <ul style="list-style: none; margin-bottom: 2rem; space-y: 0.75rem;">
-                        <li style="display: flex; align-items: center; gap: 0.75rem; margin-bottom: 0.75rem; color: rgba(255,255,255,0.9);"><span style="color: white; font-weight: bold; font-size: 1.1rem;">✓</span> Até 15 utilizadores</li>
-                        <li style="display: flex; align-items: center; gap: 0.75rem; margin-bottom: 0.75rem; color: rgba(255,255,255,0.9);"><span style="color: white; font-weight: bold; font-size: 1.1rem;">✓</span> IA Insights avançados</li>
-                        <li style="display: flex; align-items: center; gap: 0.75rem; margin-bottom: 0.75rem; color: rgba(255,255,255,0.9);"><span style="color: white; font-weight: bold; font-size: 1.1rem;">✓</span> Workflows personalizáveis</li>
-                        <li style="display: flex; align-items: center; gap: 0.75rem; margin-bottom: 0.75rem; color: rgba(255,255,255,0.9);"><span style="color: white; font-weight: bold; font-size: 1.1rem;">✓</span> Alertas avançados</li>
-                        <li style="display: flex; align-items: center; gap: 0.75rem; margin-bottom: 0.75rem; color: rgba(255,255,255,0.9);"><span style="color: white; font-weight: bold; font-size: 1.1rem;">✓</span> Análise predictiva</li>
-                        <li style="display: flex; align-items: center; gap: 0.75rem; margin-bottom: 0.75rem; color: rgba(255,255,255,0.9);"><span style="color: white; font-weight: bold; font-size: 1.1rem;">✓</span> Suporte prioritário</li>
+                <div class="pricing-card featured">
+                    <h3 class="plan-name">Professional</h3>
+                    <p class="plan-description">Para escritórios em crescimento</p>
+                    <div class="plan-price">€99</div>
+                    <p class="plan-period">por mês</p>
+                    <ul class="plan-features">
+                        <li><span class="feature-check">✓</span> Até 15 utilizadores</li>
+                        <li><span class="feature-check">✓</span> IA Insights avançados</li>
+                        <li><span class="feature-check">✓</span> Workflows personalizáveis</li>
+                        <li><span class="feature-check">✓</span> Alertas avançados</li>
+                        <li><span class="feature-check">✓</span> Análise predictiva</li>
+                        <li><span class="feature-check">✓</span> Suporte prioritário</li>
+                        <li><span class="feature-check">✓</span> Integração com software contabilístico</li>
                     </ul>
-                    <a href="#" style="width: 100%; text-align: center; justify-content: center; padding: 1rem 2rem; background: white; color: var(--primary); border: none; border-radius: 12px; font-weight: 600; font-size: 1rem; cursor: pointer; transition: all 0.3s ease; text-decoration: none; display: inline-flex; align-items: center;" onmouseover="this.style.transform='translateY(-2px)'; this.style.boxShadow='0 10px 30px rgba(255,255,255,0.3)'" onmouseout="this.style.transform='translateY(0)'; this.style.boxShadow='none'">🚀 Começar Teste Grátis</a>
+                    <a href="#" class="btn btn-primary" style="width: 100%; justify-content: center;">
+                        🚀 Começar Teste Grátis
+                    </a>
                 </div>
 
                 <!-- Plano Enterprise -->
-                <div style="background: var(--glass); border: 1px solid var(--glass-border); border-radius: 20px; padding: 2rem; backdrop-filter: blur(20px); transition: all 0.3s ease;" onmouseover="this.style.transform='translateY(-10px)'; this.style.boxShadow='0 25px 50px rgba(0, 0, 0, 0.3)'" onmouseout="this.style.transform='translateY(0)'; this.style.boxShadow='none'">
-                    <div style="text-align: center; margin-bottom: 2rem;">
-                        <h3 style="font-size: 1.5rem; font-weight: 700; color: var(--white); margin-bottom: 0.5rem;">Enterprise</h3>
-                        <p style="color: var(--gray-400);">Para grandes escritórios</p>
-                        <div style="font-size: 3rem; font-weight: 800; background: linear-gradient(135deg, var(--primary), var(--secondary)); -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text; margin: 1rem 0;">€199</div>
-                        <p style="color: var(--gray-400);">por mês</p>
-                    </div>
-                    <ul style="list-style: none; margin-bottom: 2rem;">
-                        <li style="display: flex; align-items: center; gap: 0.75rem; margin-bottom: 0.75rem; color: var(--gray-300);"><span style="color: var(--success); font-weight: bold; font-size: 1.1rem;">✓</span> Utilizadores ilimitados</li>
-                        <li style="display: flex; align-items: center; gap: 0.75rem; margin-bottom: 0.75rem; color: var(--gray-300);"><span style="color: var(--success); font-weight: bold; font-size: 1.1rem;">✓</span> Integração personalizada</li>
-                        <li style="display: flex; align-items: center; gap: 0.75rem; margin-bottom: 0.75rem; color: var(--gray-300);"><span style="color: var(--success); font-weight: bold; font-size: 1.1rem;">✓</span> API completa</li>
-                        <li style="display: flex; align-items: center; gap: 0.75rem; margin-bottom: 0.75rem; color: var(--gray-300);"><span style="color: var(--success); font-weight: bold; font-size: 1.1rem;">✓</span> Relatórios executivos</li>
-                        <li style="display: flex; align-items: center; gap: 0.75rem; margin-bottom: 0.75rem; color: var(--gray-300);"><span style="color: var(--success); font-weight: bold; font-size: 1.1rem;">✓</span> Gestor de conta dedicado</li>
+                <div class="pricing-card">
+                    <h3 class="plan-name">Enterprise</h3>
+                    <p class="plan-description">Para grandes escritórios</p>
+                    <div class="plan-price">€199</div>
+                    <p class="plan-period">por mês</p>
+                    <ul class="plan-features">
+                        <li><span class="feature-check">✓</span> Utilizadores ilimitados</li>
+                        <li><span class="feature-check">✓</span> Integração personalizada</li>
+                        <li><span class="feature-check">✓</span> API completa</li>
+                        <li><span class="feature-check">✓</span> Relatórios executivos</li>
+                        <li><span class="feature-check">✓</span> Gestor de conta dedicado</li>
+                        <li><span class="feature-check">✓</span> SLA garantido</li>
+                        <li><span class="feature-check">✓</span> Formação personalizada</li>
                     </ul>
-                    <a href="#" class="btn btn-secondary" style="width: 100%; text-align: center; justify-content: center;">Contactar Vendas</a>
+                    <a href="#" class="btn btn-secondary" style="width: 100%; justify-content: center;">
+                        Contactar Vendas
+                    </a>
                 </div>
             </div>
 
             <!-- ROI Calculator -->
-            <div style="max-width: 600px; margin: 4rem auto 0; background: var(--glass); border: 1px solid var(--glass-border); border-radius: 20px; padding: 2rem; backdrop-filter: blur(20px); text-align: center;">
-                <h3 style="color: var(--white); margin-bottom: 1rem; font-weight: 700;">💡 Calculadora de ROI</h3>
-                <p style="color: var(--gray-400); margin-bottom: 1.5rem;">Se descobrir apenas 1 cliente que está a custar €200/mês em prejuízo:</p>
-                <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(150px, 1fr)); gap: 1rem; margin: 1.5rem 0;">
-                    <div style="background: rgba(16, 185, 129, 0.1); padding: 1rem; border-radius: 12px; border: 1px solid rgba(16, 185, 129, 0.3);">
-                        <div style="font-size: 1.5rem; font-weight: 800; color: var(--success);">€2.400</div>
-                        <div style="color: var(--gray-400); font-size: 0.875rem;">poupados por ano</div>
+            <div class="roi-calculator">
+                <h3 style="margin-bottom: 1rem; font-weight: 700;">💡 Calculadora de ROI Real</h3>
+                <p style="margin-bottom: 1.5rem; opacity: 0.9;">
+                    Se descobrir apenas 1 cliente que está a custar €200/mês em prejuízo:
+                </p>
+                <div class="roi-grid">
+                    <div class="roi-item">
+                        <div class="roi-number">€2.400</div>
+                        <div class="roi-label">poupados por ano</div>
                     </div>
-                    <div style="background: rgba(99, 102, 241, 0.1); padding: 1rem; border-radius: 12px; border: 1px solid rgba(99, 102, 241, 0.3);">
-                        <div style="font-size: 1.5rem; font-weight: 800; color: var(--primary);">2000%</div>
-                        <div style="color: var(--gray-400); font-size: 0.875rem;">retorno do investimento</div>
+                    <div class="roi-item">
+                        <div class="roi-number">2000%</div>
+                        <div class="roi-label">retorno anual</div>
+                    </div>
+                    <div class="roi-item">
+                        <div class="roi-number">15 dias</div>
+                        <div class="roi-label">para recuperar investimento</div>
                     </div>
                 </div>
-                <p style="color: var(--success); font-weight: 600; font-size: 0.9rem;">✅ Recupera o investimento anual em apenas 2 semanas</p>
+                <p style="font-weight: 600; font-size: 0.9rem; margin-top: 1rem;">
+                    ✅ Média real: clientes descobrem 3-5 problemas que valem €500-1500/mês
+                </p>
             </div>
         </div>
     </section>
 
     <!-- Final CTA Section -->
-    <section class="cta-section scroll-animate">
+    <section class="cta-section fade-in">
         <div class="cta-container">
             <h2 class="cta-title">Pare de Perder Dinheiro Hoje Mesmo</h2>
             <p class="cta-subtitle">
-                Em 60 segundos descubra exatamente quanto está a perder com clientes não rentáveis. 
-                Teste grátis por 14 dias - se não encontrar pelo menos um problema que vale mais que o custo, devolvemos o dinheiro.
+                Em 60 segundos descubra exatamente quanto está a perder. Teste grátis por 14 dias - 
+                se não encontrar pelo menos €300 em prejuízos escondidos, devolvemos o dinheiro.
             </p>
             
             <div class="cta-buttons">
-                <a href="#" class="btn btn-primary" style="font-size: 1.1rem; padding: 1.25rem 2.5rem;">
-                    🚀 Descobrir Meus Prejuízos Agora
+                <a href="#" class="btn btn-white" style="font-size: 1.1rem; padding: 1.25rem 2.5rem;">
+                    📅 Experimentar a PRAgenda Grátis
                 </a>
-                <a href="#" class="btn btn-secondary">
+                <a href="#" class="btn btn-outline">
                     📞 Falar com Especialista
                 </a>
             </div>
             
             <div class="cta-guarantee">
                 <div class="guarantee-item">
-                    <span class="guarantee-icon">✅</span>
+                    <span>✅</span>
                     <span>14 dias grátis</span>
                 </div>
                 <div class="guarantee-item">
-                    <span class="guarantee-icon">✅</span>
-                    <span>Configuração em 5 minutos</span>
+                    <span>✅</span>
+                    <span>Configuração em 5 min</span>
                 </div>
                 <div class="guarantee-item">
-                    <span class="guarantee-icon">✅</span>
-                    <span>Cancelamento automático</span>
+                    <span>✅</span>
+                    <span>Sem fidelização</span>
                 </div>
                 <div class="guarantee-item">
-                    <span class="guarantee-icon">✅</span>
-                    <span>Garantia de satisfação</span>
+                    <span>✅</span>
+                    <span>Garantia satisfação 100%</span>
                 </div>
             </div>
         </div>
@@ -1919,20 +1240,20 @@
             <div class="footer-grid">
                 <div class="footer-brand">
                     <div class="logo">
-                        <div class="logo-icon">T</div>
-                        TarefAI
+                        <div class="logo-icon">P</div>
+                        PRAgenda
                     </div>
-                    <p>Plataforma inteligente para gestão de escritórios de contabilidade. Identifique clientes não rentáveis, organize a equipa e nunca mais perca um prazo.</p>
+                    <p>A PRAgenda que nunca falha. Plataforma inteligente para escritórios de contabilidade e advocacia que organiza prazos, identifica prejuízos ocultos e automatiza processos para recuperar tempo e lucros.</p>
                 </div>
                 
                 <div class="footer-section">
                     <h4>Produto</h4>
                     <ul class="footer-links">
                         <li><a href="#solucao">Funcionalidades</a></li>
-                        <li><a href="#demo">Demo Interativo</a></li>
+                        <li><a href="#prova">Casos de Sucesso</a></li>
                         <li><a href="#preco">Preços</a></li>
                         <li><a href="#">Integrações</a></li>
-                        <li><a href="#">API</a></li>
+                        <li><a href="#">Segurança</a></li>
                     </ul>
                 </div>
                 
@@ -1941,7 +1262,7 @@
                     <ul class="footer-links">
                         <li><a href="#">Centro de Ajuda</a></li>
                         <li><a href="#">Documentação</a></li>
-                        <li><a href="#">Tutoriais</a></li>
+                        <li><a href="#">Vídeos Tutorial</a></li>
                         <li><a href="#">Estado do Sistema</a></li>
                         <li><a href="#">Contacto</a></li>
                     </ul>
@@ -1951,27 +1272,16 @@
                     <h4>Empresa</h4>
                     <ul class="footer-links">
                         <li><a href="#">Sobre Nós</a></li>
-                        <li><a href="#">Blog</a></li>
-                        <li><a href="#">Carreiras</a></li>
-                        <li><a href="#">Imprensa</a></li>
-                        <li><a href="#">Parceiros</a></li>
+                        <li><a href="#">Termos e Privacidade</a></li>
                     </ul>
                 </div>
             </div>
             
             <div class="footer-bottom">
-                <p>&copy; 2024 TarefAI. Todos os direitos reservados.</p>
-                <div style="display: flex; gap: 2rem; align-items: center; flex-wrap: wrap;">
-                    <div style="display: flex; gap: 1rem;">
-                        <a href="#" style="color: var(--gray-400); text-decoration: none; font-size: 0.875rem;">Privacidade</a>
-                        <a href="#" style="color: var(--gray-400); text-decoration: none; font-size: 0.875rem;">Termos</a>
-                        <a href="#" style="color: var(--gray-400); text-decoration: none; font-size: 0.875rem;">Cookies</a>
-                    </div>
-                    <div class="footer-social">
-                        <a href="#" class="social-link">📧</a>
-                        <a href="#" class="social-link">💬</a>
-                        <a href="#" class="social-link">📱</a>
-                    </div>
+                <p>&copy; 2024 PRAgenda. Todos os direitos reservados. | RGPD Compliance</p>
+                <div style="display: flex; gap: 1rem;">
+                    <span style="color: var(--gray-500);">📧 suporte@softsolutions.pt</span>
+                    <span style="color: var(--gray-500);">📞 +351 21 000 0000</span>
                 </div>
             </div>
         </div>
@@ -1988,7 +1298,7 @@
             }
         });
 
-        // Smooth scrolling
+        // Smooth scrolling for navigation links
         document.querySelectorAll('a[href^="#"]').forEach(anchor => {
             anchor.addEventListener('click', function (e) {
                 e.preventDefault();
@@ -2002,28 +1312,9 @@
             });
         });
 
-        // Demo tabs functionality
-        function showDemo(tabName) {
-            // Hide all demo contents
-            document.querySelectorAll('.demo-content').forEach(content => {
-                content.classList.remove('active');
-            });
-            
-            // Remove active class from all tabs
-            document.querySelectorAll('.demo-tab').forEach(tab => {
-                tab.classList.remove('active');
-            });
-            
-            // Show selected demo content
-            document.getElementById(tabName).classList.add('active');
-            
-            // Add active class to clicked tab
-            event.target.classList.add('active');
-        }
-
-        // Scroll animations
+        // Fade in animations on scroll
         function revealOnScroll() {
-            const elements = document.querySelectorAll('.scroll-animate');
+            const elements = document.querySelectorAll('.fade-in');
             
             elements.forEach(element => {
                 const elementTop = element.getBoundingClientRect().top;
@@ -2035,84 +1326,7 @@
             });
         }
 
-        window.addEventListener('scroll', revealOnScroll);
-        
-        // Initial check
-        revealOnScroll();
-
-        // Interactive metric cards animation
-        document.querySelectorAll('.metric-card').forEach(card => {
-            card.addEventListener('mouseenter', function() {
-                const value = this.querySelector('.metric-value');
-                if (value) {
-                    value.style.transform = 'scale(1.1)';
-                    value.style.transition = 'transform 0.3s ease';
-                }
-            });
-            
-            card.addEventListener('mouseleave', function() {
-                const value = this.querySelector('.metric-value');
-                if (value) {
-                    value.style.transform = 'scale(1)';
-                }
-            });
-        });
-
-        // Feature cards enhanced hover
-        document.querySelectorAll('.feature-card').forEach(card => {
-            card.addEventListener('mouseenter', function() {
-                this.style.zIndex = '10';
-            });
-            
-            card.addEventListener('mouseleave', function() {
-                this.style.zIndex = '1';
-            });
-        });
-
-        // CTA buttons click tracking
-        document.querySelectorAll('.btn-primary').forEach(button => {
-            button.addEventListener('click', function(e) {
-                e.preventDefault();
-                
-                // Add loading state
-                const originalText = this.innerHTML;
-                this.innerHTML = '<div class="loading-dots"><div class="loading-dot"></div><div class="loading-dot"></div><div class="loading-dot"></div></div> A processar...';
-                this.style.pointerEvents = 'none';
-                
-                // Simulate processing
-                setTimeout(() => {
-                    this.innerHTML = originalText;
-                    this.style.pointerEvents = 'auto';
-                    alert('🚀 Demo em desenvolvimento! Em breve poderá experimentar todas as funcionalidades da TarefAI.');
-                }, 2000);
-            });
-        });
-
-        // Testimonial cards stagger animation
-        const observerOptions = {
-            threshold: 0.1,
-            rootMargin: '0px 0px -50px 0px'
-        };
-
-        const observer = new IntersectionObserver((entries) => {
-            entries.forEach((entry, index) => {
-                if (entry.isIntersecting) {
-                    setTimeout(() => {
-                        entry.target.style.opacity = '1';
-                        entry.target.style.transform = 'translateY(0)';
-                    }, index * 150);
-                }
-            });
-        }, observerOptions);
-
-        document.querySelectorAll('.testimonial-card').forEach(card => {
-            card.style.opacity = '0';
-            card.style.transform = 'translateY(30px)';
-            card.style.transition = 'all 0.6s ease';
-            observer.observe(card);
-        });
-
-        // Enhanced scroll performance
+        // Throttled scroll event
         let ticking = false;
         
         function updateOnScroll() {
@@ -2127,33 +1341,88 @@
             }
         });
 
-        // Mobile menu toggle (basic implementation)
+        // Initial check for elements already in view
+        revealOnScroll();
+
+        // CTA button interactions
+        document.querySelectorAll('.btn-primary, .btn-white').forEach(button => {
+            button.addEventListener('click', function(e) {
+                e.preventDefault();
+                
+                // Add loading state
+                const originalText = this.innerHTML;
+                this.innerHTML = '<span style="display: inline-flex; align-items: center; gap: 8px;"><span style="width: 16px; height: 16px; border: 2px solid currentColor; border-radius: 50%; border-top-color: transparent; animation: spin 1s linear infinite;"></span>A processar...</span>';
+                this.style.pointerEvents = 'none';
+                
+                // Add spin animation
+                const style = document.createElement('style');
+                style.textContent = '@keyframes spin { to { transform: rotate(360deg); } }';
+                document.head.appendChild(style);
+                
+                // Simulate processing
+                setTimeout(() => {
+                    this.innerHTML = originalText;
+                    this.style.pointerEvents = 'auto';
+                    
+                    // Show demo modal or redirect
+                    alert('📅 Obrigado pelo seu interesse na PRAgenda!\n\nEm breve entraremos em contacto para agendar a sua demonstração personalizada e mostrar-lhe como a PRAgenda que nunca falha pode transformar o seu escritório.');
+                }, 2000);
+            });
+        });
+
+        // Enhanced hover effects for cards
+        document.querySelectorAll('.solution-card, .pricing-card, .testimonial-card').forEach(card => {
+            card.addEventListener('mouseenter', function() {
+                this.style.zIndex = '10';
+            });
+            
+            card.addEventListener('mouseleave', function() {
+                this.style.zIndex = '1';
+            });
+        });
+
+        // Mobile menu functionality
         const createMobileMenu = () => {
             if (window.innerWidth <= 768) {
+                const navbar = document.querySelector('.navbar');
                 const navLinks = document.querySelector('.nav-links');
-                if (navLinks && !document.querySelector('.mobile-menu-toggle')) {
+                
+                if (!document.querySelector('.mobile-menu-toggle')) {
                     const toggleButton = document.createElement('button');
                     toggleButton.className = 'mobile-menu-toggle';
                     toggleButton.innerHTML = '☰';
                     toggleButton.style.cssText = `
                         background: none;
                         border: none;
-                        color: white;
+                        color: var(--gray-900);
                         font-size: 1.5rem;
                         cursor: pointer;
                         display: block;
+                        padding: 0.5rem;
                     `;
                     
+                    let isOpen = false;
                     toggleButton.addEventListener('click', () => {
-                        navLinks.style.display = navLinks.style.display === 'flex' ? 'none' : 'flex';
-                        navLinks.style.flexDirection = 'column';
-                        navLinks.style.position = 'absolute';
-                        navLinks.style.top = '100%';
-                        navLinks.style.left = '0';
-                        navLinks.style.right = '0';
-                        navLinks.style.background = 'rgba(15, 23, 42, 0.95)';
-                        navLinks.style.padding = '2rem';
-                        navLinks.style.backdropFilter = 'blur(20px)';
+                        isOpen = !isOpen;
+                        if (isOpen) {
+                            navLinks.style.cssText = `
+                                display: flex;
+                                flex-direction: column;
+                                position: absolute;
+                                top: 100%;
+                                left: 0;
+                                right: 0;
+                                background: rgba(255, 255, 255, 0.98);
+                                padding: 2rem;
+                                backdrop-filter: blur(20px);
+                                border-top: 1px solid var(--gray-200);
+                                box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+                            `;
+                            toggleButton.innerHTML = '✕';
+                        } else {
+                            navLinks.style.display = 'none';
+                            toggleButton.innerHTML = '☰';
+                        }
                     });
                     
                     document.querySelector('.nav-container').appendChild(toggleButton);
@@ -2164,30 +1433,22 @@
         window.addEventListener('resize', createMobileMenu);
         createMobileMenu();
 
-        // Add some dynamic content updates
-        setInterval(() => {
-            const liveIndicator = document.querySelector('.status-indicator');
-            if (liveIndicator) {
-                liveIndicator.style.opacity = '0.5';
-                setTimeout(() => {
-                    liveIndicator.style.opacity = '1';
-                }, 500);
-            }
-        }, 3000);
+        // Performance optimization
+        const observerOptions = {
+            threshold: 0.1,
+            rootMargin: '0px 0px -50px 0px'
+        };
 
-        // Performance optimization: Lazy load animations
-        const lazyAnimationObserver = new IntersectionObserver((entries) => {
+        const observer = new IntersectionObserver((entries) => {
             entries.forEach(entry => {
                 if (entry.isIntersecting) {
-                    entry.target.style.animationPlayState = 'running';
-                } else {
-                    entry.target.style.animationPlayState = 'paused';
+                    entry.target.classList.add('visible');
                 }
             });
-        });
+        }, observerOptions);
 
-        document.querySelectorAll('.chart-bar, .loading-dot').forEach(el => {
-            lazyAnimationObserver.observe(el);
+        document.querySelectorAll('.fade-in').forEach(el => {
+            observer.observe(el);
         });
     </script>
 </body>
