@@ -1,11 +1,15 @@
 <!DOCTYPE html>
 <html lang="pt">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>PRAgenda - A IA que Nunca Falha no Seu Escritório</title>
-    <meta name="description" content="IA que identifica prejuízos em 60s, automatiza workflows fiscais e elimina 100% dos atrasos. Escritórios recuperam €3000+/mês.">
-    <link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500;600;700&family=Inter:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet">
+    <meta name="description"
+        content="IA que identifica prejuízos em 60s, automatiza workflows fiscais e elimina 100% dos atrasos. Escritórios recuperam €3000+/mês.">
+    <link
+        href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500;600;700&family=Inter:wght@300;400;500;600;700;800;900&display=swap"
+        rel="stylesheet">
     <style>
         :root {
             --primary: #6366f1;
@@ -49,14 +53,21 @@
             height: 100%;
             z-index: -1;
             background: radial-gradient(circle at 20% 80%, rgba(120, 119, 198, 0.3) 0%, transparent 50%),
-                        radial-gradient(circle at 80% 20%, rgba(255, 119, 198, 0.3) 0%, transparent 50%),
-                        radial-gradient(circle at 40% 40%, rgba(120, 119, 198, 0.2) 0%, transparent 50%);
+                radial-gradient(circle at 80% 20%, rgba(255, 119, 198, 0.3) 0%, transparent 50%),
+                radial-gradient(circle at 40% 40%, rgba(120, 119, 198, 0.2) 0%, transparent 50%);
             animation: bgShift 20s ease-in-out infinite;
         }
 
         @keyframes bgShift {
-            0%, 100% { transform: scale(1) rotate(0deg); }
-            50% { transform: scale(1.1) rotate(180deg); }
+
+            0%,
+            100% {
+                transform: scale(1) rotate(0deg);
+            }
+
+            50% {
+                transform: scale(1.1) rotate(180deg);
+            }
         }
 
         /* Floating Elements */
@@ -104,9 +115,22 @@
         }
 
         @keyframes float {
-            0%, 100% { transform: translateY(0px) rotate(0deg); opacity: 0.7; }
-            33% { transform: translateY(-30px) rotate(120deg); opacity: 1; }
-            66% { transform: translateY(30px) rotate(240deg); opacity: 0.5; }
+
+            0%,
+            100% {
+                transform: translateY(0px) rotate(0deg);
+                opacity: 0.7;
+            }
+
+            33% {
+                transform: translateY(-30px) rotate(120deg);
+                opacity: 1;
+            }
+
+            66% {
+                transform: translateY(30px) rotate(240deg);
+                opacity: 0.5;
+            }
         }
 
         /* Navigation */
@@ -161,13 +185,19 @@
             left: -100%;
             width: 100%;
             height: 100%;
-            background: linear-gradient(90deg, transparent, rgba(255,255,255,0.4), transparent);
+            background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.4), transparent);
             animation: shine 3s infinite;
         }
 
         @keyframes shine {
-            0% { left: -100%; }
-            50%, 100% { left: 100%; }
+            0% {
+                left: -100%;
+            }
+
+            50%,
+            100% {
+                left: 100%;
+            }
         }
 
         .nav-links {
@@ -222,7 +252,7 @@
             left: -100%;
             width: 100%;
             height: 100%;
-            background: linear-gradient(90deg, transparent, rgba(255,255,255,0.2), transparent);
+            background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.2), transparent);
             transition: left 0.5s ease;
         }
 
@@ -282,8 +312,17 @@
         }
 
         @keyframes pulse {
-            0%, 100% { transform: scale(1); opacity: 1; }
-            50% { transform: scale(1.2); opacity: 0.7; }
+
+            0%,
+            100% {
+                transform: scale(1);
+                opacity: 1;
+            }
+
+            50% {
+                transform: scale(1.2);
+                opacity: 0.7;
+            }
         }
 
         .hero-title {
@@ -636,7 +675,7 @@
             border: 1px solid var(--glass-border);
             border-radius: 20px;
             overflow: hidden;
-            height: 500px;
+            height: 1000px;
             display: flex;
             flex-direction: column;
         }
@@ -714,154 +753,169 @@
         }
 
         .ai-message {
-           align-self: flex-start;
+            align-self: flex-start;
         }
 
         .ai-message .message-content {
-           background: var(--glass);
-           border: 1px solid var(--glass-border);
-           color: rgba(255, 255, 255, 0.9);
-           padding: 1rem;
-           border-radius: 18px 18px 18px 4px;
-           backdrop-filter: blur(10px);
-           line-height: 1.5;
-           white-space: pre-line;
+            background: var(--glass);
+            border: 1px solid var(--glass-border);
+            color: rgba(255, 255, 255, 0.9);
+            padding: 1rem;
+            border-radius: 18px 18px 18px 4px;
+            backdrop-filter: blur(10px);
+            line-height: 1.5;
+            white-space: pre-line;
         }
 
         .message-time {
-           font-size: 0.75rem;
-           color: rgba(255, 255, 255, 0.5);
-           align-self: flex-end;
-           margin-top: 0.25rem;
+            font-size: 0.75rem;
+            color: rgba(255, 255, 255, 0.5);
+            align-self: flex-end;
+            margin-top: 0.25rem;
         }
 
         .typing-indicator {
-           display: flex;
-           gap: 4px;
-           padding: 1rem;
+            display: flex;
+            gap: 4px;
+            padding: 1rem;
         }
 
         .typing-indicator .dot {
-           width: 8px;
-           height: 8px;
-           background: var(--primary);
-           border-radius: 50%;
-           animation: typing 1.4s infinite;
+            width: 8px;
+            height: 8px;
+            background: var(--primary);
+            border-radius: 50%;
+            animation: typing 1.4s infinite;
         }
 
-        .typing-indicator .dot:nth-child(2) { animation-delay: 0.2s; }
-        .typing-indicator .dot:nth-child(3) { animation-delay: 0.4s; }
+        .typing-indicator .dot:nth-child(2) {
+            animation-delay: 0.2s;
+        }
+
+        .typing-indicator .dot:nth-child(3) {
+            animation-delay: 0.4s;
+        }
 
         @keyframes typing {
-           0%, 60%, 100% { transform: translateY(0); opacity: 0.5; }
-           30% { transform: translateY(-10px); opacity: 1; }
+
+            0%,
+            60%,
+            100% {
+                transform: translateY(0);
+                opacity: 0.5;
+            }
+
+            30% {
+                transform: translateY(-10px);
+                opacity: 1;
+            }
         }
 
         .chat-input {
-           padding: 1rem;
-           display: flex;
-           gap: 0.5rem;
-           border-top: 1px solid var(--glass-border);
-           background: var(--glass);
+            padding: 1rem;
+            display: flex;
+            gap: 0.5rem;
+            border-top: 1px solid var(--glass-border);
+            background: var(--glass);
         }
 
         .chat-input input {
-           flex: 1;
-           background: transparent;
-           border: 1px solid var(--glass-border);
-           border-radius: 25px;
-           padding: 0.75rem 1rem;
-           color: white;
-           font-size: 0.875rem;
+            flex: 1;
+            background: transparent;
+            border: 1px solid var(--glass-border);
+            border-radius: 25px;
+            padding: 0.75rem 1rem;
+            color: white;
+            font-size: 0.875rem;
         }
 
         .chat-input input::placeholder {
-           color: rgba(255, 255, 255, 0.5);
+            color: rgba(255, 255, 255, 0.5);
         }
 
         .chat-input button {
-           background: var(--primary);
-           border: none;
-           border-radius: 50%;
-           width: 40px;
-           height: 40px;
-           display: flex;
-           align-items: center;
-           justify-content: center;
-           cursor: pointer;
+            background: var(--primary);
+            border: none;
+            border-radius: 50%;
+            width: 40px;
+            height: 40px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            cursor: pointer;
         }
 
         .chat-features h3 {
-           color: white;
-           margin-bottom: 1.5rem;
-           font-size: 1.25rem;
+            color: white;
+            margin-bottom: 1.5rem;
+            font-size: 1.25rem;
         }
 
         .question-categories {
-           display: grid;
-           gap: 1.5rem;
-           margin-bottom: 2rem;
+            display: grid;
+            gap: 1.5rem;
+            margin-bottom: 2rem;
         }
 
         .question-category {
-           background: var(--glass);
-           border: 1px solid var(--glass-border);
-           border-radius: 12px;
-           padding: 1.5rem;
-           backdrop-filter: blur(10px);
+            background: var(--glass);
+            border: 1px solid var(--glass-border);
+            border-radius: 12px;
+            padding: 1.5rem;
+            backdrop-filter: blur(10px);
         }
 
         .question-category h4 {
-           color: white;
-           margin-bottom: 1rem;
-           font-size: 1.1rem;
+            color: white;
+            margin-bottom: 1rem;
+            font-size: 1.1rem;
         }
 
         .question-category ul {
-           list-style: none;
+            list-style: none;
         }
 
         .question-category li {
-           color: rgba(255, 255, 255, 0.8);
-           margin-bottom: 0.5rem;
-           font-style: italic;
-           padding-left: 1rem;
-           position: relative;
+            color: rgba(255, 255, 255, 0.8);
+            margin-bottom: 0.5rem;
+            font-style: italic;
+            padding-left: 1rem;
+            position: relative;
         }
 
         .question-category li::before {
-           content: '"';
-           position: absolute;
-           left: 0;
-           color: var(--primary);
-           font-size: 1.2rem;
+            content: '"';
+            position: absolute;
+            left: 0;
+            color: var(--primary);
+            font-size: 1.2rem;
         }
 
         .ai-capabilities {
-           display: grid;
-           gap: 1rem;
+            display: grid;
+            gap: 1rem;
         }
 
         .capability {
-           display: flex;
-           align-items: center;
-           gap: 1rem;
-           background: var(--glass);
-           border: 1px solid var(--glass-border);
-           border-radius: 12px;
-           padding: 1rem;
-           backdrop-filter: blur(10px);
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+            background: var(--glass);
+            border: 1px solid var(--glass-border);
+            border-radius: 12px;
+            padding: 1rem;
+            backdrop-filter: blur(10px);
         }
 
         .capability-icon {
-           font-size: 1.5rem;
-           width: 40px;
-           text-align: center;
+            font-size: 1.5rem;
+            width: 40px;
+            text-align: center;
         }
 
         .capability-text {
-           color: rgba(255, 255, 255, 0.9);
-           line-height: 1.4;
+            color: rgba(255, 255, 255, 0.9);
+            line-height: 1.4;
         }
 
         /* Demo Terminal */
@@ -901,13 +955,28 @@
             animation: typewriter 0.5s ease-in-out forwards;
         }
 
-        .terminal-line:nth-child(1) { animation-delay: 1s; }
-        .terminal-line:nth-child(2) { animation-delay: 2s; }
-        .terminal-line:nth-child(3) { animation-delay: 3s; }
+        .terminal-line:nth-child(1) {
+            animation-delay: 1s;
+        }
+
+        .terminal-line:nth-child(2) {
+            animation-delay: 2s;
+        }
+
+        .terminal-line:nth-child(3) {
+            animation-delay: 3s;
+        }
 
         @keyframes typewriter {
-            from { opacity: 0; transform: translateX(-10px); }
-            to { opacity: 1; transform: translateX(0); }
+            from {
+                opacity: 0;
+                transform: translateX(-10px);
+            }
+
+            to {
+                opacity: 1;
+                transform: translateX(0);
+            }
         }
 
         .terminal-prompt {
@@ -1324,11 +1393,13 @@
             border-radius: 50%;
         }
 
-        .roi-timeline, .implementation-timeline {
+        .roi-timeline,
+        .implementation-timeline {
             margin: 1rem 0;
         }
 
-        .timeline-item, .timeline-step {
+        .timeline-item,
+        .timeline-step {
             background: rgba(99, 102, 241, 0.1);
             border: 1px solid rgba(99, 102, 241, 0.3);
             border-radius: 8px;
@@ -1602,17 +1673,23 @@
 
         /* Loading Animations */
         .loading-shimmer {
-            background: linear-gradient(90deg, transparent, rgba(255,255,255,0.1), transparent);
+            background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.1), transparent);
             background-size: 200% 100%;
             animation: shimmer 2s infinite;
         }
 
         @keyframes shimmer {
-            0% { background-position: -200% 0; }
-            100% { background-position: 200% 0; }
+            0% {
+                background-position: -200% 0;
+            }
+
+            100% {
+                background-position: 200% 0;
+            }
         }
     </style>
 </head>
+
 <body>
     <!-- Animated Background -->
     <div class="bg-animation"></div>
@@ -1648,16 +1725,16 @@
                     <div class="pulse-dot"></div>
                     IA_ONLINE • A DETETAR PREJUÍZOS
                 </div>
-                
+
                 <h1 class="hero-title">
                     A IA que nunca falha no seu escritório
                 </h1>
-                
+
                 <p class="hero-subtitle">
-                    Sistema inteligente que detecta prejuízos em 60 segundos, automatiza workflows fiscais complexos 
+                    Sistema inteligente que detecta prejuízos em 60 segundos, automatiza workflows fiscais complexos
                     e elimina 100% dos atrasos. Escritórios recuperam €3000+ por mês em lucros escondidos.
                 </p>
-                
+
                 <div class="hero-cta">
                     <a href="#demo" class="btn btn-primary">
                         🤖 Testar IA Grátis
@@ -1677,7 +1754,7 @@
                         LIVE
                     </div>
                 </div>
-                
+
                 <div class="metrics-grid">
                     <div class="metric-card">
                         <div class="metric-label">Prejuízos Detectados</div>
@@ -1722,7 +1799,7 @@
                 <div class="section-badge">🧠 INTELIGÊNCIA_ARTIFICIAL</div>
                 <h2 class="section-title">IA que Revoluciona Contabilidade</h2>
                 <p class="section-subtitle">
-                    Não é só software. É inteligência artificial que aprende, 
+                    Não é só software. É inteligência artificial que aprende,
                     adapta-se e evolui com o seu escritório.
                 </p>
             </div>
@@ -1732,7 +1809,7 @@
                     <div class="feature-icon icon-ai">🤖</div>
                     <h3 class="feature-title">Detecção Automática de Prejuízos</h3>
                     <p class="feature-description">
-                        IA analisa padrões de tempo vs receita em tempo real. 
+                        IA analisa padrões de tempo vs receita em tempo real.
                         Identifica clientes tóxicos antes que drenem o negócio.
                     </p>
                     <div class="feature-highlight">
@@ -1744,7 +1821,7 @@
                     <div class="feature-icon icon-workflow">⚡</div>
                     <h3 class="feature-title">Workflows Fiscais Inteligentes</h3>
                     <p class="feature-description">
-                        Sistema aprende obrigações específicas de cada cliente. 
+                        Sistema aprende obrigações específicas de cada cliente.
                         Gera automaticamente tarefas IVA, IRC, IRS baseado em histórico.
                     </p>
                     <div class="feature-highlight">
@@ -1756,7 +1833,7 @@
                     <div class="feature-icon icon-analytics">📈</div>
                     <h3 class="feature-title">Análise Predictiva de Lucros</h3>
                     <p class="feature-description">
-                        Prevê tendências de rentabilidade. Sugere ajustes de preços 
+                        Prevê tendências de rentabilidade. Sugere ajustes de preços
                         baseados em complexidade real de cada cliente.
                     </p>
                     <div class="feature-highlight">
@@ -1768,7 +1845,7 @@
                     <div class="feature-icon icon-automation">🎯</div>
                     <h3 class="feature-title">Distribuição Inteligente de Tarefas</h3>
                     <p class="feature-description">
-                        IA conhece capacidades da equipa. Distribui tarefas 
+                        IA conhece capacidades da equipa. Distribui tarefas
                         automaticamente baseado em expertise e carga atual.
                     </p>
                     <div class="feature-highlight">
@@ -1780,7 +1857,7 @@
                     <div class="feature-icon icon-ai">🔔</div>
                     <h3 class="feature-title">Sistema de Notificações Inteligente</h3>
                     <p class="feature-description">
-                        IA envia os alertas para a plataforma e para o seu e-mail! 
+                        IA envia os alertas para a plataforma e para o seu e-mail!
                         Notificações precisas sobre prazos críticos, workflows bloqueados, novas tarefas e muito mais.
                     </p>
                     <div class="feature-highlight">
@@ -1792,7 +1869,7 @@
                     <div class="feature-icon icon-automation">🔮</div>
                     <h3 class="feature-title">Consultor IA Estratégico</h3>
                     <p class="feature-description">
-                        Chat IA que responde questões sobre o negócio. 
+                        Chat IA que responde questões sobre o negócio.
                         "Quais clientes devo aumentar preços?" - resposta instantânea.
                     </p>
                     <div class="feature-highlight">
@@ -1810,7 +1887,8 @@
                 <div class="section-badge">💬 CONSULTOR_IA_24/7</div>
                 <h2 class="section-title">O Seu CFO Virtual Sempre Disponível</h2>
                 <p class="section-subtitle">
-                    Converse com a IA sobre o seu negócio. Pergunte qualquer coisa - receberá insights instantâneos baseados nos seus dados reais.
+                    Converse com a IA sobre o seu negócio. Pergunte qualquer coisa - receberá insights instantâneos
+                    baseados nos seus dados reais.
                 </p>
             </div>
 
@@ -1838,20 +1916,20 @@
                         <div class="message ai-message">
                             <div class="message-content">📊 **Análise concluída!**
 
-Identifiquei **3 clientes** para renegociação:
+                                Identifiquei **3 clientes** para renegociação:
 
-🔴 **Cliente ABC Ltd** - Perda €340/mês
-• Tempo real: 18.5h | Paga: €800 | Deveria pagar: €1.140
+                                🔴 **Cliente ABC Ltd** - Perda €340/mês
+                                • Tempo real: 18.5h | Paga: €800 | Deveria pagar: €1.140
 
-🟡 **Empresa XYZ** - Perda €180/mês  
-• Complexidade aumentou 40% vs contrato inicial
+                                🟡 **Empresa XYZ** - Perda €180/mês
+                                • Complexidade aumentou 40% vs contrato inicial
 
-🟠 **Silva & Associados** - Perda €220/mês
-• Serviços extra não faturados: IRS, consultoria fiscal
+                                🟠 **Silva & Associados** - Perda €220/mês
+                                • Serviços extra não faturados: IRS, consultoria fiscal
 
-**💰 Potencial recuperação: €740/mês = €8.880/ano**
+                                **💰 Potencial recuperação: €740/mês = €8.880/ano**
 
-Devo preparar propostas automáticas?</div>
+                                Devo preparar propostas automáticas?</div>
                             <div class="message-time">10:31</div>
                         </div>
 
@@ -1879,7 +1957,7 @@ Devo preparar propostas automáticas?</div>
 
                 <div class="chat-features">
                     <h3>🧠 O que pode perguntar à IA:</h3>
-                    
+
                     <div class="question-categories">
                         <div class="question-category">
                             <h4>💰 Rentabilidade</h4>
@@ -2000,7 +2078,8 @@ Devo preparar propostas automáticas?</div>
             <div class="testimonials-grid">
                 <div class="testimonial-card">
                     <div class="testimonial-content">
-                        "Zero atrasos em 8 meses. A IA gere workflows fiscais sozinha. Reduzi 20h/semana de microgestão e foco no crescimento. Contratei 2 pessoas novas."
+                        "Zero atrasos em 8 meses. A IA gere workflows fiscais sozinha. Reduzi 20h/semana de microgestão
+                        e foco no crescimento. Contratei 2 pessoas novas."
                     </div>
                     <div class="testimonial-author">
                         <div class="author-avatar">JF</div>
@@ -2013,7 +2092,8 @@ Devo preparar propostas automáticas?</div>
 
                 <div class="testimonial-card">
                     <div class="testimonial-content">
-                        "Consultor IA é genial. Pergunto 'Que clientes devo renegociar?' e tenho lista completa com valores sugeridos. Como ter um CFO 24/7."
+                        "Consultor IA é genial. Pergunto 'Que clientes devo renegociar?' e tenho lista completa com
+                        valores sugeridos. Como ter um CFO 24/7."
                     </div>
                     <div class="testimonial-author">
                         <div class="author-avatar">PL</div>
@@ -2026,7 +2106,8 @@ Devo preparar propostas automáticas?</div>
 
                 <div class="testimonial-card">
                     <div class="testimonial-content">
-                        "Workflows fiscais automáticos são perfeitos. Sistema gera 80+ tarefas por mês baseado nas obrigações de cada cliente. Nunca mais esqueço nada."
+                        "Workflows fiscais automáticos são perfeitos. Sistema gera 80+ tarefas por mês baseado nas
+                        obrigações de cada cliente. Nunca mais esqueço nada."
                     </div>
                     <div class="testimonial-author">
                         <div class="author-avatar">TM</div>
@@ -2047,11 +2128,11 @@ Devo preparar propostas automáticas?</div>
                 <div class="section-badge">💎 INVESTIMENTO_INTELIGENTE</div>
                 <h2 class="section-title">Planos que se Pagam Sozinhos</h2>
                 <p class="section-subtitle">
-                    Cada plano inclui nossa IA completa. A maioria dos clientes recupera o investimento 
+                    Cada plano inclui nossa IA completa. A maioria dos clientes recupera o investimento
                     detectando apenas 1 cliente não rentável.
                 </p>
             </div>
-            
+
             <div class="pricing-grid">
                 <!-- Plano Starter -->
                 <div class="pricing-card">
@@ -2067,11 +2148,13 @@ Devo preparar propostas automáticas?</div>
                     <div class="plan-savings">
                         <span>💰 ROI médio: €2.400/mês</span>
                     </div>
-                    
+
                     <ul class="plan-features">
-                        <li><span class="feature-check">🤖</span> <strong>IA Completa</strong> - Detecção prejuízos automática</li>
+                        <li><span class="feature-check">🤖</span> <strong>IA Completa</strong> - Detecção prejuízos
+                            automática</li>
                         <li><span class="feature-check">👥</span> Até <strong>5 utilizadores</strong></li>
-                        <li><span class="feature-check">💬</span> <strong>Chat IA ilimitado</strong> - Consultor 24/7</li>
+                        <li><span class="feature-check">💬</span> <strong>Chat IA ilimitado</strong> - Consultor 24/7
+                        </li>
                         <li><span class="feature-check">⚡</span> <strong>Workflows automáticos</strong> fiscais</li>
                         <li><span class="feature-check">📊</span> Análise rentabilidade em tempo real</li>
                         <li><span class="feature-check">🗣️</span> <strong>Registo por voz</strong> natural</li>
@@ -2079,11 +2162,11 @@ Devo preparar propostas automáticas?</div>
                         <li><span class="feature-check">📱</span> Apps móveis iOS/Android</li>
                         <li><span class="feature-check">📧</span> Suporte prioritário</li>
                     </ul>
-                    
+
                     <a href="#" class="plan-cta btn btn-secondary">
                         🚀 Teste 14 Dias Grátis
                     </a>
-                    
+
                     <div class="plan-guarantee">
                         ✅ Sem compromisso • ✅ Sem setup • ✅ Cancelamento livre
                     </div>
@@ -2104,25 +2187,31 @@ Devo preparar propostas automáticas?</div>
                     <div class="plan-savings">
                         <span>💰 ROI médio: €4.800/mês</span>
                     </div>
-                    
+
                     <ul class="plan-features">
-                        <li><span class="feature-check">🤖</span> <strong>IA Avançada</strong> - Previsões + análise predictiva</li>
+                        <li><span class="feature-check">🤖</span> <strong>IA Avançada</strong> - Previsões + análise
+                            predictiva</li>
                         <li><span class="feature-check">👥</span> Até <strong>15 utilizadores</strong></li>
-                        <li><span class="feature-check">💬</span> <strong>IA Consultant Premium</strong> - Insights executivos</li>
-                        <li><span class="feature-check">🏗️</span> <strong>Workflows personalizáveis</strong> complexos</li>
+                        <li><span class="feature-check">💬</span> <strong>IA Consultant Premium</strong> - Insights
+                            executivos</li>
+                        <li><span class="feature-check">🏗️</span> <strong>Workflows personalizáveis</strong> complexos
+                        </li>
                         <li><span class="feature-check">📈</span> <strong>Dashboards executivos</strong> avançados</li>
-                        <li><span class="feature-check">🔗</span> <strong>Integrações</strong> software contabilístico</li>
-                        <li><span class="feature-check">📊</span> <strong>Relatórios personalizados</strong> automáticos</li>
+                        <li><span class="feature-check">🔗</span> <strong>Integrações</strong> software contabilístico
+                        </li>
+                        <li><span class="feature-check">📊</span> <strong>Relatórios personalizados</strong> automáticos
+                        </li>
                         <li><span class="feature-check">⚡</span> <strong>API completa</strong> para automações</li>
                         <li><span class="feature-check">🎯</span> <strong>White-label</strong> parcial disponível</li>
-                        <li><span class="feature-check">📞</span> <strong>Suporte prioritário</strong> + videochamadas</li>
+                        <li><span class="feature-check">📞</span> <strong>Suporte prioritário</strong> + videochamadas
+                        </li>
                         <li><span class="feature-check">🎓</span> <strong>Formação personalizada</strong> da equipa</li>
                     </ul>
-                    
+
                     <a href="#" class="plan-cta btn btn-primary">
                         ⚡ Começar Agora - 14 Dias Grátis
                     </a>
-                    
+
                     <div class="plan-guarantee">
                         ✅ Migração gratuita • ✅ Setup dedicado • ✅ Garantia 30 dias
                     </div>
@@ -2140,25 +2229,29 @@ Devo preparar propostas automáticas?</div>
                     <div class="plan-savings">
                         <span>💰 ROI médio: €15.000+/mês</span>
                     </div>
-                    
+
                     <ul class="plan-features">
-                        <li><span class="feature-check">🤖</span> <strong>IA Empresarial</strong> - Modelos personalizados</li>
+                        <li><span class="feature-check">🤖</span> <strong>IA Empresarial</strong> - Modelos
+                            personalizados</li>
                         <li><span class="feature-check">👥</span> <strong>Utilizadores ilimitados</strong></li>
                         <li><span class="feature-check">🏢</span> <strong>Multi-organização</strong> e multi-país</li>
-                        <li><span class="feature-check">🔒</span> <strong>Segurança enterprise</strong> (SOC2, ISO27001)</li>
-                        <li><span class="feature-check">🎨</span> <strong>White-label completo</strong> com sua marca</li>
-                        <li><span class="feature-check">⚡</span> <strong>Integrações personalizadas</strong> ERP/CRM</li>
+                        <li><span class="feature-check">🔒</span> <strong>Segurança enterprise</strong> (SOC2, ISO27001)
+                        </li>
+                        <li><span class="feature-check">🎨</span> <strong>White-label completo</strong> com sua marca
+                        </li>
+                        <li><span class="feature-check">⚡</span> <strong>Integrações personalizadas</strong> ERP/CRM
+                        </li>
                         <li><span class="feature-check">📊</span> <strong>Business Intelligence</strong> avançado</li>
                         <li><span class="feature-check">🎯</span> <strong>SLA garantido</strong> 99.9% uptime</li>
                         <li><span class="feature-check">👨‍💼</span> <strong>Gestor de conta dedicado</strong></li>
                         <li><span class="feature-check">🛠️</span> <strong>Desenvolvimento à medida</strong></li>
                         <li><span class="feature-check">📈</span> <strong>Consultoria estratégica</strong> incluída</li>
                     </ul>
-                    
+
                     <a href="#" class="plan-cta btn btn-outline">
                         💼 Falar com Especialista
                     </a>
-                    
+
                     <div class="plan-guarantee">
                         ✅ Demo personalizada • ✅ POC gratuito • ✅ Migração completa
                     </div>
@@ -2169,7 +2262,7 @@ Devo preparar propostas automáticas?</div>
             <div class="roi-calculator">
                 <h3>🧮 Calculadora de ROI Real</h3>
                 <p>Veja quanto pode recuperar detectando prejuízos com nossa IA:</p>
-                
+
                 <div class="roi-inputs">
                     <div class="roi-input-group">
                         <label>Número de clientes:</label>
@@ -2180,7 +2273,7 @@ Devo preparar propostas automáticas?</div>
                         <input type="number" id="avgRevenue" value="400" min="100" max="5000">
                     </div>
                 </div>
-                
+
                 <div class="roi-results">
                     <div class="roi-result">
                         <div class="roi-label">Se apenas 15% dos clientes têm prejuízos ocultos:</div>
@@ -2213,21 +2306,23 @@ Devo preparar propostas automáticas?</div>
             <div class="faq-grid">
                 <div class="faq-category">
                     <h3>🤖 Sobre a IA</h3>
-                    
+
                     <div class="faq-item">
                         <div class="faq-question">
                             <h4>Como funciona a detecção de prejuízos da IA?</h4>
                             <span class="faq-toggle">+</span>
                         </div>
                         <div class="faq-answer">
-                            <p>Nossa IA analisa em tempo real o tempo gasto vs receita de cada cliente. Cruza dados de:</p>
+                            <p>Nossa IA analisa em tempo real o tempo gasto vs receita de cada cliente. Cruza dados de:
+                            </p>
                             <ul>
                                 <li>⏱️ <strong>Registos de tempo</strong> da equipa</li>
                                 <li>💰 <strong>Receitas</strong> por cliente/serviço</li>
                                 <li>📊 <strong>Custos operacionais</strong> (salários, overhead)</li>
                                 <li>🎯 <strong>Complexidade</strong> de cada workflow</li>
                             </ul>
-                            <p><strong>Resultado:</strong> Identifica automaticamente clientes que custam mais do que pagam, com precisão de 95%.</p>
+                            <p><strong>Resultado:</strong> Identifica automaticamente clientes que custam mais do que
+                                pagam, com precisão de 95%.</p>
                         </div>
                     </div>
 
@@ -2266,7 +2361,7 @@ Devo preparar propostas automáticas?</div>
 
                 <div class="faq-category">
                     <h3>💰 Financeiro & ROI</h3>
-                    
+
                     <div class="faq-item">
                         <div class="faq-question">
                             <h4>Em quanto tempo recupero o investimento?</h4>
@@ -2285,7 +2380,8 @@ Devo preparar propostas automáticas?</div>
                                     <strong>Semana 3-4:</strong> Receita adicional > custo do software
                                 </div>
                             </div>
-                            <p><strong>Exemplo real:</strong> Cliente detectou €2.340/mês em prejuízos no primeiro mês.</p>
+                            <p><strong>Exemplo real:</strong> Cliente detectou €2.340/mês em prejuízos no primeiro mês.
+                            </p>
                         </div>
                     </div>
 
@@ -2325,7 +2421,7 @@ Devo preparar propostas automáticas?</div>
 
                 <div class="faq-category">
                     <h3>🔒 Segurança & Dados</h3>
-                    
+
                     <div class="faq-item">
                         <div class="faq-question">
                             <h4>Os meus dados estão seguros?</h4>
@@ -2362,7 +2458,7 @@ Devo preparar propostas automáticas?</div>
 
                 <div class="faq-category">
                     <h3>🚀 Implementação</h3>
-                    
+
                     <div class="faq-item">
                         <div class="faq-question">
                             <h4>Quanto tempo demora a implementação?</h4>
@@ -2442,10 +2538,10 @@ Devo preparar propostas automáticas?</div>
         <div class="cta-container">
             <h2 class="cta-title">Pare de Perder €3000+ por Mês</h2>
             <p class="cta-subtitle">
-                A IA está pronta para revelar prejuízos escondidos no seu escritório. 
+                A IA está pronta para revelar prejuízos escondidos no seu escritório.
                 Teste grátis por 14 dias - sem compromisso, sem risco.
             </p>
-            
+
             <div class="cta-buttons">
                 <a href="#" class="btn btn-primary" style="font-size: 1.1rem; padding: 1.2rem 2.5rem;">
                     🤖 Começar Teste Grátis
@@ -2454,7 +2550,7 @@ Devo preparar propostas automáticas?</div>
                     📞 Fale Connosco
                 </a>
             </div>
-            
+
             <div class="cta-guarantee">
                 <div class="guarantee-item">
                     <span>🚫</span>
@@ -2477,9 +2573,10 @@ Devo preparar propostas automáticas?</div>
                         <div class="logo-icon">PR</div>
                         PRAgenda.ai
                     </div>
-                    <p>Inteligência artificial que revoluciona escritórios de contabilidade e advocacia. Detecta prejuízos, automatiza workflows e maximiza lucros.</p>
+                    <p>Inteligência artificial que revoluciona escritórios de contabilidade e advocacia. Detecta
+                        prejuízos, automatiza workflows e maximiza lucros.</p>
                 </div>
-                
+
                 <div class="footer-section">
                     <h4>IA Features</h4>
                     <ul class="footer-links">
@@ -2490,7 +2587,7 @@ Devo preparar propostas automáticas?</div>
                         <li><a href="#ai-features">Registo por Voz</a></li>
                     </ul>
                 </div>
-                
+
                 <div class="footer-section">
                     <h4>Suporte</h4>
                     <ul class="footer-links">
@@ -2499,7 +2596,7 @@ Devo preparar propostas automáticas?</div>
                         <li><a href="#">Status Sistema (Em Breve)</a></li>
                     </ul>
                 </div>
-                
+
                 <div class="footer-section">
                     <h4>Empresa</h4>
                     <ul class="footer-links">
@@ -2510,7 +2607,7 @@ Devo preparar propostas automáticas?</div>
                     </ul>
                 </div>
             </div>
-            
+
             <div class="footer-bottom">
                 <p>&copy; 2025 PRAgenda.ai • RGPD Compliance</p>
                 <div style="display: flex; gap: 1rem; color: rgba(255,255,255,0.6);">
@@ -2528,7 +2625,7 @@ Devo preparar propostas automáticas?</div>
 
         window.addEventListener('scroll', () => {
             const currentScrollY = window.scrollY;
-            
+
             if (currentScrollY > 100) {
                 navbar.style.background = 'rgba(10, 10, 15, 0.95)';
                 navbar.style.backdropFilter = 'blur(25px)';
@@ -2569,11 +2666,11 @@ Devo preparar propostas automáticas?</div>
         function animateMetrics() {
             const positiveMetrics = document.querySelectorAll('.metric-positive .metric-value');
             const negativeMetrics = document.querySelectorAll('.metric-negative .metric-value');
-            
+
             positiveMetrics.forEach(metric => {
                 const value = parseInt(metric.textContent.replace(/[^\d]/g, ''));
                 const newValue = value + Math.floor(Math.random() * 50);
-                
+
                 if (metric.textContent.includes('€')) {
                     metric.textContent = `+€${newValue.toLocaleString()}`;
                 } else if (metric.textContent.includes('%')) {
@@ -2581,7 +2678,7 @@ Devo preparar propostas automáticas?</div>
                 } else {
                     metric.textContent = `${newValue}h`;
                 }
-                
+
                 metric.style.animation = 'none';
                 setTimeout(() => metric.style.animation = 'pulse 0.5s ease', 10);
             });
@@ -2590,7 +2687,7 @@ Devo preparar propostas automáticas?</div>
                 const value = parseInt(metric.textContent.replace(/[^\d]/g, ''));
                 const newValue = Math.max(0, value - Math.floor(Math.random() * 30));
                 metric.textContent = `-€${newValue.toLocaleString()}`;
-                
+
                 metric.style.animation = 'none';
                 setTimeout(() => metric.style.animation = 'pulse 0.5s ease', 10);
             });
@@ -2603,12 +2700,12 @@ Devo preparar propostas automáticas?</div>
             question.addEventListener('click', () => {
                 const faqItem = question.parentElement;
                 const isOpen = faqItem.classList.contains('open');
-                
+
                 // Close all other FAQ items
                 document.querySelectorAll('.faq-item').forEach(item => {
                     item.classList.remove('open');
                 });
-                
+
                 // Toggle current item
                 if (!isOpen) {
                     faqItem.classList.add('open');
@@ -2620,20 +2717,20 @@ Devo preparar propostas automáticas?</div>
         function updateROI() {
             const clientCount = parseInt(document.getElementById('clientCount')?.value) || 20;
             const avgRevenue = parseInt(document.getElementById('avgRevenue')?.value) || 400;
-            
+
             const hiddenLossPercentage = 0.15; // 15% of clients have hidden losses
             const avgLossPercentage = 0.30; // 30% loss on average
-            
+
             const clientsWithLoss = Math.ceil(clientCount * hiddenLossPercentage);
             const monthlyLoss = clientsWithLoss * avgRevenue * avgLossPercentage;
             const annualSaving = monthlyLoss * 12;
             const softwareCost = 159 * 12; // Professional plan
             const roi = ((annualSaving - softwareCost) / softwareCost) * 100;
-            
+
             const hiddenLossEl = document.getElementById('hiddenLoss');
             const annualSavingEl = document.getElementById('annualSaving');
             const roiPercentEl = document.getElementById('roiPercent');
-            
+
             if (hiddenLossEl) hiddenLossEl.textContent = `€${monthlyLoss.toLocaleString()}/mês`;
             if (annualSavingEl) annualSavingEl.textContent = `€${annualSaving.toLocaleString()}`;
             if (roiPercentEl) roiPercentEl.textContent = `${Math.round(roi).toLocaleString()}%`;
@@ -2668,15 +2765,15 @@ Quer que implemente estas optimizações?`,
             if (chatMessageIndex < additionalMessages.length) {
                 const message = additionalMessages[chatMessageIndex];
                 const messagesContainer = document.querySelector('.chat-messages');
-                
+
                 if (!messagesContainer) return;
-                
+
                 // Remove typing indicator
                 const typingMessage = document.querySelector('.message.ai-message.typing');
                 if (typingMessage) {
                     typingMessage.remove();
                 }
-                
+
                 // Add new message
                 const messageElement = document.createElement('div');
                 messageElement.className = 'message ai-message';
@@ -2684,12 +2781,12 @@ Quer que implemente estas optimizações?`,
                     <div class="message-content">${message.content}</div>
                     <div class="message-time">${message.time}</div>
                 `;
-                
+
                 messagesContainer.appendChild(messageElement);
                 messagesContainer.scrollTop = messagesContainer.scrollHeight;
-                
+
                 chatMessageIndex++;
-                
+
                 // Add typing indicator for next message if there is one
                 if (chatMessageIndex < additionalMessages.length) {
                     setTimeout(() => {
@@ -2723,7 +2820,7 @@ Quer que implemente estas optimizações?`,
                 if (entry.isIntersecting) {
                     entry.target.style.opacity = '1';
                     entry.target.style.transform = 'translateY(0)';
-                    
+
                     // Special handling for demo terminal
                     if (entry.target.classList.contains('demo-interface')) {
                         const terminalLines = entry.target.querySelectorAll('.terminal-text');
@@ -2742,7 +2839,7 @@ Quer que implemente estas optimizações?`,
             let i = 0;
             const originalText = element.textContent;
             element.textContent = '';
-            
+
             function type() {
                 if (i < text.length) {
                     element.textContent += text.charAt(i);
@@ -2763,9 +2860,9 @@ Quer que implemente estas optimizações?`,
 
         // Enhanced CTA interactions with loading states
         document.querySelectorAll('.btn-primary').forEach(button => {
-            button.addEventListener('click', function(e) {
+            button.addEventListener('click', function (e) {
                 e.preventDefault();
-                
+
                 // Create loading effect
                 const originalHTML = this.innerHTML;
                 const loadingHTML = `
@@ -2774,10 +2871,10 @@ Quer que implemente estas optimizações?`,
                         IA Analisando...
                     </div>
                 `;
-                
+
                 this.innerHTML = loadingHTML;
                 this.style.pointerEvents = 'none';
-                
+
                 // Add spin animation
                 if (!document.getElementById('spin-animation')) {
                     const style = document.createElement('style');
@@ -2785,12 +2882,12 @@ Quer que implemente estas optimizações?`,
                     style.textContent = '@keyframes spin { to { transform: rotate(360deg); } }';
                     document.head.appendChild(style);
                 }
-                
+
                 // Simulate AI processing
                 setTimeout(() => {
                     this.innerHTML = originalHTML;
                     this.style.pointerEvents = 'auto';
-                    
+
                     // Show AI response modal
                     showAIModal();
                 }, 3000);
@@ -2812,7 +2909,7 @@ Quer que implemente estas optimizações?`,
                 z-index: 10000;
                 backdrop-filter: blur(10px);
             `;
-            
+
             modal.innerHTML = `
                 <div style="
                     background: var(--dark-card);
@@ -2847,11 +2944,11 @@ Quer que implemente estas optimizações?`,
                     </button>
                 </div>
             `;
-            
+
             document.body.appendChild(modal);
-            
+
             // Add click outside to close
-            modal.addEventListener('click', function(e) {
+            modal.addEventListener('click', function (e) {
                 if (e.target === modal) {
                     modal.remove();
                 }
@@ -2862,7 +2959,7 @@ Quer que implemente estas optimizações?`,
         window.addEventListener('scroll', () => {
             const scrolled = window.pageYOffset;
             const shapes = document.querySelectorAll('.shape');
-            
+
             shapes.forEach((shape, index) => {
                 const speed = 0.5 + (index * 0.1);
                 shape.style.transform = `translateY(${scrolled * speed}px) rotate(${scrolled * 0.1}deg)`;
@@ -2891,7 +2988,7 @@ Quer que implemente estas optimizações?`,
                         behavior: 'smooth',
                         block: 'start'
                     });
-                    
+
                     // Close mobile menu if open
                     if (navLinks.classList.contains('open')) {
                         navLinks.classList.remove('open');
@@ -2908,7 +3005,7 @@ Quer que implemente estas optimizações?`,
             ticking = false;
         }
 
-        window.addEventListener('scroll', function() {
+        window.addEventListener('scroll', function () {
             if (!ticking) {
                 requestAnimationFrame(updateAnimations);
                 ticking = true;
@@ -2916,7 +3013,7 @@ Quer que implemente estas optimizações?`,
         });
 
         // Initialize all functions when DOM is loaded
-        document.addEventListener('DOMContentLoaded', function() {
+        document.addEventListener('DOMContentLoaded', function () {
             updateROI();
         });
     </script>
